@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extreme Slug Racing 2026 Catalog</title>
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #1a1a1a;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    color: #FFB800;
+    font-size: 22px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .header p {
+    color: #aaa;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  /* ── Flipbook container ── */
+  #flipbook-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  #flipbook {
+    /* StPageFlip sizes itself — this is just a wrapper */
+  }
+
+  /* Each page image */
+  .page img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── Controls ── */
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn {
+    background: #FFB800;
+    color: #111;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.15s;
+  }
+  .btn:hover { background: #e6a800; }
+  .btn:disabled { background: #555; color: #888; cursor: default; }
+
+  .page-counter {
+    color: #ccc;
+    font-size: 14px;
+    min-width: 100px;
+    text-align: center;
+  }
+
+  .btn-download {
+    background: #8B2FC9;
+    color: #fff;
+  }
+  .btn-download:hover { background: #7a28b0; }
+
+  /* ── Instructions ── */
+  .instructions {
+    color: #666;
+    font-size: 11px;
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  /* ── Loading state ── */
+  #loading {
+    color: #FFB800;
+    font-size: 16px;
+    text-align: center;
+    padding: 40px;
+    display: none;
+  }
+
+  /* ── Mobile warning ── */
+  .mobile-tip {
+    color: #888;
+    font-size: 11px;
+    margin-top: 8px;
+    text-align: center;
+    display: none;
+  }
+  @media (max-width: 600px) {
+    .mobile-tip { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🐌 Extreme Slug Racing — 2026 Catalog</h1>
+  <p>Joyce, WA &nbsp;•&nbsp; slugraces.com &nbsp;•&nbsp; Benefits Clallam County Fire District No. 4</p>
+</div>
+
+<div id="loading">Loading catalog...</div>
+
+<div id="flipbook-container">
+  <div id="flipbook">
+
+    <!-- ══════════════════════════════════════════════════════
+         REPLACE EACH src="" WITH YOUR BLOGGER IMAGE URL
+         Export pages from Acrobat as JPG at 150dpi minimum
+         Upload to Blogger, copy the image URL, paste below
+         ══════════════════════════════════════════════════════ -->
+
+    <div class="page">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_pY6O1JFA2IXUD7WAEoUHa6Et704NQhtJdkg5h-msQ8mocEMiSr8u_A6KOxp9yhoyJzLb68QRuegZlLaMEJ-kLsouadLnifq3hODc-ZB5iGYsOZdYpZosuql4njr3_pRWCO4gRXnm0lNbm8HBpFV2FzvSVLtW114BlstoLqJN65kUxR5z0I4Nh5upgWk/s320/2026ExtremeRacingCatalog_Page_1.jpg" alt="Cover — I've Seen Things. Nothing Like Heat 3.">
+    </div>
+
+    <div class="page">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgtSdCa8v9J9-CGMSQ0UjAHZ9y3XCCY-oSNyMUyP1jV1RARtOBd-yd5iG55Em0kouZVL6mPvYL83fv6UBbD6GLKXszeSaJa-x6a3rP0ZPeG-xkoHaLmHOzb_pRm4evVfuqyQZQuJk_Kh9xAAbdkqw6kJq8yV5bvsYhyMZbhzKTCU6eJ-LiGh7Xc_hMhBMI/s320/2026ExtremeRacingCatalog_Page_2.jpg" alt="Join Our Team — Hats and Beanies">
+    </div>
+
+    <div class="page">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgfs70SW_N_I56o68rq2qdTLgdlWQ05-iDBUT97HaWWbwVKILvOtmg_NCiSfKh6yO0HFsopQaMiMCsh00nJqknnbAL18bsGVoa7sRk6AxjBMIIRCXD6JZlugy6ta8TscM_bPv_bkWfgnAXqc-EkWnyHUaUDB8lsYhx4S7J6V-nIZ7zMCWyvR34rXAq2qMA/s320/2026ExtremeRacingCatalog_Page_3.jpg" alt="Women's Apparel">
+    </div>
+
+    <div class="page">
+      <img src=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiboPlKnJcd3rVaF5ofZhImQYDIqRgamVu6y_V3NhU1wrq_HQ9keitrRiLsjW8nBHQ7iOcC8Z5ycyBDcpcK7YpwT9FHUQzBTi1SC8Vjugf3Yy1tm3Ajp96TFKf1Qi3_UQajQbVdid-G31AJS6YnBAVJkN4w-GbUOfyfLcDjr07eG8bWbqd_BzcWh4lJcno/s320/2026ExtremeRacingCatalog_Page_4.jpg" alt="T-Shirts and Hawaiian Shirt">
+    </div>
+
+    <div class="page">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmwFzys6v1RWYdbdwLCnC1oOaoQJVPM77IRDZzul2cZVZFtYq8CBC0bDKxSuI8eGhc8km3egCnQwEUJO4VOZpgxkIgSrcV2qhsfrcXN4u_9jIekgFTRgvoBFW3XansHOSmFj0cj0XlIVInVzN9hKblUKeAusrHmJS55YqYXyPilT_Xv_9XVkmXJydFB3E/s320/2026ExtremeRacingCatalog_Page_5.jpg" alt="Men's Apparel">
+    </div>
+
+    <div class="page">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgE-O0LV8cR0Il9GxGxDfWKoc6bdYIFECCGGwjgqsvghYt4EF6ymFraYqzot_mYkoTK2woX5Icdj10AuexFsYDjsL16oi4W2BMF0zMUOAZA_aDf5vDGtJvqMKkKg_LyASRNbXd6EacK4Y804g13P-n0_bsWvq-5z-4x5ccql2EmupUUKdszPuPzJmIv0ok/s320/2026ExtremeRacingCatalog_Page_6.jpg" alt="Socks and Slides">
+    </div>
+
+    <div class="page">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUU9JevbJYUurBBWiFoDRC2E72rChu8anWwdgBEXZboTk2ZgCWyKmgtSPMmOHshKhMPHK50INrS5BbJd9Tt0_OW637DZhUwP1Ji9YPMA9CoBeRqtvJIMVTgahmxJnhLQIIyOqhudBkFgi3kr_WcbXGu0B9AtBgq9w1AKtYH1pl-QosUqPW9bb1ZGhcwLY/s320/2026ExtremeRacingCatalog_Page_7.jpg" alt="Drinkware and Poster">
+    </div>
+
+    <div class="page">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYmFnXgxFdo4jtVxl-PUuPeBTOt1TEe6plw3F63MTebsXSHQ_DWpD4FEasS5xv9P6ynmFIi9g1_Fkx_rUY7U0B87Bl3Q4SrpiFhZjs7CDVrbHtJD5wogCOsIBjo8bdwnAf_kgerXO2uDL0i8kwaFGnyNiGKELcXc2v1YtuPWinBb693Dm5hIHo_9wAQnk/s320/2026ExtremeRacingCatalog_Page_8.jpg" alt="Order Form">
+    </div>
+
+    <div class="page">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi78pEAeKBmZRukwtvk0bn1t4gBKoXqVp8eswps-1uXYgXXC57eg4bVCUgQ-e0Ekf4G-qpukQ-8VlVVpGn8R1lx-k225x_T-3OhjE4InYZtIiJozbBJbus_u6rptQmmrf1tQ_tmY4-Dx8EkUPE4Oe25yOwl_lo0Fb1iHznhR7_x9eVIHnHpfpdXYIsxUT8/s320/2026ExtremeRacingCatalog_Page_9.jpg" alt="Back Cover — I Don't Kill Slugs. I Raise Champions.">
+    </div>
+
+  </div>
+</div>
+
+<div class="controls">
+  <button class="btn" id="btn-prev" onclick="flipPrev()">◀ Prev</button>
+  <span class="page-counter" id="page-counter">Page 1 of 9</span>
+  <button class="btn" id="btn-next" onclick="flipNext()">Next ▶</button>
+  <a class="btn btn-download" href="https://drive.google.com/file/d/1NSy2MjPGECi1v_kCHBGxhCLPcmgAhKk5/view?usp=sharing" target="_blank">📄 Download PDF</a>
+</div>
+
+<p class="instructions">Click the page edge to turn • Or use arrow buttons • Drag to flip</p>
+<p class="mobile-tip">📱 Tip: rotate to landscape for best viewing on mobile</p>
+
+<script>
+  // ── Detect screen size for responsive book dimensions ──
+  function getBookSize() {
+    const vw = window.innerWidth;
+    if (vw < 480) {
+      return { width: vw - 40, height: Math.round((vw - 40) * 1.294) };
+    } else if (vw < 800) {
+      return { width: Math.min(350, vw / 2 - 20), height: Math.round(Math.min(350, vw / 2 - 20) * 1.294) };
+    } else {
+      return { width: 400, height: 518 };
+    }
+  }
+
+  const size = getBookSize();
+
+  // ── Initialise StPageFlip ──
+  const pageFlip = new St.PageFlip(
+    document.getElementById('flipbook'),
+    {
+      width: size.width,
+      height: size.height,
+      size: 'fixed',
+      minWidth: 200,
+      maxWidth: 500,
+      minHeight: 260,
+      maxHeight: 650,
+      drawShadow: true,
+      flippingTime: 700,
+      usePortrait: true,
+      startZIndex: 0,
+      autoSize: true,
+      showCover: true,       // first page renders as full cover
+      mobileScrollSupport: true,
+      swipeDistance: 30,
+      showPageCount: true,
+      useMouseEvents: true,
+    }
+  );
+
+  // Load pages from HTML img elements
+  pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+  // ── Update page counter ──
+  function updateCounter() {
+    const current = pageFlip.getCurrentPageIndex() + 1;
+    const total = pageFlip.getPageCount();
+    document.getElementById('page-counter').textContent = 'Page ' + current + ' of ' + total;
+    document.getElementById('btn-prev').disabled = current <= 1;
+    document.getElementById('btn-next').disabled = current >= total;
+  }
+
+  pageFlip.on('flip', updateCounter);
+  pageFlip.on('init', updateCounter);
+
+  // ── Button handlers ──
+  function flipPrev() { pageFlip.flipPrev(); }
+  function flipNext() { pageFlip.flipNext(); }
+
+  // ── Keyboard navigation ──
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') flipNext();
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   flipPrev();
+  });
+</script>
+
+</body>
+</html>
