@@ -261,14 +261,22 @@ img { max-width: 100%; display: block; }
   transition: transform 0.2s;
 }
 .product-img-wrap:hover img { transform: scale(1.04); }
-.slug-icon {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  z-index: 10;
+.slug-icon { display: none; } /* moved inline — see .card-slug-row */
+.card-slug-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #bbb;
+}
+.card-slug-row img {
   height: 28px;
   width: auto;
+  flex-shrink: 0;
 }
+.card-slug-row .slug-label { line-height: 1.2; }
+.card-slug-row .slug-days { font-size: 10px; color: #888; font-weight: normal; display: block; }
 .product-body {
   padding: 12px 14px 14px;
   display: flex;
@@ -1117,32 +1125,31 @@ function renderGrid(categoryKey, gridId) {
 
 function buildCard(p) {
   var isEtsy = p.supplier === 'etsy';
-  var slugIcon = isEtsy
-    ? '<img class="slug-icon" src="' + SPEEDY_IMG + '" alt="Speedy Slug">'
-    : '<img class="slug-icon" src="' + SLOW_IMG + '" alt="Slow Slug">';
-  var badgeClass = isEtsy ? 'badge-etsy' : 'badge-artsadd';
-  var badgeText = isEtsy ? '⚡ Speedy Slug — Etsy' : '🐌 Slow Slug — ArtsAdd';
+  var slugImg = isEtsy ? SPEEDY_IMG : SLOW_IMG;
+  var slugAlt = isEtsy ? 'Speedy Slug' : 'Slow Slug';
+  var slugName = isEtsy ? '⚡ Speedy Slug' : '🐌 Slow Slug';
+  var slugDays = isEtsy ? 'Etsy · Ships 5–7 days' : 'ArtsAdd · Ships 30–45 days';
   var swatchHtml = '';
   for (var j = 0; j < p.colors.length; j++) {
     var colorName = p.colors[j];
     var colorVal = SWATCHES[colorName] || '#888';
-    var bg = colorVal.indexOf('gradient') >= 0
-      ? 'background:' + colorVal + ';'
-      : 'background:' + colorVal + ';';
+    var bg = 'background:' + colorVal + ';';
     swatchHtml += '<span class="swatch" title="' + esc(colorName) + '" style="' + bg + '"></span>';
   }
   var orderLink = 'orderform.html?item=' + encodeURIComponent(p.id);
   return '<div class="product-card">' +
     '<a href="' + orderLink + '" class="product-img-wrap">' +
       '<img src="' + esc(p.image) + '" alt="' + esc(p.name) + '" loading="lazy">' +
-      slugIcon +
     '</a>' +
     '<div class="product-body">' +
+      '<div class="card-slug-row">' +
+        '<img src="' + slugImg + '" alt="' + slugAlt + '">' +
+        '<div class="slug-label">' + slugName + '<span class="slug-days">' + slugDays + '</span></div>' +
+      '</div>' +
       '<div class="product-name">' + esc(p.name) + '</div>' +
       '<div class="product-sku">' + esc(p.id) + '</div>' +
       '<div class="product-price">$' + p.price.toFixed(2) + '</div>' +
       (swatchHtml ? '<div class="product-swatches">' + swatchHtml + '</div>' : '') +
-      '<div class="product-supplier-badge ' + badgeClass + '">' + badgeText + '</div>' +
       '<button class="add-to-cart-btn" onclick="addToCart(\'' + esc(p.id) + '\')">Add to Cart</button>' +
     '</div>' +
   '</div>';
