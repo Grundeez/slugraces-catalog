@@ -753,18 +753,16 @@ function updateTotals() {
 // URL PRE-SELECT
 // ══════════════════════════════════════════════
 window.addEventListener('load', function() {
+  // Always add first item row on load
   addItem();
 
+  // Then check for preselect parameter
   const params = new URLSearchParams(window.location.search);
   const preselect = params.get('item');
   if (preselect) {
-    // Find which category the item belongs to
-    let found = false;
     Object.entries(CATEGORIES).forEach(([catKey, cat]) => {
-      if (found) return;
       const match = cat.products.find(p => p.id === preselect);
       if (match) {
-        found = true;
         switchCategory(1, catKey);
         setTimeout(() => {
           const ps = document.getElementById('product-1');
@@ -870,18 +868,7 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
     alert('There was a problem submitting your order. Please email GrundeezPetLove.com directly and we'll get you sorted right away!');
   }
 });
-// Auto-select product from URL parameter
-window.addEventListener('load', function() {
-  const params = new URLSearchParams(window.location.search);
-  const preselect = params.get('item');
-  if (preselect) {
-    const productSelect = document.getElementById('product-1');
-    if (productSelect) {
-      productSelect.value = preselect;
-      onProductChange(1);
-    }
-  }
-});
+
 </script>
 
 </body>
