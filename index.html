@@ -1160,12 +1160,10 @@ function renderGrid(categoryKey, gridId) {
   var cat = CATEGORIES[categoryKey];
   var grid = document.getElementById(gridId);
   if (!grid || !cat) return;
-  var html = '';
+  grid.innerHTML = '';
   for (var i = 0; i < cat.products.length; i++) {
-    var p = cat.products[i];
-    html += buildCard(p);
+    grid.appendChild(buildCard(cat.products[i]));
   }
-  grid.innerHTML = html;
 }
 
 function buildCard(p) {
@@ -1178,27 +1176,86 @@ function buildCard(p) {
   for (var j = 0; j < p.colors.length; j++) {
     var colorName = p.colors[j];
     var colorVal = SWATCHES[colorName] || '#888';
-    var bg = 'background:' + colorVal + ';';
-    swatchHtml += '<span class="swatch" title="' + esc(colorName) + '" style="' + bg + '"></span>';
+    swatchHtml += '<span class="swatch" title="' + colorName.replace(/"/g,'&quot;') + '" style="background:' + colorVal + ';"></span>';
   }
-  return '<div class="product-card">' +
-    '<div class="product-img-wrap" onclick="openLightbox(\'' + esc(p.image) + '\',\'' + esc(p.name) + '\')" title="Click to enlarge">' +
-      '<img src="' + esc(p.image) + '" alt="' + esc(p.name) + '" loading="lazy">' +
-      '<div class="img-zoom-hint">🔍 Click to enlarge</div>' +
-    '</div>' +
-    '<div class="product-body">' +
-      '<div class="card-slug-row">' +
-        '<img src="' + slugImg + '" alt="' + slugAlt + '">' +
-        '<div class="slug-label">' + slugName + '<span class="slug-days">' + slugDays + '</span></div>' +
-      '</div>' +
-      '<div class="product-name">' + esc(p.name) + '</div>' +
-      '<div class="product-sku">' + esc(p.id) + '</div>' +
-      '<div class="product-price">$' + p.price.toFixed(2) + '</div>' +
-      (swatchHtml ? '<div class="product-swatches">' + swatchHtml + '</div>' : '') +
-      '<button class="add-to-cart-btn" onclick="addToCart(\'' + esc(p.id) + '\')">Add to Cart</button>' +
-    '</div>' +
-  '</div>';
+  // Use data attributes — never put product IDs or URLs inside onclick strings
+  var card = document.createElement('div');
+  card.className = 'product-card';
+
+  var imgWrap = document.createElement('div');
+  imgWrap.className = 'product-img-wrap';
+  imgWrap.title = 'Click to enlarge';
+  imgWrap.setAttribute('data-img', p.image);
+  imgWrap.setAttribute('data-name', p.name);
+  imgWrap.onclick = function() { openLightbox(this.getAttribute('data-img'), this.getAttribute('data-name')); };
+
+  var img = document.createElement('img');
+  img.src = p.image;
+  img.alt = p.name;
+  img.loading = 'lazy';
+
+  var zoomHint = document.createElement('div');
+  zoomHint.className = 'img-zoom-hint';
+  zoomHint.textContent = '🔍 Click to enlarge';
+
+  imgWrap.appendChild(img);
+  imgWrap.appendChild(zoomHint);
+
+  var body = document.createElement('div');
+  body.className = 'product-body';
+
+  var slugRow = document.createElement('div');
+  slugRow.className = 'card-slug-row';
+  var slugBadgeImg = document.createElement('img');
+  slugBadgeImg.src = slugImg;
+  slugBadgeImg.alt = slugAlt;
+  var slugLabelDiv = document.createElement('div');
+  slugLabelDiv.className = 'slug-label';
+  slugLabelDiv.textContent = slugName;
+  var slugDaysSpan = document.createElement('span');
+  slugDaysSpan.className = 'slug-days';
+  slugDaysSpan.textContent = slugDays;
+  slugLabelDiv.appendChild(slugDaysSpan);
+  slugRow.appendChild(slugBadgeImg);
+  slugRow.appendChild(slugLabelDiv);
+
+  var nameEl = document.createElement('div');
+  nameEl.className = 'product-name';
+  nameEl.textContent = p.name;
+
+  var skuEl = document.createElement('div');
+  skuEl.className = 'product-sku';
+  skuEl.textContent = p.id;
+
+  var priceEl = document.createElement('div');
+  priceEl.className = 'product-price';
+  priceEl.textContent = '$' + p.price.toFixed(2);
+
+  var addBtn = document.createElement('button');
+  addBtn.className = 'add-to-cart-btn';
+  addBtn.textContent = 'Add to Cart';
+  addBtn.setAttribute('data-id', p.id);
+  addBtn.onclick = function() { addToCart(this.getAttribute('data-id')); };
+
+  body.appendChild(slugRow);
+  body.appendChild(nameEl);
+  body.appendChild(skuEl);
+  body.appendChild(priceEl);
+
+  if (swatchHtml) {
+    var swatchDiv = document.createElement('div');
+    swatchDiv.className = 'product-swatches';
+    swatchDiv.innerHTML = swatchHtml;
+    body.appendChild(swatchDiv);
+  }
+
+  body.appendChild(addBtn);
+  card.appendChild(imgWrap);
+  card.appendChild(body);
+  return card;
 }
+
+function buildCardHtml(p) { return ''; } // unused stub
 
 function esc(str) {
   if (!str) return '';
