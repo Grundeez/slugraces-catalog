@@ -53,6 +53,8 @@
   .info-box.purple { background: #2a1a3e; border: 1px solid #8B2FC9; color: #ccc; }
   .info-box.blue { background: #001a40; border: 1px solid #0057b7; color: #ccc; }
   .info-box strong { color: #FFB800; }
+  .cart-banner { background: #1a2e1a; border: 1px solid #5cb85c; border-radius: 8px; padding: 10px 16px; margin-bottom: 16px; font-size: 12px; color: #5cb85c; display: none; }
+  .cart-banner strong { color: #FFB800; }
   .submit-btn { width: 100%; padding: 16px; background: #FFB800; border: none; border-radius: 10px; color: #111; font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: background 0.15s; }
   .submit-btn:hover { background: #e6a800; }
   .submit-btn:disabled { background: #555; color: #888; cursor: default; }
@@ -75,6 +77,10 @@
     <span class="badge badge-fast">⚡ Speedy Slug — Ships 5-7 days</span>
     <span class="badge badge-slow">🐌 Slow Slug — Ships 30-45 days</span>
   </div>
+</div>
+
+<div class="cart-banner" id="cart-banner">
+  🛒 <strong id="cart-banner-text"></strong> — review your items below and add color/size for each.
 </div>
 
 <form id="orderForm">
@@ -114,7 +120,7 @@
 
   <div class="section">
     <div class="section-title">🛒 Your Order</div>
-    <div id="items-container"><p> Please select Category Tab to view items in dropdown</p></div>
+    <div id="items-container"><p>Please select Category Tab to view items in dropdown</p></div>
     <button type="button" class="add-item-btn" onclick="addItem()">+ Add Another Item</button>
   </div>
 
@@ -151,7 +157,7 @@
   Check your spam folder if you don't hear back.<br><br>
   <strong style="color:#FFB800;">Race Day — August 1, 2026</strong><br>
   Joyce Family Kitchen Beer Garden — Highway 112, Joyce WA — Post time 2:30pm<br><br>
- Proceeds benefit Clallam County Fire Protection District No. 4. 🔥</p>
+  Proceeds benefit Clallam County Fire Protection District No. 4. 🔥</p>
 </div>
 
 <div class="disclaimer">
@@ -302,7 +308,6 @@ function addItem() {
   itemCount++;
   var n = itemCount;
 
-  // Build tabs
   var tabHtml = '';
   Object.keys(CATEGORIES).forEach(function(key) {
     var cat = CATEGORIES[key];
@@ -313,10 +318,8 @@ function addItem() {
     tabHtml += cat.label + '</button>';
   });
 
-  // Build remove button
   var removeBtn = n > 1 ? '<button type="button" class="remove-btn" onclick="removeItem(' + n + ')">✕ Remove</button>' : '';
 
-  // Build full item HTML
   var html = '<div class="item-block" id="item-block-' + n + '">';
   html += '<div class="item-header">';
   html += '<span class="item-label">Item ' + n + '</span>';
@@ -349,7 +352,10 @@ function addItem() {
   html += '</div></div>';
   html += '</div>';
 
-  document.getElementById('items-container').insertAdjacentHTML('beforeend', html);
+  // Clear the placeholder text on first item
+  var container = document.getElementById('items-container');
+  if (n === 1) container.innerHTML = '';
+  container.insertAdjacentHTML('beforeend', html);
   updateTotals();
 }
 
@@ -357,7 +363,6 @@ function addItem() {
 // SWITCH CATEGORY TAB
 // ══════════════════════════════════════════════
 function switchCategory(n, catKey) {
-  // Update tab active states
   Object.keys(CATEGORIES).forEach(function(key) {
     var tab = document.getElementById('tab-' + n + '-' + key);
     if (tab) {
@@ -366,11 +371,9 @@ function switchCategory(n, catKey) {
     }
   });
 
-  // Rebuild dropdown for this category
   var ps = document.getElementById('product-' + n);
   if (ps) ps.innerHTML = buildOptions(catKey);
 
-  // Reset dependent rows
   var optRow = document.getElementById('options-row-' + n);
   var qtyRow = document.getElementById('qty-row-' + n);
   var priceEl = document.getElementById('item-price-' + n);
@@ -395,11 +398,9 @@ function onProductChange(n) {
   var price = parseFloat(opt.getAttribute('data-price')) || 0;
   var supplier = opt.getAttribute('data-supplier') || '';
 
-  // Price display
   var priceEl = document.getElementById('item-price-' + n);
   if (priceEl) priceEl.textContent = price > 0 ? '$' + price.toFixed(2) : '$0.00';
 
-  // Ship badge
   var badge = document.getElementById('item-ship-' + n);
   if (badge) {
     if (id && supplier) {
@@ -423,7 +424,6 @@ function onProductChange(n) {
     if (optRow) optRow.style.display = '';
     if (qtyRow) qtyRow.style.display = '';
 
-    // Colors
     var colorSel = document.getElementById('color-' + n);
     if (colorSel) {
       colorSel.innerHTML = '<option value="">— Select color —</option>';
@@ -434,7 +434,6 @@ function onProductChange(n) {
       if (colors.length === 1) colorSel.value = colors[0];
     }
 
-    // Sizes
     var sizeSel = document.getElementById('size-' + n);
     if (sizeSel) {
       sizeSel.innerHTML = '<option value="">— Select size —</option>';
@@ -493,36 +492,117 @@ function updateTotals() {
 }
 
 // ══════════════════════════════════════════════
-// PAGE LOAD — add first item + handle preselect
+// FIND WHICH CATEGORY AN ITEM ID BELONGS TO
 // ══════════════════════════════════════════════
-window.onload = function() {
-  addItem();
-
-  var params = new URLSearchParams(window.location.search);
-  var preselect = params.get('item');
-  if (!preselect) return;
-
-  var foundCat = null;
+function findCategoryForId(productId) {
+  var found = null;
   Object.keys(CATEGORIES).forEach(function(catKey) {
-    if (foundCat) return;
-    var cat = CATEGORIES[catKey];
-    for (var i = 0; i < cat.products.length; i++) {
-      if (cat.products[i].id === preselect) {
-        foundCat = catKey;
-        break;
-      }
+    if (found) return;
+    var prods = CATEGORIES[catKey].products;
+    for (var i = 0; i < prods.length; i++) {
+      if (prods[i].id === productId) { found = catKey; break; }
     }
   });
+  return found;
+}
 
-  if (foundCat) {
-    switchCategory(1, foundCat);
-    setTimeout(function() {
-      var ps = document.getElementById('product-1');
-      if (ps) {
-        ps.value = preselect;
-        onProductChange(1);
-      }
-    }, 100);
+// ══════════════════════════════════════════════
+// LOAD CART FROM SESSIONSTORAGE
+// ══════════════════════════════════════════════
+function loadCartFromSession() {
+  var raw = null;
+  try { raw = sessionStorage.getItem('slugcart'); } catch(e) {}
+  if (!raw) return false;
+
+  var cartItems = null;
+  try { cartItems = JSON.parse(raw); } catch(e) {}
+  if (!cartItems || !cartItems.length) return false;
+
+  // Clear the default first item that addItem() will have already added
+  document.getElementById('items-container').innerHTML = '';
+  itemCount = 0;
+
+  var loaded = 0;
+  for (var i = 0; i < cartItems.length; i++) {
+    var cartItem = cartItems[i];
+    var productId = cartItem.id;
+    var qty = cartItem.qty || 1;
+
+    // Verify the product exists in our catalog
+    if (!ALL_PRODUCTS[productId]) continue;
+
+    var catKey = findCategoryForId(productId);
+    if (!catKey) continue;
+
+    // Add a new item row
+    addItem();
+    var n = itemCount;
+
+    // Switch to correct category tab
+    switchCategory(n, catKey);
+
+    // Select the product — needs a tiny delay for DOM to settle after switchCategory
+    (function(rowN, pid, rowQty) {
+      setTimeout(function() {
+        var ps = document.getElementById('product-' + rowN);
+        if (!ps) return;
+        ps.value = pid;
+        onProductChange(rowN);
+
+        // Set quantity after onProductChange shows the qty row
+        setTimeout(function() {
+          var qtyEl = document.getElementById('qty-' + rowN);
+          if (qtyEl) {
+            // Set qty — clamp to available options (max 5)
+            var setQty = Math.min(rowQty, 5);
+            qtyEl.value = setQty;
+            updateTotals();
+          }
+        }, 50);
+      }, 80 * rowN); // stagger each item slightly so DOM builds in order
+    })(n, productId, qty);
+
+    loaded++;
+  }
+
+  if (loaded > 0) {
+    var banner = document.getElementById('cart-banner');
+    var bannerText = document.getElementById('cart-banner-text');
+    if (banner && bannerText) {
+      bannerText.textContent = loaded + ' item' + (loaded > 1 ? 's' : '') + ' loaded from your cart';
+      banner.style.display = 'block';
+    }
+    return true;
+  }
+  return false;
+}
+
+// ══════════════════════════════════════════════
+// PAGE LOAD
+// ══════════════════════════════════════════════
+window.onload = function() {
+  // Try sessionStorage cart first
+  var loadedFromCart = loadCartFromSession();
+
+  if (!loadedFromCart) {
+    // Fall back to single ?item= preselect or blank form
+    addItem();
+
+    var params = new URLSearchParams(window.location.search);
+    var preselect = params.get('item');
+    if (!preselect) return;
+
+    var foundCat = findCategoryForId(preselect);
+    if (foundCat) {
+      switchCategory(1, foundCat);
+      setTimeout(function() {
+        var ps = document.getElementById('product-1');
+        if (ps) {
+          ps.value = preselect;
+          onProductChange(1);
+        }
+      }, 100);
+    }
   }
 };
 
@@ -611,6 +691,8 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
     body: JSON.stringify(formData)
   }).then(function(response) {
     if (response.ok) {
+      // Clear the cart from sessionStorage on successful submission
+      try { sessionStorage.removeItem('slugcart'); } catch(e) {}
       document.getElementById('orderForm').style.display = 'none';
       document.getElementById('successMsg').style.display = 'block';
       window.scrollTo(0, 0);
@@ -620,7 +702,7 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
   }).catch(function() {
     btn.disabled = false;
     btn.textContent = '🐌 Submit My Order';
-    alert('There was a problem submitting your order. Please email me directly Grundeezpetlove@gmail.com and I will get you sorted right away!');
+    alert('There was a problem submitting your order. Please email me directly at Grundeezpetlove@gmail.com and I will get you sorted right away!');
   });
 });
 
