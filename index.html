@@ -730,6 +730,12 @@ img { max-width: 100%; display: block; }
   <div class="product-grid" id="grid-drinkware"></div>
 </div>
 
+<!-- ========== LIGHTBOX ========== -->
+<div id="img-lightbox" onclick="closeLightbox()">
+  <span id="img-lightbox-close" onclick="closeLightbox()">✕</span>
+  <img id="img-lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+</div>
+
 <!-- ========== CART OVERLAY & SIDEBAR ========== -->
 <div id="cart-overlay" onclick="closeCart()"></div>
 <div id="cart-sidebar">
@@ -804,6 +810,45 @@ img { max-width: 100%; display: block; }
 <!-- ========== JAVASCRIPT ========== -->
 <script>
 
+/* ---- LIGHTBOX ---- */
+#img-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 5000;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+#img-lightbox.open { display: flex; }
+#img-lightbox img {
+  max-width: 90vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 0 60px rgba(0,0,0,0.8);
+  cursor: default;
+}
+#img-lightbox-close {
+  position: absolute;
+  top: 18px; right: 24px;
+  font-size: 32px;
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.7;
+}
+#img-lightbox-close:hover { opacity: 1; }
+.img-zoom-hint {
+  position: absolute;
+  bottom: 8px; left: 0; right: 0;
+  text-align: center;
+  font-size: 11px;
+  color: #888;
+  pointer-events: none;
+}
+
 /* ---- SWATCH COLOR MAP ---- */
 var SWATCHES = {
   'Black': '#111',
@@ -835,7 +880,7 @@ var CATEGORIES = {
       {
         id: 'AAOLBC-2601',
         name: 'Official Logo Ball Cap',
-        price: 24.99,
+        price: 9.98,
         supplier: 'artsadd',
         colors: ['Black','White','Navy','Army Green','Stone'],
         image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUNVAQ5I5d4vhElo5wtqYEP5DKFjscdsdiTFMNmUlhKtRpd_3De17jG1aslUtTTsKH6j7jSYPZujzGc6on7s6OGPrITefDym60ooS19lMN5sy4ou_sCNidxx-tPN0V1phol9k5o49MZqwwwpj_Oi_5uMOkegH9bdsbf7a3XX5AflZtNdDTV9ZdRizVTQIT/s320/AAOLBC-2601.jpg'
@@ -843,7 +888,7 @@ var CATEGORIES = {
       {
         id: 'AACLBC-2602',
         name: 'Color Logo Ball Cap',
-        price: 24.99,
+        price: 9.98,
         supplier: 'artsadd',
         colors: ['Black','White','Navy','Royal Blue'],
         image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjbTAiKIR2MjUbprhUjcSMcgkmfeta_4pB7_n4uvpAFPYvNajkS-vyj5XozzC__XLfIy0VYx_Btpo0Fe6NY7Ti1B_nl3kUZC9IKjcl10YaC7u8IvY03eg8kRoEy13oKahB_AUpal83A8Du072PJ6ERmOYXSvZlmhD6TPhBN9kbbbIB3KLVtOleaGvHNKt5L/s320/AACLBC-2602.jpg'
@@ -851,7 +896,7 @@ var CATEGORIES = {
       {
         id: 'AARLBC-2603',
         name: 'Rainbow Logo Ball Cap',
-        price: 27.99,
+        price: 9.98,
         supplier: 'artsadd',
         colors: ['Black','White','Natural'],
         image: 'https://cdn.sdspod.com/out/2538/202606/73a0a5f40c3e96cf612ae4757c908313.jpg'
@@ -859,15 +904,15 @@ var CATEGORIES = {
       {
         id: 'ESOLBC-2604',
         name: 'Premium Logo Cap',
-        price: 29.99,
-        supplier: 'etsy',
+        price: 20.22,
+        supplier: 'artsadd',
         colors: ['Black','Navy','Hunter Green'],
         image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdSnG1kNRtu9YN0FQ0AZ3_mxr4TwOP3ShGXt8QvMamdWSVqr0QdTfM_PvhNbjyCaGRDgaHlula1YJnXQgzR10A493PppjjWh-YYntYNyHLyn_VxNA3TSn-VULcJmZ9Az3i2vPDhdYlA4dHHBVaW5I603fcywv6LCj23zjJpvtP1IZRHNU0ot-QX86gMTN0/s320/ESOLBC-2604.jpg'
       },
       {
         id: 'ESTEKB-2605',
         name: 'Embroidered Knit Beanie',
-        price: 22.99,
+        price: 29.99,
         supplier: 'etsy',
         colors: ['Black','Navy','Forest Green','Cardinal Red'],
         image: 'https://i.etsystatic.com/50253800/r/il/b018dc/8162568665/il_794xN.8162568665_1psy.jpg'
@@ -875,7 +920,7 @@ var CATEGORIES = {
       {
         id: 'AARPKB-2606',
         name: 'Rainbow Pom Knit Beanie',
-        price: 22.99,
+        price: 18.57,
         supplier: 'artsadd',
         colors: ['Black','White'],
         image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGN392lwemRTsQym6iVE8KYB4vA5G9JBA48GXQlSs-tBqFSeXBV63ZyCmTye1moWenj8Tmml5earApKPyRdqKjjANKny8aRT4LHA0urvoT1Us8d-TMnZNPm3TBGJVrV_FqxBaEBl7fL6fOfUafElTeFJF3xrZzdZWjFdKI1galy3zDqipxTGcSPfikoRGd/s320/AARPKB-2606.jpg'
@@ -888,7 +933,7 @@ var CATEGORIES = {
       {
         id: 'AARISV-2607',
         name: 'Rainbow Ice Silk V-Neck',
-        price: 32.99,
+        price: 19.75,
         supplier: 'artsadd',
         colors: ['White','Natural','Light Blue'],
         image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHYqdPLvmVUAvXoXLVUpBUdaEIrTnMR7b2TQmsuiVC2cx-5NeW-6bvR8QhcJsT-fO8y9X1XjMsZb3B8BHwsp2w7OiH6YC9P3VBFYDKWQS3pkSojC86UM_xDC3EYiDaBAV8qx8f_R6_PlJAQJzn9Za0ao02YAPKHKHp9GJ2qPGFjL31Ketmx3XfH7S57l3g/s320/AARISV-2607.jpg'
@@ -896,7 +941,7 @@ var CATEGORIES = {
       {
         id: 'AARBWV-2608',
         name: 'Rainbow Bat Wing V-Neck',
-        price: 34.99,
+        price: 19.36,
         supplier: 'artsadd',
         colors: ['White','Black'],
         image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMX3TfBxjZdl-AUSxRZ57cNsh5gIWyZe8FvBNsRiG8QS90RzkeOtVcAXrGuFEUYFz8P6VHEwQ4KB8j8GUOJD3xPZ9luP0J0XqYdCXRhfUGFz8P6VHEwQ4KB8j8GUOJD3xPZ9luP0J0XqYdCXRhfUKjzu2hjLZSVPN0IOZCed0DXmie/s320/AARBWV-2608.jpg'
@@ -904,7 +949,7 @@ var CATEGORIES = {
       {
         id: 'AAPWLV-2609',
         name: 'Purple Lace V-Neck',
-        price: 32.99,
+        price: 17.95,
         supplier: 'artsadd',
         colors: ['Purple','Black','Navy'],
         image: 'https://www.mszxdz.com/public/tuku/img/ceshi/20260620/6a35c9c5defca6_50083095_63561.jpg'
@@ -912,7 +957,7 @@ var CATEGORIES = {
       {
         id: 'AARCWH-2610',
         name: "Race Car Women's Hoodie",
-        price: 44.99,
+        price: 33.35,
         supplier: 'artsadd',
         colors: ['Black','Navy','Purple','Forest Green'],
         image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/a95acdd005f197f56d81b71d428037f8.jpg?x-oss-process=image/resize,w_500,h_500'
@@ -920,7 +965,7 @@ var CATEGORIES = {
       {
         id: 'ESRJPT-2611',
         name: 'Race Jockey Print Tee',
-        price: 27.99,
+        price: 22.97,
         supplier: 'etsy',
         colors: ['White','Natural','Sports Gray'],
         image: 'https://i.etsystatic.com/50253800/r/il/1dd09a/8177052383/il_794xN.8177052383_lrtf.jpg'
@@ -928,7 +973,7 @@ var CATEGORIES = {
       {
         id: 'ESOLPT-2612',
         name: 'Official Logo Print Tee',
-        price: 25.99,
+        price: 22.97,
         supplier: 'etsy',
         colors: ['White','Black','Sports Gray','Light Blue'],
         image: 'https://i.etsystatic.com/50253800/r/il/9efd0d/8176586789/il_794xN.8176586789_b65f.jpg'
@@ -936,7 +981,7 @@ var CATEGORIES = {
       {
         id: 'ESRLPT-2613',
         name: 'Rainbow Logo Print Tee',
-        price: 27.99,
+        price: 22.97,
         supplier: 'etsy',
         colors: ['White','Natural','Beige'],
         image: 'https://i.etsystatic.com/50253800/r/il/030084/8128683628/il_794xN.8128683628_a3ld.jpg'
@@ -944,7 +989,7 @@ var CATEGORIES = {
       {
         id: 'ESSNPT-2614',
         name: 'Slug Names Print Tee',
-        price: 27.99,
+        price: 22.97,
         supplier: 'etsy',
         colors: ['White','Natural','Sports Gray'],
         image: 'https://i.etsystatic.com/50253800/r/il/d97647/8176657913/il_794xN.8176657913_633h.jpg'
@@ -957,7 +1002,7 @@ var CATEGORIES = {
       {
         id: 'ESRCPT-2615',
         name: 'Race Car Print Tee',
-        price: 27.99,
+        price: 22.97,
         supplier: 'etsy',
         colors: ['White','Black','Sports Gray','Natural'],
         image: 'https://i.etsystatic.com/50253800/r/il/0fc57f/8128658910/il_794xN.8128658910_s4n5.jpg'
@@ -965,7 +1010,7 @@ var CATEGORIES = {
       {
         id: 'ESFPHS-2616',
         name: 'Hawaiian Shirt — Speedy',
-        price: 49.99,
+        price: 59.99,
         supplier: 'etsy',
         colors: ['Multi'],
         image: 'https://i.etsystatic.com/50253800/r/il/eeb605/8157418568/il_794xN.8157418568_ma11.jpg'
@@ -973,7 +1018,7 @@ var CATEGORIES = {
       {
         id: 'AAFPHS-2617',
         name: 'Hawaiian Shirt — Slow',
-        price: 44.99,
+        price: 39.23,
         supplier: 'artsadd',
         colors: ['Multi'],
         image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/b8192f2d7bc5fbfb97aaf7b6ca786e3b.jpg'
@@ -981,7 +1026,7 @@ var CATEGORIES = {
       {
         id: 'AASRCL-2618',
         name: 'Slug Racer Color Logo Tee',
-        price: 25.99,
+        price: 17.97,
         supplier: 'artsadd',
         colors: ['White','Black','Navy','Sports Gray'],
         image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUpmuFCLND_yU3Za5xe7t1IuOxOUq9OpP2yji5YE-kr0emth2nu-HkoNJVX3ygQsRbtTAqmYdtB_dMgVjLPFnDu8IHGnF-CqZtDLIFT-IngolajhnddtErZXKSe8MBhw7_bTbON1FEjivHh39O3V1e80bFpFRKwP1pOTPY7WWBdGupNtrS83TDWapJYfgA/s320/AASRCL-2618.jpg'
@@ -989,7 +1034,7 @@ var CATEGORIES = {
       {
         id: 'AASRAO-2619',
         name: 'Slug Racer All Over Print Tee',
-        price: 32.99,
+        price: 21.92,
         supplier: 'artsadd',
         colors: ['White'],
         image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj87EdySz59JDDcMXjOi16skY4-kvwotBmGn2FETf34GMx9CIQr4lp3mKPEHA5sDNmJ2ccROr8U4xQmW15WZsom5cg0pb4si2jRlT44kR0SN6K7NWW55Dgu5o6Lv5d6qPVh353tJX-y_13gHh93aFQ-xVuGXh73_VRecLyE3vvOQ2Gk2L0qOz6JL_F0STX3/s320/AASRAO-2619.jpg'
@@ -997,7 +1042,7 @@ var CATEGORIES = {
       {
         id: 'AASJMP-2620',
         name: 'Slug Jockey Plus Size Tee',
-        price: 29.99,
+        price: 18.68,
         supplier: 'artsadd',
         colors: ['White','Black','Sports Gray'],
         image: 'https://cdn.sdspod.com/out/2538/202606/e5e14ffc60f67e331246c8f21fbd42a8.jpg'
@@ -1005,7 +1050,7 @@ var CATEGORIES = {
       {
         id: 'AAJFRH-2621',
         name: 'Joyce Fire Rescue Hoodie',
-        price: 54.99,
+        price: 33.76,
         supplier: 'artsadd',
         colors: ['Black','Navy','Forest Green','Cardinal Red'],
         image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/58c781bba8cab6ff9276abe64bf782d1.jpg'
@@ -1018,7 +1063,7 @@ var CATEGORIES = {
       {
         id: 'AASIWS-2621',
         name: "Slug ID Women's Socks",
-        price: 14.99,
+        price: 12.35,
         supplier: 'artsadd',
         colors: ['White','Black'],
         image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/afcf08bca58aae5102c723941b45f861.jpg'
@@ -1026,7 +1071,7 @@ var CATEGORIES = {
       {
         id: 'AAERWS-2622',
         name: "Extreme Racing Women's Socks",
-        price: 14.99,
+        price: 12.35,
         supplier: 'artsadd',
         colors: ['White','Black'],
         image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/0ef5f4d176132f93e036a36ea6a3cb07.jpg?x-oss-process=image/resize,w_500,h_500'
@@ -1034,7 +1079,7 @@ var CATEGORIES = {
       {
         id: 'AAFPWS-2623',
         name: "Floral Women's Slide Sandal",
-        price: 34.99,
+        price: 22.38,
         supplier: 'artsadd',
         colors: ['Multi'],
         image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/6a224ed8aeeaec78d5e2c747371f86c1.jpg'
@@ -1042,7 +1087,7 @@ var CATEGORIES = {
       {
         id: 'AASIMS-2624',
         name: "Slug ID Men's Socks",
-        price: 14.99,
+        price: 12.40,
         supplier: 'artsadd',
         colors: ['White','Black'],
         image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/00068fda1af533cb8a15fc41549a6a65.jpg'
@@ -1050,7 +1095,7 @@ var CATEGORIES = {
       {
         id: 'AAERMS-2625',
         name: "Extreme Racing Men's Socks",
-        price: 14.99,
+        price: 12.40,
         supplier: 'artsadd',
         colors: ['White','Black'],
         image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/f496db59977da046f2b141373953d518.jpg'
@@ -1058,7 +1103,7 @@ var CATEGORIES = {
       {
         id: 'AAESMS-2626',
         name: "Extreme Slug Men's Slide",
-        price: 36.99,
+        price: 22.79,
         supplier: 'artsadd',
         colors: ['Multi'],
         image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/778674da2628f695f167e1a05dc174b0.jpg?x-oss-process=image/resize,w_500,h_500'
@@ -1071,7 +1116,7 @@ var CATEGORIES = {
       {
         id: 'ESSWPP-2627',
         name: 'Slugs of the World Poster',
-        price: 19.99,
+        price: 14.99,
         supplier: 'etsy',
         colors: [],
         image: 'https://i.etsystatic.com/50253800/r/il/7a4b5f/8127113962/il_794xN.8127113962_qqfo.jpg'
@@ -1079,7 +1124,7 @@ var CATEGORIES = {
       {
         id: 'ESOLBG-2628',
         name: 'Official Logo Beer Glass',
-        price: 18.99,
+        price: 19.75,
         supplier: 'etsy',
         colors: [],
         image: 'https://i.etsystatic.com/50253800/r/il/8a1be0/8176977727/il_794xN.8176977727_2zpa.jpg'
@@ -1087,8 +1132,8 @@ var CATEGORIES = {
       {
         id: 'AAESCM-2629',
         name: '15oz Extreme Slug Coffee Mug',
-        price: 16.99,
-        supplier: 'artsadd',
+        price: 19.99,
+        supplier: 'etsy',
         colors: ['White'],
         image: 'https://i.etsystatic.com/50253800/r/il/32ca43/8129001892/il_794xN.8129001892_seut.jpg'
       },
@@ -1136,11 +1181,11 @@ function buildCard(p) {
     var bg = 'background:' + colorVal + ';';
     swatchHtml += '<span class="swatch" title="' + esc(colorName) + '" style="' + bg + '"></span>';
   }
-  var orderLink = 'orderform.html?item=' + encodeURIComponent(p.id);
   return '<div class="product-card">' +
-    '<a href="' + orderLink + '" class="product-img-wrap">' +
+    '<div class="product-img-wrap" onclick="openLightbox(\'' + esc(p.image) + '\',\'' + esc(p.name) + '\')" title="Click to enlarge">' +
       '<img src="' + esc(p.image) + '" alt="' + esc(p.name) + '" loading="lazy">' +
-    '</a>' +
+      '<div class="img-zoom-hint">🔍 Click to enlarge</div>' +
+    '</div>' +
     '<div class="product-body">' +
       '<div class="card-slug-row">' +
         '<img src="' + slugImg + '" alt="' + slugAlt + '">' +
@@ -1399,6 +1444,26 @@ function showToast(msg) {
   if (toastTimer) clearTimeout(toastTimer);
   toastTimer = setTimeout(function() { el.classList.remove('show'); }, 2500);
 }
+
+/* ---- LIGHTBOX ---- */
+function openLightbox(src, alt) {
+  var lb = document.getElementById('img-lightbox');
+  var img = document.getElementById('img-lightbox-img');
+  img.src = src;
+  img.alt = alt || '';
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('img-lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close lightbox on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeLightbox(); closeCart(); }
+});
 
 /* ---- MOBILE NAV ---- */
 function toggleMobileNav() {
