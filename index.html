@@ -1245,43 +1245,30 @@ function updateCartUI() {
   document.getElementById('nav-cart-count').textContent = totalQty;
   document.getElementById('nav-cart-total').textContent = totalQty > 0 ? '$' + totalPrice.toFixed(2) : '';
 
-  // cart items list
+  // cart items list — build with DOM nodes to avoid esc() breaking onclick handlers
   var listEl = document.getElementById('cart-items-list');
-  var emptyEl = document.getElementById('cart-empty-msg');
+  listEl.innerHTML = '';
+
   if (cart.length === 0) {
-    emptyEl.style.display = 'block';
-    listEl.innerHTML = '';
-    listEl.appendChild(emptyEl);
+    var emptyDiv = document.createElement('div');
+    emptyDiv.id = 'cart-empty-msg';
+    emptyDiv.style.cssText = 'text-align:center;color:#666;font-size:13px;margin-top:40px;';
+    emptyDiv.textContent = 'Your cart is empty. Add some slug gear!';
+    listEl.appendChild(emptyDiv);
     document.getElementById('cart-subtotal-val').textContent = '$0.00';
     document.getElementById('cart-total-val').textContent = '$0.00';
     document.getElementById('cart-shipping-note').textContent = 'Add items to see shipping estimate.';
     return;
   }
-  emptyEl.style.display = 'none';
-  var html = '';
+
   for (var j = 0; j < cart.length; j++) {
-    var item = cart[j];
-    html += '<div class="cart-item">' +
-      '<img class="cart-item-img" src="' + esc(item.image) + '" alt="' + esc(item.name) + '">' +
-      '<div class="cart-item-info">' +
-        '<div class="cart-item-name">' + esc(item.name) + '</div>' +
-        '<div class="cart-item-sku">' + esc(item.id) + '</div>' +
-        '<div class="cart-item-price">$' + item.price.toFixed(2) + ' each</div>' +
-        '<div class="cart-item-qty">' +
-          '<button class="cart-qty-btn" onclick="changeQty(\'' + esc(item.id) + '\',-1)">−</button>' +
-          '<span class="cart-qty-num">' + item.qty + '</span>' +
-          '<button class="cart-qty-btn" onclick="changeQty(\'' + esc(item.id) + '\',1)">+</button>' +
-        '</div>' +
-      '</div>' +
-      '<button class="cart-item-remove" onclick="removeFromCart(\'' + esc(item.id) + '\')" title="Remove">✕</button>' +
-    '</div>';
+    listEl.appendChild(buildCartItemNode(cart[j]));
   }
-  listEl.innerHTML = html;
 
   document.getElementById('cart-subtotal-val').textContent = '$' + totalPrice.toFixed(2);
   document.getElementById('cart-total-val').textContent = '$' + totalPrice.toFixed(2);
 
-  // Shipping note — check if mixed suppliers
+  // Shipping note
   var hasEtsy = false;
   var hasArts = false;
   for (var k = 0; k < cart.length; k++) {
@@ -1297,6 +1284,69 @@ function updateCartUI() {
     note = '🐌 Slow Slug — ArtsAdd items ship in 30–45 days. Order processed via form.';
   }
   document.getElementById('cart-shipping-note').textContent = note;
+}
+
+function buildCartItemNode(item) {
+  // Use DOM construction so product IDs never touch onclick string escaping
+  var row = document.createElement('div');
+  row.className = 'cart-item';
+
+  var img = document.createElement('img');
+  img.className = 'cart-item-img';
+  img.src = item.image;
+  img.alt = item.name;
+
+  var info = document.createElement('div');
+  info.className = 'cart-item-info';
+
+  var nameEl = document.createElement('div');
+  nameEl.className = 'cart-item-name';
+  nameEl.textContent = item.name;
+
+  var skuEl = document.createElement('div');
+  skuEl.className = 'cart-item-sku';
+  skuEl.textContent = item.id;
+
+  var priceEl = document.createElement('div');
+  priceEl.className = 'cart-item-price';
+  priceEl.textContent = '$' + item.price.toFixed(2) + ' each';
+
+  var qtyRow = document.createElement('div');
+  qtyRow.className = 'cart-item-qty';
+
+  var btnMinus = document.createElement('button');
+  btnMinus.className = 'cart-qty-btn';
+  btnMinus.textContent = '−';
+  (function(id) { btnMinus.onclick = function() { changeQty(id, -1); }; })(item.id);
+
+  var qtyNum = document.createElement('span');
+  qtyNum.className = 'cart-qty-num';
+  qtyNum.textContent = item.qty;
+
+  var btnPlus = document.createElement('button');
+  btnPlus.className = 'cart-qty-btn';
+  btnPlus.textContent = '+';
+  (function(id) { btnPlus.onclick = function() { changeQty(id, 1); }; })(item.id);
+
+  qtyRow.appendChild(btnMinus);
+  qtyRow.appendChild(qtyNum);
+  qtyRow.appendChild(btnPlus);
+
+  info.appendChild(nameEl);
+  info.appendChild(skuEl);
+  info.appendChild(priceEl);
+  info.appendChild(qtyRow);
+
+  var removeBtn = document.createElement('button');
+  removeBtn.className = 'cart-item-remove';
+  removeBtn.title = 'Remove';
+  removeBtn.textContent = '✕';
+  (function(id) { removeBtn.onclick = function() { removeFromCart(id); }; })(item.id);
+
+  row.appendChild(img);
+  row.appendChild(info);
+  row.appendChild(removeBtn);
+  return row;
 }
 
 /* ---- OPEN/CLOSE CART ---- */
@@ -1319,9 +1369,24 @@ function doCheckout() {
     return;
   }
   try {
-    sessionStorage.setItem('slugcart', JSON.stringify(cart));
-    sessionStorage.setItem('slugcart_checkout', JSON.stringify(cart));
-  } catch(e) {}
+    // Write full cart under all likely key names the orderform might read
+    var cartJson = JSON.stringify(cart);
+    sessionStorage.setItem('slugcart', cartJson);
+    sessionStorage.setItem('slugcart_checkout', cartJson);
+    sessionStorage.setItem('cartData', cartJson);
+    sessionStorage.setItem('cart', cartJson);
+
+    // Also write a simplified [{itemId, qty, name, price}] format as a fallback
+    var simple = [];
+    for (var i = 0; i < cart.length; i++) {
+      simple.push({ itemId: cart[i].id, id: cart[i].id, name: cart[i].name, price: cart[i].price, qty: cart[i].qty, quantity: cart[i].qty, supplier: cart[i].supplier });
+    }
+    sessionStorage.setItem('cartItems', JSON.stringify(simple));
+    sessionStorage.setItem('orderItems', JSON.stringify(simple));
+  } catch(e) {
+    alert('Could not save cart. Please check your browser settings allow sessionStorage.');
+    return;
+  }
   window.location.href = 'orderform.html';
 }
 
