@@ -3,260 +3,1366 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Extreme Slug Racing 2026 Catalog</title>
-<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+<title>Extreme Slug Racing — Official Merchandise Store</title>
+<meta name="description" content="Official Extreme Slug Racing merchandise. Funny shirts. Serious purpose. Proceeds benefit Joyce Fire &amp; Rescue.">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* ========== RESET & BASE ========== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: Arial, sans-serif;
+  background: #1a1a1a;
+  color: #f0f0f0;
+  min-height: 100vh;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
 
-  body {
-    background: #1a1a1a;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-  }
+/* ========== NAV ========== */
+#main-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #111;
+  border-bottom: 2px solid #FFB800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 54px;
+}
+#main-nav .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#main-nav .nav-logo img {
+  height: 38px;
+  width: auto;
+}
+#main-nav .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+#main-nav .nav-links a {
+  color: #f0f0f0;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+#main-nav .nav-links a:hover { background: #FFB800; color: #111; }
+#main-nav .nav-etsy {
+  font-size: 11px !important;
+  color: #aaa !important;
+  font-weight: normal !important;
+  border: 1px solid #444;
+}
+#main-nav .nav-etsy:hover { background: #333 !important; color: #FFB800 !important; }
+#cart-nav-btn {
+  background: #8B2FC9;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+#cart-nav-btn:hover { background: #6d24a0; }
+#cart-nav-btn .cart-count {
+  background: #FFB800;
+  color: #111;
+  border-radius: 50%;
+  min-width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+}
+#cart-nav-btn .cart-total {
+  font-size: 12px;
+  opacity: 0.9;
+}
 
-  /* ── Header ── */
-  .header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  .header h1 {
-    color: #FFB800;
-    font-size: 22px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-  .header p {
-    color: #aaa;
-    font-size: 12px;
-    margin-top: 4px;
-  }
+/* ========== HERO ========== */
+#hero {
+  position: relative;
+  width: 100%;
+  min-height: 380px;
+  background: #111 url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQuVG89k2FTFsvBpbvj7nyS9Lvi67GxhEBqZ-EKt33i9rGOVffvmLt7r2W5RZXxYh6Y00_l8pRswUBZtE3xzItfkHdZ0gv0faVHZQ8nKzqIX9TyFwOfi6uGaOrD7prX13UKNWRsVaLLDS7MkUOV1r6STIBmzz_CCrT4hGr9dCYfLV7mrORUQgHKZKuFlDO/s320/ExtremeText-fullcolor-01.png') center/contain no-repeat;
+  display: flex;
+  align-items: center;
+}
+#hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.2) 100%);
+}
+#hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 520px;
+  padding: 50px 40px;
+}
+#hero-content h1 {
+  font-size: 2.4rem;
+  line-height: 1.15;
+  color: #FFB800;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+  margin-bottom: 14px;
+}
+#hero-content .hero-tagline {
+  font-size: 1.1rem;
+  color: #f0f0f0;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+}
+#hero-content .hero-sub {
+  font-size: 0.9rem;
+  color: #ccc;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+#hero-content .hero-btn {
+  display: inline-block;
+  background: #8B2FC9;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background 0.15s;
+}
+#hero-content .hero-btn:hover { background: #FFB800; color: #111; }
 
-  /* ── Flipbook container ── */
-  #flipbook-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
+/* ========== SHIPPING LEGEND ========== */
+#shipping-legend {
+  background: #222;
+  border-top: 1px solid #333;
+  border-bottom: 3px solid #FFB800;
+  padding: 18px 30px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+#shipping-legend .legend-label {
+  font-size: 12px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 8px;
+}
+.slug-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #111;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+}
+.slug-badge img { height: 26px; width: auto; }
+.slug-badge .badge-text { line-height: 1.3; }
+.slug-badge .badge-name { font-weight: bold; display: block; }
+.slug-badge .badge-days { font-size: 11px; color: #aaa; display: block; }
+#shipping-legend .legend-note {
+  font-size: 12px;
+  color: #888;
+  font-style: italic;
+  margin-left: auto;
+}
 
-  #flipbook {
-    /* StPageFlip sizes itself — this is just a wrapper */
-  }
+/* ========== INTRO ========== */
+#intro {
+  background: #1a1a1a;
+  padding: 28px 30px;
+  text-align: center;
+  border-bottom: 1px solid #333;
+}
+#intro p {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 14px;
+  color: #bbb;
+  line-height: 1.7;
+}
+#intro strong { color: #FFB800; }
 
-  /* Each page image */
-  .page img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+/* ========== SECTION HEADINGS ========== */
+.section-heading {
+  background: linear-gradient(90deg, #8B2FC9 0%, #1a1a1a 60%);
+  padding: 18px 30px;
+  border-left: 5px solid #FFB800;
+  margin-top: 10px;
+}
+.section-heading h2 {
+  font-size: 1.5rem;
+  color: #FFB800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.section-heading .section-sub {
+  font-size: 12px;
+  color: #bbb;
+  margin-top: 3px;
+}
+
+/* ========== PRODUCT GRID ========== */
+.product-section {
+  background: #1a1a1a;
+  padding: 20px 20px 36px;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* ========== PRODUCT CARD ========== */
+.product-card {
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.product-card:hover {
+  border-color: #8B2FC9;
+  transform: translateY(-2px);
+}
+.product-img-wrap {
+  position: relative;
+  background: #f5f5f5;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  cursor: pointer;
+}
+.product-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.2s;
+}
+.product-img-wrap:hover img { transform: scale(1.04); }
+.slug-icon {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 10;
+  height: 28px;
+  width: auto;
+}
+.product-body {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 6px;
+}
+.product-name {
+  font-size: 13px;
+  font-weight: bold;
+  color: #f0f0f0;
+  line-height: 1.3;
+}
+.product-sku {
+  font-size: 11px;
+  color: #888;
+}
+.product-price {
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFB800;
+}
+.product-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-height: 20px;
+}
+.swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #555;
+  cursor: default;
+  flex-shrink: 0;
+}
+.swatch[title="White"] { border-color: #ccc; }
+.product-supplier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  width: fit-content;
+}
+.badge-etsy { background: #1b3a1b; color: #6edb6e; border: 1px solid #2a5a2a; }
+.badge-artsadd { background: #3a1b1b; color: #db6e6e; border: 1px solid #5a2a2a; }
+.add-to-cart-btn {
+  margin-top: auto;
+  padding-top: 8px;
+  background: #8B2FC9;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.15s;
+  text-align: center;
+}
+.add-to-cart-btn:hover { background: #FFB800; color: #111; }
+
+/* ========== FLOATING CART ========== */
+#cart-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1990;
+}
+#cart-overlay.open { display: block; }
+#cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 400px;
+  max-width: 95vw;
+  height: 100vh;
+  background: #111;
+  border-left: 2px solid #8B2FC9;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease;
+}
+#cart-sidebar.open { right: 0; }
+#cart-header {
+  background: #1a1a1a;
+  padding: 16px 20px;
+  border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#cart-header h3 { color: #FFB800; font-size: 1rem; }
+#cart-close-btn {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 22px;
+  cursor: pointer;
+  line-height: 1;
+}
+#cart-close-btn:hover { color: #fff; }
+#cart-items-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+}
+#cart-empty-msg {
+  text-align: center;
+  color: #666;
+  font-size: 13px;
+  margin-top: 40px;
+}
+.cart-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #2a2a2a;
+}
+.cart-item-img {
+  width: 52px;
+  height: 52px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.cart-item-info { flex: 1; }
+.cart-item-name { font-size: 12px; font-weight: bold; line-height: 1.3; }
+.cart-item-sku { font-size: 10px; color: #888; }
+.cart-item-price { font-size: 12px; color: #FFB800; margin-top: 2px; }
+.cart-item-qty {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 5px;
+}
+.cart-qty-btn {
+  background: #333;
+  border: 1px solid #444;
+  color: #fff;
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cart-qty-btn:hover { background: #8B2FC9; }
+.cart-qty-num { font-size: 13px; min-width: 16px; text-align: center; }
+.cart-item-remove {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 4px;
+  line-height: 1;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+.cart-item-remove:hover { color: #e55; }
+#cart-footer {
+  border-top: 1px solid #333;
+  padding: 16px 20px;
+  background: #1a1a1a;
+}
+.cart-subtotal-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #bbb;
+  margin-bottom: 5px;
+}
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFB800;
+  margin-bottom: 4px;
+}
+.cart-shipping-note {
+  font-size: 11px;
+  color: #888;
+  font-style: italic;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+#checkout-btn {
+  width: 100%;
+  background: #8B2FC9;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 13px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+#checkout-btn:hover { background: #FFB800; color: #111; }
+#cart-continue-btn {
+  width: 100%;
+  background: none;
+  color: #888;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: color 0.15s;
+}
+#cart-continue-btn:hover { color: #f0f0f0; }
+
+/* ========== ADDED TOAST ========== */
+#cart-toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #8B2FC9;
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 3000;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+#cart-toast.show { opacity: 1; transform: translateY(0); }
+
+/* ========== FOOTER ========== */
+#footer {
+  background: #111;
+  border-top: 3px solid #8B2FC9;
+  padding: 40px 30px 24px;
+  margin-top: 40px;
+}
+#footer .footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto 30px;
+}
+#footer h4 {
+  color: #FFB800;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 6px;
+}
+#footer p, #footer li {
+  font-size: 12px;
+  color: #999;
+  line-height: 1.7;
+}
+#footer ul { list-style: none; }
+#footer a { color: #999; transition: color 0.15s; }
+#footer a:hover { color: #FFB800; }
+.footer-race-day {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 14px;
+  font-size: 12px;
+  color: #bbb;
+  line-height: 1.7;
+}
+.footer-race-day strong { color: #FFB800; display: block; font-size: 14px; margin-bottom: 4px; }
+#footer .footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #2a2a2a;
+  font-size: 11px;
+  color: #555;
+}
+#footer .footer-bottom a { color: #555; }
+#footer .footer-bottom a:hover { color: #888; }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  #main-nav .nav-links { display: none; }
+  #hero-content { padding: 30px 20px; }
+  #hero-content h1 { font-size: 1.7rem; }
+  #shipping-legend { gap: 12px; }
+  #shipping-legend .legend-note { margin-left: 0; }
+  .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+  #cart-sidebar { width: 100%; max-width: 100%; }
+}
+
+/* ========== MOBILE NAV TOGGLE ========== */
+#mobile-nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #FFB800;
+  font-size: 24px;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  #mobile-nav-toggle { display: block; }
+  #mobile-nav-menu {
+    position: fixed;
+    top: 54px;
+    left: 0;
+    right: 0;
+    background: #111;
+    border-bottom: 2px solid #FFB800;
+    z-index: 999;
+    display: none;
+    padding: 10px 0;
+  }
+  #mobile-nav-menu.open { display: block; }
+  #mobile-nav-menu a {
     display: block;
+    padding: 11px 24px;
+    color: #f0f0f0;
+    font-size: 15px;
+    font-weight: bold;
+    border-bottom: 1px solid #222;
   }
-
-  /* ── Controls ── */
-  .controls {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .btn {
-    background: #FFB800;
-    color: #111;
-    border: none;
-    padding: 10px 24px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: background 0.15s;
-  }
-  .btn:hover { background: #e6a800; }
-  .btn:disabled { background: #555; color: #888; cursor: default; }
-
-  .page-counter {
-    color: #ccc;
-    font-size: 14px;
-    min-width: 100px;
-    text-align: center;
-  }
-
-  .btn-download {
-    background: #8B2FC9;
-    color: #fff;
-  }
-  .btn-download:hover { background: #7a28b0; }
-
-  /* ── Instructions ── */
-  .instructions {
-    color: #666;
-    font-size: 11px;
-    margin-top: 12px;
-    text-align: center;
-  }
-
-  /* ── Loading state ── */
-  #loading {
-    color: #FFB800;
-    font-size: 16px;
-    text-align: center;
-    padding: 40px;
-    display: none;
-  }
-
-  /* ── Mobile warning ── */
-  .mobile-tip {
-    color: #888;
-    font-size: 11px;
-    margin-top: 8px;
-    text-align: center;
-    display: none;
-  }
-  @media (max-width: 600px) {
-    .mobile-tip { display: block; }
-  }
+  #mobile-nav-menu a:hover { background: #1a1a1a; color: #FFB800; }
+}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>🐌 Extreme Slug Racing — 2026 Catalog</h1>
-  <p>Joyce, WA &nbsp;•&nbsp; slugraces.com &nbsp;•&nbsp; Benefits Clallam County Fire District No. 4</p>
+<!-- ========== NAV ========== -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQuVG89k2FTFsvBpbvj7nyS9Lvi67GxhEBqZ-EKt33i9rGOVffvmLt7r2W5RZXxYh6Y00_l8pRswUBZtE3xzItfkHdZ0gv0faVHZQ8nKzqIX9TyFwOfi6uGaOrD7prX13UKNWRsVaLLDS7MkUOV1r6STIBmzz_CCrT4hGr9dCYfLV7mrORUQgHKZKuFlDO/s320/ExtremeText-fullcolor-01.png" alt="Extreme Slug Racing">
+  </div>
+  <div class="nav-links">
+    <a href="#hats">Hats &amp; Beanies</a>
+    <a href="#womens">Women's</a>
+    <a href="#mens">Men's</a>
+    <a href="#footwear">Footwear &amp; Socks</a>
+    <a href="#drinkware">Drinkware</a>
+    <a href="https://www.etsy.com/shop/SlugRaces" target="_blank" rel="noopener" class="nav-etsy">Etsy Shop ↗</a>
+  </div>
+  <button id="cart-nav-btn" onclick="openCart()">
+    🛒 <span class="cart-count" id="nav-cart-count">0</span>
+    <span class="cart-total" id="nav-cart-total"></span>
+  </button>
+  <button id="mobile-nav-toggle" onclick="toggleMobileNav()" aria-label="Menu">☰</button>
+</nav>
+
+<div id="mobile-nav-menu">
+  <a href="#hats" onclick="closeMobileNav()">Hats &amp; Beanies</a>
+  <a href="#womens" onclick="closeMobileNav()">Women's Apparel</a>
+  <a href="#mens" onclick="closeMobileNav()">Men's Apparel</a>
+  <a href="#footwear" onclick="closeMobileNav()">Footwear &amp; Socks</a>
+  <a href="#drinkware" onclick="closeMobileNav()">Drinkware &amp; Posters</a>
+  <a href="https://www.etsy.com/shop/SlugRaces" target="_blank" rel="noopener" onclick="closeMobileNav()">Etsy Shop ↗</a>
 </div>
 
-<div id="loading">Loading catalog...</div>
+<!-- ========== HERO ========== -->
+<section id="hero">
+  <div id="hero-overlay"></div>
+  <div id="hero-content">
+    <h1>The World's Fastest Gastropods</h1>
+    <p class="hero-tagline">Funny Shirts. Serious Purpose.</p>
+    <p class="hero-sub">Official merchandise from the 11th Annual Extreme Slug Racing at Joyce Daze. Proceeds benefit Clallam County Fire Protection District No. 4 — Joyce Fire &amp; Rescue.</p>
+    <a href="#hats" class="hero-btn">Shop the Collection ↓</a>
+  </div>
+</section>
 
-<div id="flipbook-container">
-  <div id="flipbook">
-
-    <!-- ══════════════════════════════════════════════════════
-         REPLACE EACH src="" WITH YOUR BLOGGER IMAGE URL
-         Export pages from Acrobat as JPG at 150dpi minimum
-         Upload to Blogger, copy the image URL, paste below
-         ══════════════════════════════════════════════════════ -->
-
-    <div class="page">
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEovEOMmpibM78xOnKs12jcuhqiW1v-sw3m6GyiGdTx7aQrTcbzdogE3-eEGBw1znXOFg5rcAzEm4Tz8-ZmQFFlaPixN0tTDyuEO8BUIVY-k0uzsIyqy40DYpbwtluE7QLXv8V3K7HaZHRzb4PF_atzIe2mil0mL4KP6Q_LI_TM8eW3O59dliC88L2nAY/s1600/2026ExtremeRacingCatalog_Page_1.jpg" alt="Cover — I've Seen Things. Nothing Like Heat 3.">
+<!-- ========== SHIPPING LEGEND ========== -->
+<div id="shipping-legend">
+  <span class="legend-label">Shipping:</span>
+  <div class="slug-badge">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFX6Ea68EIlxecU-4w2pwr6xdrpmTOtKpvbxL4GQ_YPzK-b3276goFAHcv-VGmAfqZtuNu0T4HDFO0oVsSOBZ6qLdH8JXtE8cOwBeEu8H2ZeidSvXUb3jFngbPDp18ZqVlcABVJqlY8RJ2ocERHrdU2GNtuEE0IXvrbskQrya83AQ4oyxyW_BGzj4Szoh0/w88-h101/SpeedySlug.png" alt="Speedy Slug">
+    <div class="badge-text">
+      <span class="badge-name">⚡ Speedy Slug</span>
+      <span class="badge-days">Etsy · Ships 5–7 days</span>
     </div>
-
-    <div class="page">
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh382FjizBm6LgyZvgpowgDohRNt7V8u6gJy6hQ13uZqVYBE9_jLD-l2Z3ew2cA_VPi7b51vb_0AhDb02PyZ0WXRPKV7qIWovl8BX2J8ZWjLe8yEo0EarjBh0BZ2VT87Glj-vxAgeHiJtLbUcfqhDmOp0TGtcROUt2ncgrIYrX92IoKRPPHWaA6Pbbpr9g/s1600/2026ExtremeRacingCatalog_Page_2.jpg" alt="Join Our Team — Hats and Beanies">
+  </div>
+  <div class="slug-badge">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7p0b9qpjUI81VQuGkzdzGsZ9fiAxplqhd7fy_CLTNGP91fIg9CX-YblsnTBodv6DQbD21zFkVEFMD91bLhUq4cGfHk3PTeSDJNk1azEsL2SzFrNraaD_I62N8SQRD-ZWYQW8mhlACWE449c7W6YO_t4t71lWq_yEQjenjMlPorCP7XLCHzFOG9PiU2VGJ/w84-h101/SlowSlug.png" alt="Slow Slug">
+    <div class="badge-text">
+      <span class="badge-name">🐌 Slow Slug</span>
+      <span class="badge-days">ArtsAdd · Ships 30–45 days</span>
     </div>
+  </div>
+  <span class="legend-note">All ArtsAdd orders processed via our order form</span>
+</div>
 
-    <div class="page">
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgi_JlPzbbBETfz0Y6fzDeVstjny8cZMyKNP55rnEb1MHzkXp9e-Kj3JczNDRM04naRISG58t7apyfe0wcrTErJbt3A3g0EHIP_BxZm2xZxKFFeM8q15Wb3enHsf1Rf1-ifj3K9gG-bxqtFho-wRR-XvCoILPR3mcfXNtCvnIIIwrbvBERil4mVLQOFj8I/s1600/2026ExtremeRacingCatalog_Page_3.jpg" alt="Women's Apparel">
+<!-- ========== INTRO ========== -->
+<div id="intro">
+  <p>This store routes orders to <strong>Etsy</strong> (fast shipping, Speedy Slug ⚡) and <strong>ArtsAdd</strong> (larger catalog, Slow Slug 🐌, orders via our form). Every purchase supports <strong>Joyce Fire &amp; Rescue</strong> — the volunteer firefighters protecting our community since day one. <strong>No slugs are harmed</strong> — all competitors are returned to their natural habitat after racing.</p>
+</div>
+
+<!-- ========== HATS & BEANIES ========== -->
+<div id="hats" class="section-heading">
+  <h2>🧢 Hats &amp; Beanies</h2>
+  <div class="section-sub">Ball caps, beanies, and headgear for the serious slug fan</div>
+</div>
+<div class="product-section">
+  <div class="product-grid" id="grid-hats"></div>
+</div>
+
+<!-- ========== WOMEN'S ========== -->
+<div id="womens" class="section-heading">
+  <h2>👗 Women's Apparel</h2>
+  <div class="section-sub">V-necks, hoodies, print tees, and more</div>
+</div>
+<div class="product-section">
+  <div class="product-grid" id="grid-womens"></div>
+</div>
+
+<!-- ========== MEN'S ========== -->
+<div id="mens" class="section-heading">
+  <h2>👕 Men's Apparel</h2>
+  <div class="section-sub">Tees, Hawaiian shirts, hoodies for the track</div>
+</div>
+<div class="product-section">
+  <div class="product-grid" id="grid-mens"></div>
+</div>
+
+<!-- ========== FOOTWEAR ========== -->
+<div id="footwear" class="section-heading">
+  <h2>🧦 Footwear &amp; Socks</h2>
+  <div class="section-sub">Socks and slides — race day ready</div>
+</div>
+<div class="product-section">
+  <div class="product-grid" id="grid-footwear"></div>
+</div>
+
+<!-- ========== DRINKWARE ========== -->
+<div id="drinkware" class="section-heading">
+  <h2>🍺 Drinkware &amp; Posters</h2>
+  <div class="section-sub">Mugs, glasses, and wall art for slug enthusiasts</div>
+</div>
+<div class="product-section">
+  <div class="product-grid" id="grid-drinkware"></div>
+</div>
+
+<!-- ========== CART OVERLAY & SIDEBAR ========== -->
+<div id="cart-overlay" onclick="closeCart()"></div>
+<div id="cart-sidebar">
+  <div id="cart-header">
+    <h3>🛒 Your Cart</h3>
+    <button id="cart-close-btn" onclick="closeCart()">✕</button>
+  </div>
+  <div id="cart-items-list">
+    <div id="cart-empty-msg">Your cart is empty. Add some slug gear!</div>
+  </div>
+  <div id="cart-footer">
+    <div class="cart-subtotal-row">
+      <span>Subtotal</span>
+      <span id="cart-subtotal-val">$0.00</span>
     </div>
-
-    <div class="page">
-      <img src=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhm0wemB1UdI7Zg9_hiBg4ZAQt5oBwspqpJnbpVvMTzAKbQ2ESge_vkhHym1t6SE8TwzcE5Ml3j1qgg1dEkZAQ3yoylONS8ZPehBJN4heoZotgrofLUUCicn27_LrtjRRqQF-cbrk05CGtDXp0qY9e2Ng0txOnp6yfbWRNrGMcE3fhpss6vk21mbkpG9T0/s1600/2026ExtremeRacingCatalog_Page_4.jpg" alt="T-Shirts and Hawaiian Shirt">
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cart-total-val">$0.00</span>
     </div>
-
-    <div class="page">
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgOHppBCHXcv2QHlJNoMQURxpq3g73ncgvM08o_CwNMbfQS9LFSH0Y4nQtl6I2G5UOoAooXU6hjBrKeTrHjKy50_E7dAqfW3v-UkFHYFkWIraBwh2RifYO1RYEgeCLhnOfUYwZqo5Lum9whRKkoHYeHs7zeErhFOjV6cGCeOjXkl-4Su1v4h01u6ltZqks/s1600/2026ExtremeRacingCatalog_Page_5.jpg" alt="Men's Apparel">
-    </div>
-
-    <div class="page">
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9THqP6LAyHCsSRu1IIve2irwnQbWFWJsjb3b1mrprJ5zFqPsguD7o51HtQfNpkomuMl_bf-llgzwezy1Wo4DdfBK4QTyN_cCSagRa_ALplk7dg2WCI3A2Jxgq5__mP6gTRjPPOmj4RNTeqx6We8auC9OSOOxfVl-DZLLLvD2kNBxpaa-d6Y3k1K_96ww/s1600/2026ExtremeRacingCatalog_Page_6.jpg" alt="Socks and Slides">
-    </div>
-
-    <div class="page">
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh3HDA1x1TC0uaQSajdmxu8VTvW6URoNhhCSncoHyLm1OynKQKGctmRA82zyAEEAGKGZRUwjFvgoJKESKxYeNQ9FMwT3TdAy1-Ctb6gNM9W4iVOTm8tmagIsScafTHSPb4zmZDtYKmGOlWMyyUhm8vTfKl-rBaaVAp6yv2E55thzliqY5vfQjzyHp-vmxo/s1600/2026ExtremeRacingCatalog_Page_7.jpg" alt="Drinkware and Poster">
-    </div>
-
-    <div class="page">
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjIHqdHx0YeXuigxQ-Mw-X6RCS91potJf7VZ598hhhTzmS-L8WH4WEKLwltyu33GhzNtPjPEv8L0omidCQlxluJBy0JXizOD4A1LQdMWBaXYtPPFwk84Q0TsR1709XoWvjM8l_JUlXltv1D6RoGp-QifPCAUK6MfTx8BUhhuOKXskyQRr-yoMOzniJvin0/s1600/2026ExtremeRacingCatalog_Page_8.jpg" alt="Order Form">
-    </div>
-
-    <div class="page">
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhg6l2gbcXaOlYASCdD-Dj2_gTiMulCV4TWjqW8Wi7i66t9dREYiagis8j2L1BlletAEHY8jGM5FMGfIodSoAyDU7xNFjWwFqlsmBg9RM4lhbnb8FyxJTnHuh1JbDFtd4IRgI7GHeBiPsqrLEmomTsu0peTZzMxh0-wDehg5NiXWG7cnuDnmrcjn6lSW_c/s1600/2026ExtremeRacingCatalog_Page_9.jpg" alt="Back Cover — I Don't Kill Slugs. I Raise Champions.">
-    </div>
-
+    <div class="cart-shipping-note" id="cart-shipping-note">Add items to see shipping estimate.</div>
+    <button id="checkout-btn" onclick="doCheckout()">Proceed to Order Form →</button>
+    <button id="cart-continue-btn" onclick="closeCart()">Continue Shopping</button>
   </div>
 </div>
 
-<div class="controls">
-  <button class="btn" id="btn-prev" onclick="flipPrev()">◀ Prev</button>
-  <span class="page-counter" id="page-counter">Page 1 of 9</span>
-  <button class="btn" id="btn-next" onclick="flipNext()">Next ▶</button>
-  <a class="btn btn-download" href="https://drive.google.com/file/d/1ASOAeBJQVlwA_SCPtSYlNJRuEnhKO2bh/view?usp=sharing" target="_blank">📄 Download PDF</a>
- <a class="btn" href="https://grundeez.github.io/slugraces-catalog/orderform.html" target="_blank" style="background:#8B2FC9; color:#fff;">🐌 Place an Order</a>
-</div>
+<!-- ========== TOAST ========== -->
+<div id="cart-toast"></div>
 
-<p class="instructions">Click the page edge to turn • Or use arrow buttons • Drag to flip</p>
-<p class="mobile-tip">📱 Tip: rotate to landscape for best viewing on mobile</p>
+<!-- ========== FOOTER ========== -->
+<footer id="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>About This Store</h4>
+      <p>Official merchandise for the Extreme Slug Racing series. Products ship from Etsy (fast) or ArtsAdd (extended catalog). All proceeds go directly to Joyce Fire &amp; Rescue — Clallam County Fire Protection District No. 4.</p>
+    </div>
+    <div>
+      <div class="footer-race-day">
+        <strong>🏁 Race Day — August 1, 2026</strong>
+        11th Annual Extreme Slug Racing<br>
+        Joyce Daze Wild Blackberry Festival<br>
+        Joyce Family Kitchen Beer Garden<br>
+        Highway 112, Joyce WA<br>
+        Post Time: 2:30 PM<br>
+        <em>Organizer: Sam Nugent</em>
+      </div>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#hats">Hats &amp; Beanies</a></li>
+        <li><a href="#womens">Women's Apparel</a></li>
+        <li><a href="#mens">Men's Apparel</a></li>
+        <li><a href="#footwear">Footwear &amp; Socks</a></li>
+        <li><a href="#drinkware">Drinkware &amp; Posters</a></li>
+        <li><a href="orderform.html">Order Form</a></li>
+        <li><a href="catalog.html">Flip Catalog</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Joyce Fire &amp; Rescue</h4>
+      <p>Clallam County Fire Protection District No. 4 serves the Joyce community with volunteer firefighters and first responders. Your purchase supports their equipment, training, and operations.</p>
+      <br>
+      <h4>No Slugs Harmed</h4>
+      <p>All racing slugs are returned to their natural habitat after each race. 🐌</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Extreme Slug Racing · Joyce, WA · Funny Shirts. Serious Purpose. · <a href="https://www.etsy.com/shop/SlugRaces" target="_blank" rel="noopener">Etsy Shop</a> · <a href="orderform.html">Order Form</a></p>
+  </div>
+</footer>
 
+<!-- ========== JAVASCRIPT ========== -->
 <script>
-  // ── Detect screen size for responsive book dimensions ──
-  function getBookSize() {
-    const vw = window.innerWidth;
-    if (vw < 480) {
-      return { width: vw - 40, height: Math.round((vw - 40) * 1.294) };
-    } else if (vw < 800) {
-      return { width: Math.min(350, vw / 2 - 20), height: Math.round(Math.min(350, vw / 2 - 20) * 1.294) };
-    } else {
-      return { width: 400, height: 518 };
+
+/* ---- SWATCH COLOR MAP ---- */
+var SWATCHES = {
+  'Black': '#111',
+  'White': '#fff',
+  'Beige': '#C8AD7F',
+  'Army Green': '#4B5320',
+  'Military Green': '#4B5320',
+  'Stone': '#928E85',
+  'Hunter Green': '#355E3B',
+  'Navy': '#1B2A4A',
+  'Heather Navy': '#1B2A4A',
+  'Royal Blue': '#4169E1',
+  'Natural': '#F5F0DC',
+  'Sports Gray': '#9EA0A3',
+  'Light Blue': '#ADD8E6',
+  'Dark Chocolate': '#3C1A0E',
+  'Purple': '#6A0DAD',
+  'Cardinal Red': '#C41E3A',
+  'Forest Green': '#228B22',
+  'Rainbow': 'linear-gradient(135deg,red,orange,yellow,green,blue,violet)',
+  'Multi': 'linear-gradient(135deg,#FFB800,#8B2FC9,#fff,#111)'
+};
+
+/* ---- PRODUCT CATALOG ---- */
+var CATEGORIES = {
+  hats: {
+    label: 'Hats & Beanies',
+    products: [
+      {
+        id: 'AAOLBC-2601',
+        name: 'Official Logo Ball Cap',
+        price: 24.99,
+        supplier: 'artsadd',
+        colors: ['Black','White','Navy','Army Green','Stone'],
+        image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUNVAQ5I5d4vhElo5wtqYEP5DKFjscdsdiTFMNmUlhKtRpd_3De17jG1aslUtTTsKH6j7jSYPZujzGc6on7s6OGPrITefDym60ooS19lMN5sy4ou_sCNidxx-tPN0V1phol9k5o49MZqwwwpj_Oi_5uMOkegH9bdsbf7a3XX5AflZtNdDTV9ZdRizVTQIT/s320/AAOLBC-2601.jpg'
+      },
+      {
+        id: 'AACLBC-2602',
+        name: 'Color Logo Ball Cap',
+        price: 24.99,
+        supplier: 'artsadd',
+        colors: ['Black','White','Navy','Royal Blue'],
+        image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjbTAiKIR2MjUbprhUjcSMcgkmfeta_4pB7_n4uvpAFPYvNajkS-vyj5XozzC__XLfIy0VYx_Btpo0Fe6NY7Ti1B_nl3kUZC9IKjcl10YaC7u8IvY03eg8kRoEy13oKahB_AUpal83A8Du072PJ6ERmOYXSvZlmhD6TPhBN9kbbbIB3KLVtOleaGvHNKt5L/s320/AACLBC-2602.jpg'
+      },
+      {
+        id: 'AARLBC-2603',
+        name: 'Rainbow Logo Ball Cap',
+        price: 27.99,
+        supplier: 'artsadd',
+        colors: ['Black','White','Natural'],
+        image: 'https://cdn.sdspod.com/out/2538/202606/73a0a5f40c3e96cf612ae4757c908313.jpg'
+      },
+      {
+        id: 'ESOLBC-2604',
+        name: 'Premium Logo Cap',
+        price: 29.99,
+        supplier: 'etsy',
+        colors: ['Black','Navy','Hunter Green'],
+        image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdSnG1kNRtu9YN0FQ0AZ3_mxr4TwOP3ShGXt8QvMamdWSVqr0QdTfM_PvhNbjyCaGRDgaHlula1YJnXQgzR10A493PppjjWh-YYntYNyHLyn_VxNA3TSn-VULcJmZ9Az3i2vPDhdYlA4dHHBVaW5I603fcywv6LCj23zjJpvtP1IZRHNU0ot-QX86gMTN0/s320/ESOLBC-2604.jpg'
+      },
+      {
+        id: 'ESTEKB-2605',
+        name: 'Embroidered Knit Beanie',
+        price: 22.99,
+        supplier: 'etsy',
+        colors: ['Black','Navy','Forest Green','Cardinal Red'],
+        image: 'https://i.etsystatic.com/50253800/r/il/b018dc/8162568665/il_794xN.8162568665_1psy.jpg'
+      },
+      {
+        id: 'AARPKB-2606',
+        name: 'Rainbow Pom Knit Beanie',
+        price: 22.99,
+        supplier: 'artsadd',
+        colors: ['Black','White'],
+        image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGN392lwemRTsQym6iVE8KYB4vA5G9JBA48GXQlSs-tBqFSeXBV63ZyCmTye1moWenj8Tmml5earApKPyRdqKjjANKny8aRT4LHA0urvoT1Us8d-TMnZNPm3TBGJVrV_FqxBaEBl7fL6fOfUafElTeFJF3xrZzdZWjFdKI1galy3zDqipxTGcSPfikoRGd/s320/AARPKB-2606.jpg'
+      }
+    ]
+  },
+  womens: {
+    label: "Women's Apparel",
+    products: [
+      {
+        id: 'AARISV-2607',
+        name: 'Rainbow Ice Silk V-Neck',
+        price: 32.99,
+        supplier: 'artsadd',
+        colors: ['White','Natural','Light Blue'],
+        image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHYqdPLvmVUAvXoXLVUpBUdaEIrTnMR7b2TQmsuiVC2cx-5NeW-6bvR8QhcJsT-fO8y9X1XjMsZb3B8BHwsp2w7OiH6YC9P3VBFYDKWQS3pkSojC86UM_xDC3EYiDaBAV8qx8f_R6_PlJAQJzn9Za0ao02YAPKHKHp9GJ2qPGFjL31Ketmx3XfH7S57l3g/s320/AARISV-2607.jpg'
+      },
+      {
+        id: 'AARBWV-2608',
+        name: 'Rainbow Bat Wing V-Neck',
+        price: 34.99,
+        supplier: 'artsadd',
+        colors: ['White','Black'],
+        image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMX3TfBxjZdl-AUSxRZ57cNsh5gIWyZe8FvBNsRiG8QS90RzkeOtVcAXrGuFEUYFz8P6VHEwQ4KB8j8GUOJD3xPZ9luP0J0XqYdCXRhfUGFz8P6VHEwQ4KB8j8GUOJD3xPZ9luP0J0XqYdCXRhfUKjzu2hjLZSVPN0IOZCed0DXmie/s320/AARBWV-2608.jpg'
+      },
+      {
+        id: 'AAPWLV-2609',
+        name: 'Purple Lace V-Neck',
+        price: 32.99,
+        supplier: 'artsadd',
+        colors: ['Purple','Black','Navy'],
+        image: 'https://www.mszxdz.com/public/tuku/img/ceshi/20260620/6a35c9c5defca6_50083095_63561.jpg'
+      },
+      {
+        id: 'AARCWH-2610',
+        name: "Race Car Women's Hoodie",
+        price: 44.99,
+        supplier: 'artsadd',
+        colors: ['Black','Navy','Purple','Forest Green'],
+        image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/a95acdd005f197f56d81b71d428037f8.jpg?x-oss-process=image/resize,w_500,h_500'
+      },
+      {
+        id: 'ESRJPT-2611',
+        name: 'Race Jockey Print Tee',
+        price: 27.99,
+        supplier: 'etsy',
+        colors: ['White','Natural','Sports Gray'],
+        image: 'https://i.etsystatic.com/50253800/r/il/1dd09a/8177052383/il_794xN.8177052383_lrtf.jpg'
+      },
+      {
+        id: 'ESOLPT-2612',
+        name: 'Official Logo Print Tee',
+        price: 25.99,
+        supplier: 'etsy',
+        colors: ['White','Black','Sports Gray','Light Blue'],
+        image: 'https://i.etsystatic.com/50253800/r/il/9efd0d/8176586789/il_794xN.8176586789_b65f.jpg'
+      },
+      {
+        id: 'ESRLPT-2613',
+        name: 'Rainbow Logo Print Tee',
+        price: 27.99,
+        supplier: 'etsy',
+        colors: ['White','Natural','Beige'],
+        image: 'https://i.etsystatic.com/50253800/r/il/030084/8128683628/il_794xN.8128683628_a3ld.jpg'
+      },
+      {
+        id: 'ESSNPT-2614',
+        name: 'Slug Names Print Tee',
+        price: 27.99,
+        supplier: 'etsy',
+        colors: ['White','Natural','Sports Gray'],
+        image: 'https://i.etsystatic.com/50253800/r/il/d97647/8176657913/il_794xN.8176657913_633h.jpg'
+      }
+    ]
+  },
+  mens: {
+    label: "Men's Apparel",
+    products: [
+      {
+        id: 'ESRCPT-2615',
+        name: 'Race Car Print Tee',
+        price: 27.99,
+        supplier: 'etsy',
+        colors: ['White','Black','Sports Gray','Natural'],
+        image: 'https://i.etsystatic.com/50253800/r/il/0fc57f/8128658910/il_794xN.8128658910_s4n5.jpg'
+      },
+      {
+        id: 'ESFPHS-2616',
+        name: 'Hawaiian Shirt — Speedy',
+        price: 49.99,
+        supplier: 'etsy',
+        colors: ['Multi'],
+        image: 'https://i.etsystatic.com/50253800/r/il/eeb605/8157418568/il_794xN.8157418568_ma11.jpg'
+      },
+      {
+        id: 'AAFPHS-2617',
+        name: 'Hawaiian Shirt — Slow',
+        price: 44.99,
+        supplier: 'artsadd',
+        colors: ['Multi'],
+        image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/b8192f2d7bc5fbfb97aaf7b6ca786e3b.jpg'
+      },
+      {
+        id: 'AASRCL-2618',
+        name: 'Slug Racer Color Logo Tee',
+        price: 25.99,
+        supplier: 'artsadd',
+        colors: ['White','Black','Navy','Sports Gray'],
+        image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUpmuFCLND_yU3Za5xe7t1IuOxOUq9OpP2yji5YE-kr0emth2nu-HkoNJVX3ygQsRbtTAqmYdtB_dMgVjLPFnDu8IHGnF-CqZtDLIFT-IngolajhnddtErZXKSe8MBhw7_bTbON1FEjivHh39O3V1e80bFpFRKwP1pOTPY7WWBdGupNtrS83TDWapJYfgA/s320/AASRCL-2618.jpg'
+      },
+      {
+        id: 'AASRAO-2619',
+        name: 'Slug Racer All Over Print Tee',
+        price: 32.99,
+        supplier: 'artsadd',
+        colors: ['White'],
+        image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj87EdySz59JDDcMXjOi16skY4-kvwotBmGn2FETf34GMx9CIQr4lp3mKPEHA5sDNmJ2ccROr8U4xQmW15WZsom5cg0pb4si2jRlT44kR0SN6K7NWW55Dgu5o6Lv5d6qPVh353tJX-y_13gHh93aFQ-xVuGXh73_VRecLyE3vvOQ2Gk2L0qOz6JL_F0STX3/s320/AASRAO-2619.jpg'
+      },
+      {
+        id: 'AASJMP-2620',
+        name: 'Slug Jockey Plus Size Tee',
+        price: 29.99,
+        supplier: 'artsadd',
+        colors: ['White','Black','Sports Gray'],
+        image: 'https://cdn.sdspod.com/out/2538/202606/e5e14ffc60f67e331246c8f21fbd42a8.jpg'
+      },
+      {
+        id: 'AAJFRH-2621',
+        name: 'Joyce Fire Rescue Hoodie',
+        price: 54.99,
+        supplier: 'artsadd',
+        colors: ['Black','Navy','Forest Green','Cardinal Red'],
+        image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/58c781bba8cab6ff9276abe64bf782d1.jpg'
+      }
+    ]
+  },
+  footwear: {
+    label: 'Footwear & Socks',
+    products: [
+      {
+        id: 'AASIWS-2621',
+        name: "Slug ID Women's Socks",
+        price: 14.99,
+        supplier: 'artsadd',
+        colors: ['White','Black'],
+        image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/afcf08bca58aae5102c723941b45f861.jpg'
+      },
+      {
+        id: 'AAERWS-2622',
+        name: "Extreme Racing Women's Socks",
+        price: 14.99,
+        supplier: 'artsadd',
+        colors: ['White','Black'],
+        image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/0ef5f4d176132f93e036a36ea6a3cb07.jpg?x-oss-process=image/resize,w_500,h_500'
+      },
+      {
+        id: 'AAFPWS-2623',
+        name: "Floral Women's Slide Sandal",
+        price: 34.99,
+        supplier: 'artsadd',
+        colors: ['Multi'],
+        image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/6a224ed8aeeaec78d5e2c747371f86c1.jpg'
+      },
+      {
+        id: 'AASIMS-2624',
+        name: "Slug ID Men's Socks",
+        price: 14.99,
+        supplier: 'artsadd',
+        colors: ['White','Black'],
+        image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/00068fda1af533cb8a15fc41549a6a65.jpg'
+      },
+      {
+        id: 'AAERMS-2625',
+        name: "Extreme Racing Men's Socks",
+        price: 14.99,
+        supplier: 'artsadd',
+        colors: ['White','Black'],
+        image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/f496db59977da046f2b141373953d518.jpg'
+      },
+      {
+        id: 'AAESMS-2626',
+        name: "Extreme Slug Men's Slide",
+        price: 36.99,
+        supplier: 'artsadd',
+        colors: ['Multi'],
+        image: 'https://us-design-0001.oss-accelerate.aliyuncs.com/778674da2628f695f167e1a05dc174b0.jpg?x-oss-process=image/resize,w_500,h_500'
+      }
+    ]
+  },
+  drinkware: {
+    label: 'Drinkware & Posters',
+    products: [
+      {
+        id: 'ESSWPP-2627',
+        name: 'Slugs of the World Poster',
+        price: 19.99,
+        supplier: 'etsy',
+        colors: [],
+        image: 'https://i.etsystatic.com/50253800/r/il/7a4b5f/8127113962/il_794xN.8127113962_qqfo.jpg'
+      },
+      {
+        id: 'ESOLBG-2628',
+        name: 'Official Logo Beer Glass',
+        price: 18.99,
+        supplier: 'etsy',
+        colors: [],
+        image: 'https://i.etsystatic.com/50253800/r/il/8a1be0/8176977727/il_794xN.8176977727_2zpa.jpg'
+      },
+      {
+        id: 'AAESCM-2629',
+        name: '15oz Extreme Slug Coffee Mug',
+        price: 16.99,
+        supplier: 'artsadd',
+        colors: ['White'],
+        image: 'https://i.etsystatic.com/50253800/r/il/32ca43/8129001892/il_794xN.8129001892_seut.jpg'
+      },
+      {
+        id: 'AAESTM-2630',
+        name: '11oz Extreme Slug Tea Mug',
+        price: 14.99,
+        supplier: 'artsadd',
+        colors: ['White'],
+        image: 'https://i.etsystatic.com/50253800/r/il/8c571f/8128982040/il_794xN.8128982040_8fk8.jpg'
+      }
+    ]
+  }
+};
+
+var SPEEDY_IMG = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFX6Ea68EIlxecU-4w2pwr6xdrpmTOtKpvbxL4GQ_YPzK-b3276goFAHcv-VGmAfqZtuNu0T4HDFO0oVsSOBZ6qLdH8JXtE8cOwBeEu8H2ZeidSvXUb3jFngbPDp18ZqVlcABVJqlY8RJ2ocERHrdU2GNtuEE0IXvrbskQrya83AQ4oyxyW_BGzj4Szoh0/w88-h101/SpeedySlug.png';
+var SLOW_IMG = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7p0b9qpjUI81VQuGkzdzGsZ9fiAxplqhd7fy_CLTNGP91fIg9CX-YblsnTBodv6DQbD21zFkVEFMD91bLhUq4cGfHk3PTeSDJNk1azEsL2SzFrNraaD_I62N8SQRD-ZWYQW8mhlACWE449c7W6YO_t4t71lWq_yEQjenjMlPorCP7XLCHzFOG9PiU2VGJ/w84-h101/SlowSlug.png';
+
+/* ---- CART STATE ---- */
+var cart = [];
+
+/* ---- RENDER GRIDS ---- */
+function renderGrid(categoryKey, gridId) {
+  var cat = CATEGORIES[categoryKey];
+  var grid = document.getElementById(gridId);
+  if (!grid || !cat) return;
+  var html = '';
+  for (var i = 0; i < cat.products.length; i++) {
+    var p = cat.products[i];
+    html += buildCard(p);
+  }
+  grid.innerHTML = html;
+}
+
+function buildCard(p) {
+  var isEtsy = p.supplier === 'etsy';
+  var slugIcon = isEtsy
+    ? '<img class="slug-icon" src="' + SPEEDY_IMG + '" alt="Speedy Slug">'
+    : '<img class="slug-icon" src="' + SLOW_IMG + '" alt="Slow Slug">';
+  var badgeClass = isEtsy ? 'badge-etsy' : 'badge-artsadd';
+  var badgeText = isEtsy ? '⚡ Speedy Slug — Etsy' : '🐌 Slow Slug — ArtsAdd';
+  var swatchHtml = '';
+  for (var j = 0; j < p.colors.length; j++) {
+    var colorName = p.colors[j];
+    var colorVal = SWATCHES[colorName] || '#888';
+    var bg = colorVal.indexOf('gradient') >= 0
+      ? 'background:' + colorVal + ';'
+      : 'background:' + colorVal + ';';
+    swatchHtml += '<span class="swatch" title="' + esc(colorName) + '" style="' + bg + '"></span>';
+  }
+  var orderLink = 'orderform.html?item=' + encodeURIComponent(p.id);
+  return '<div class="product-card">' +
+    '<a href="' + orderLink + '" class="product-img-wrap">' +
+      '<img src="' + esc(p.image) + '" alt="' + esc(p.name) + '" loading="lazy">' +
+      slugIcon +
+    '</a>' +
+    '<div class="product-body">' +
+      '<div class="product-name">' + esc(p.name) + '</div>' +
+      '<div class="product-sku">' + esc(p.id) + '</div>' +
+      '<div class="product-price">$' + p.price.toFixed(2) + '</div>' +
+      (swatchHtml ? '<div class="product-swatches">' + swatchHtml + '</div>' : '') +
+      '<div class="product-supplier-badge ' + badgeClass + '">' + badgeText + '</div>' +
+      '<button class="add-to-cart-btn" onclick="addToCart(\'' + esc(p.id) + '\')">Add to Cart</button>' +
+    '</div>' +
+  '</div>';
+}
+
+function esc(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/'/g, '&#39;');
+}
+
+/* ---- FIND PRODUCT BY ID ---- */
+function findProduct(id) {
+  var keys = Object.keys(CATEGORIES);
+  for (var k = 0; k < keys.length; k++) {
+    var prods = CATEGORIES[keys[k]].products;
+    for (var i = 0; i < prods.length; i++) {
+      if (prods[i].id === id) return prods[i];
     }
   }
+  return null;
+}
 
-  const size = getBookSize();
+/* ---- ADD TO CART ---- */
+function addToCart(productId) {
+  var p = findProduct(productId);
+  if (!p) return;
+  var existing = null;
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].id === productId) { existing = cart[i]; break; }
+  }
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({ id: p.id, name: p.name, price: p.price, image: p.image, supplier: p.supplier, qty: 1 });
+  }
+  saveCart();
+  updateCartUI();
+  showToast(p.name + ' added to cart!');
+}
 
-  // ── Initialise StPageFlip ──
-  const pageFlip = new St.PageFlip(
-    document.getElementById('flipbook'),
-    {
-      width: size.width,
-      height: size.height,
-      size: 'fixed',
-      minWidth: 200,
-      maxWidth: 500,
-      minHeight: 260,
-      maxHeight: 650,
-      drawShadow: true,
-      flippingTime: 700,
-      usePortrait: true,
-      startZIndex: 0,
-      autoSize: true,
-      showCover: true,       // first page renders as full cover
-      mobileScrollSupport: true,
-      swipeDistance: 30,
-      showPageCount: true,
-      useMouseEvents: true,
+function removeFromCart(productId) {
+  var newCart = [];
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].id !== productId) newCart.push(cart[i]);
+  }
+  cart = newCart;
+  saveCart();
+  updateCartUI();
+}
+
+function changeQty(productId, delta) {
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].id === productId) {
+      cart[i].qty += delta;
+      if (cart[i].qty < 1) {
+        removeFromCart(productId);
+        return;
+      }
+      break;
     }
-  );
+  }
+  saveCart();
+  updateCartUI();
+}
 
-  // Load pages from HTML img elements
-  pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+/* ---- SAVE/LOAD CART ---- */
+function saveCart() {
+  try { sessionStorage.setItem('slugcart', JSON.stringify(cart)); } catch(e) {}
+}
 
-  // ── Update page counter ──
-  function updateCounter() {
-    const current = pageFlip.getCurrentPageIndex() + 1;
-    const total = pageFlip.getPageCount();
-    document.getElementById('page-counter').textContent = 'Page ' + current + ' of ' + total;
-    document.getElementById('btn-prev').disabled = current <= 1;
-    document.getElementById('btn-next').disabled = current >= total;
+function loadCart() {
+  try {
+    var raw = sessionStorage.getItem('slugcart');
+    if (raw) { cart = JSON.parse(raw); }
+  } catch(e) { cart = []; }
+}
+
+/* ---- CART UI ---- */
+function updateCartUI() {
+  var totalQty = 0;
+  var totalPrice = 0;
+  for (var i = 0; i < cart.length; i++) {
+    totalQty += cart[i].qty;
+    totalPrice += cart[i].price * cart[i].qty;
   }
 
-  pageFlip.on('flip', updateCounter);
-  pageFlip.on('init', updateCounter);
+  // nav button
+  document.getElementById('nav-cart-count').textContent = totalQty;
+  document.getElementById('nav-cart-total').textContent = totalQty > 0 ? '$' + totalPrice.toFixed(2) : '';
 
-  // ── Button handlers ──
-  function flipPrev() { pageFlip.flipPrev(); }
-  function flipNext() { pageFlip.flipNext(); }
+  // cart items list
+  var listEl = document.getElementById('cart-items-list');
+  var emptyEl = document.getElementById('cart-empty-msg');
+  if (cart.length === 0) {
+    emptyEl.style.display = 'block';
+    listEl.innerHTML = '';
+    listEl.appendChild(emptyEl);
+    document.getElementById('cart-subtotal-val').textContent = '$0.00';
+    document.getElementById('cart-total-val').textContent = '$0.00';
+    document.getElementById('cart-shipping-note').textContent = 'Add items to see shipping estimate.';
+    return;
+  }
+  emptyEl.style.display = 'none';
+  var html = '';
+  for (var j = 0; j < cart.length; j++) {
+    var item = cart[j];
+    html += '<div class="cart-item">' +
+      '<img class="cart-item-img" src="' + esc(item.image) + '" alt="' + esc(item.name) + '">' +
+      '<div class="cart-item-info">' +
+        '<div class="cart-item-name">' + esc(item.name) + '</div>' +
+        '<div class="cart-item-sku">' + esc(item.id) + '</div>' +
+        '<div class="cart-item-price">$' + item.price.toFixed(2) + ' each</div>' +
+        '<div class="cart-item-qty">' +
+          '<button class="cart-qty-btn" onclick="changeQty(\'' + esc(item.id) + '\',-1)">−</button>' +
+          '<span class="cart-qty-num">' + item.qty + '</span>' +
+          '<button class="cart-qty-btn" onclick="changeQty(\'' + esc(item.id) + '\',1)">+</button>' +
+        '</div>' +
+      '</div>' +
+      '<button class="cart-item-remove" onclick="removeFromCart(\'' + esc(item.id) + '\')" title="Remove">✕</button>' +
+    '</div>';
+  }
+  listEl.innerHTML = html;
 
-  // ── Keyboard navigation ──
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') flipNext();
-    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   flipPrev();
-  });
+  document.getElementById('cart-subtotal-val').textContent = '$' + totalPrice.toFixed(2);
+  document.getElementById('cart-total-val').textContent = '$' + totalPrice.toFixed(2);
+
+  // Shipping note — check if mixed suppliers
+  var hasEtsy = false;
+  var hasArts = false;
+  for (var k = 0; k < cart.length; k++) {
+    if (cart[k].supplier === 'etsy') hasEtsy = true;
+    else hasArts = true;
+  }
+  var note = '';
+  if (hasEtsy && hasArts) {
+    note = '⚡ Etsy items ship 5–7 days. 🐌 ArtsAdd items ship 30–45 days. You have both — order form will note each.';
+  } else if (hasEtsy) {
+    note = '⚡ Speedy Slug — Etsy items ship in 5–7 days.';
+  } else {
+    note = '🐌 Slow Slug — ArtsAdd items ship in 30–45 days. Order processed via form.';
+  }
+  document.getElementById('cart-shipping-note').textContent = note;
+}
+
+/* ---- OPEN/CLOSE CART ---- */
+function openCart() {
+  document.getElementById('cart-sidebar').classList.add('open');
+  document.getElementById('cart-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+  document.getElementById('cart-sidebar').classList.remove('open');
+  document.getElementById('cart-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ---- CHECKOUT ---- */
+function doCheckout() {
+  if (cart.length === 0) {
+    showToast('Your cart is empty!');
+    return;
+  }
+  try {
+    sessionStorage.setItem('slugcart', JSON.stringify(cart));
+    sessionStorage.setItem('slugcart_checkout', JSON.stringify(cart));
+  } catch(e) {}
+  window.location.href = 'orderform.html';
+}
+
+/* ---- TOAST ---- */
+var toastTimer = null;
+function showToast(msg) {
+  var el = document.getElementById('cart-toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function() { el.classList.remove('show'); }, 2500);
+}
+
+/* ---- MOBILE NAV ---- */
+function toggleMobileNav() {
+  var menu = document.getElementById('mobile-nav-menu');
+  menu.classList.toggle('open');
+}
+function closeMobileNav() {
+  document.getElementById('mobile-nav-menu').classList.remove('open');
+}
+
+/* ---- SECURITY: EMAIL ENCODE ---- */
+/* grundeezpetlove@gmail.com */
+function getEmail() {
+  var codes = [103,114,117,110,100,101,101,122,112,101,116,108,111,118,101,64,103,109,97,105,108,46,99,111,109];
+  var s = '';
+  for (var i = 0; i < codes.length; i++) s += String.fromCharCode(codes[i]);
+  return s;
+}
+
+/* ---- INIT ---- */
+function init() {
+  loadCart();
+  renderGrid('hats', 'grid-hats');
+  renderGrid('womens', 'grid-womens');
+  renderGrid('mens', 'grid-mens');
+  renderGrid('footwear', 'grid-footwear');
+  renderGrid('drinkware', 'grid-drinkware');
+  updateCartUI();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+
 </script>
-
 </body>
 </html>
