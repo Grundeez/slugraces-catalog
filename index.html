@@ -145,6 +145,31 @@ img { max-width: 100%; display: block; }
   transition: background 0.15s;
 }
 #hero-content .hero-btn:hover { background: #FFB800; color: #111; }
+#hero-content .hero-btn-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+#hero-content .hero-donate-btn {
+  display: inline-block;
+  background: #003087;
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  border: 2px solid #009cde;
+  transition: background 0.15s;
+}
+#hero-content .hero-donate-btn:hover { background: #009cde; }
+.free-ship-badge {
+  display: inline-block;
+  background: #c0392b;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 7px;
+  border-radius: 3px;
+  margin-left: 6px;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+}
 
 /* ========== SHIPPING LEGEND ========== */
 #shipping-legend {
@@ -694,7 +719,10 @@ img { max-width: 100%; display: block; }
     <h1>The World's Fastest Gastropods</h1>
     <p class="hero-tagline">Funny Shirts. Serious Purpose.</p>
     <p class="hero-sub">Official merchandise from the 11th Annual Extreme Slug Racing at Joyce Daze. Proceeds benefit Clallam County Fire Protection District No. 4 — Joyce Fire &amp; Rescue.</p>
-    <a href="#hats" class="hero-btn">Shop the Collection ↓</a>
+    <div class="hero-btn-row">
+      <a href="#hats" class="hero-btn">Shop the Collection ↓</a>
+      <a href="https://www.paypal.com/donate/?hosted_button_id=YNK4F6T638HT2" target="_blank" rel="noopener" class="hero-donate-btn">💛 Donate to Joyce Fire &amp; Rescue</a>
+    </div>
   </div>
 </section>
 
@@ -868,6 +896,7 @@ var SWATCHES = {
   'Cardinal Red': '#C41E3A',
   'Forest Green': '#228B22',
   'Rainbow': 'linear-gradient(135deg,red,orange,yellow,green,blue,violet)',
+  'Dark Heather': '#4a4a4a',
   'Multi': 'linear-gradient(135deg,#FFB800,#8B2FC9,#fff,#111)'
 };
 
@@ -882,7 +911,7 @@ var CATEGORIES = {
         price: 9.98,
         supplier: 'artsadd',
         colors: ['Black','White','Navy','Army Green','Stone'],
-        image: 'https://cdn.sdspod.com/out/2538/202607/68bdd7b0ad2569f715387a2f27d2dfeb.jpg'
+        image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUNVAQ5I5d4vhElo5wtqYEP5DKFjscdsdiTFMNmUlhKtRpd_3De17jG1aslUtTTsKH6j7jSYPZujzGc6on7s6OGPrITefDym60ooS19lMN5sy4ou_sCNidxx-tPN0V1phol9k5o49MZqwwwpj_Oi_5uMOkegH9bdsbf7a3XX5AflZtNdDTV9ZdRizVTQIT/s320/AAOLBC-2601.jpg'
       },
       {
         id: 'AACLBC-2602',
@@ -943,7 +972,7 @@ var CATEGORIES = {
         price: 19.36,
         supplier: 'artsadd',
         colors: ['White','Black'],
-        image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMX3TfBxjZdl-AUSxRZ57cNsh5gIWyZe8FvBNsRiG8QS90RzkeOtVcAXrGuFEUYFz8P6VHEwQ4KB8j8GUOJD3xPZ9luP0J0XqYdCXRhfUCMy2lVUhRqSj68WaDE6nv5cUNMT_uP23gV0XX6o13c5E2NaUxVd9frSLTeUKnzu2hjLZSVPN0IOZCed0DXmie/s320/AARBWV-2608.jpg'
+        image: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMX3TfBxjZdl-AUSxRZ57cNsh5gIWyZe8FvBNsRiG8QS90RzkeOtVcAXrGuFEUYFz8P6VHEwQ4KB8j8GUOJD3xPZ9luP0J0XqYdCXRhfUGFz8P6VHEwQ4KB8j8GUOJD3xPZ9luP0J0XqYdCXRhfUKjzu2hjLZSVPN0IOZCed0DXmie/s320/AARBWV-2608.jpg'
       },
       {
         id: 'AAPWLV-2609',
@@ -966,6 +995,15 @@ var CATEGORIES = {
   mens: {
     label: "Men's Apparel",
     products: [
+      {
+        id: 'ESSMPA-2631',
+        name: 'Slugzilla Movie Poster Art Tee — Unisex Sizing',
+        price: 24.99,
+        freeShipping: true,
+        supplier: 'etsy',
+        colors: ['White','Light Blue','Military Green','Royal Blue','Dark Heather'],
+        image: 'https://i.etsystatic.com/50253800/r/il/604f65/8319642442/il_794xN.8319642442_s736.jpg'
+      },
       {
         id: 'ESRJPT-2611',
         name: 'Race Jockey Print Tee — Unisex Sizing',
@@ -1229,6 +1267,12 @@ function buildCard(p) {
   var priceEl = document.createElement('div');
   priceEl.className = 'product-price';
   priceEl.textContent = '$' + p.price.toFixed(2);
+  if (p.freeShipping) {
+    var fsBadge = document.createElement('span');
+    fsBadge.className = 'free-ship-badge';
+    fsBadge.textContent = 'FREE SHIPPING';
+    priceEl.appendChild(fsBadge);
+  }
 
   var addBtn = document.createElement('button');
   addBtn.className = 'add-to-cart-btn';
