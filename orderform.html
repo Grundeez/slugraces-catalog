@@ -194,7 +194,7 @@ var CATEGORIES = {
   mens: {
     label: "👕 Men's Apparel",
     products: [
-      { id: 'ESRJPT-2611', name: 'Race Jockey Print Tee — Unisex Sizing',      price: 22.97, supplier: 'etsy'    },
+      { id: 'ESSMPA-2631', name: 'Slugzilla Movie Poster Art Tee — Unisex Sizing (FREE SHIPPING)', price: 24.99, supplier: 'etsy', freeShipping: true },
       { id: 'ESOLPT-2612', name: 'Official Logo Print Tee — Unisex Sizing',    price: 22.97, supplier: 'etsy'    },
       { id: 'ESRLPT-2613', name: 'Rainbow Logo Print Tee — Unisex Sizing',     price: 22.97, supplier: 'etsy'    },
       { id: 'ESSNPT-2614', name: 'Slug Names Print Tee — Unisex Sizing',       price: 22.97, supplier: 'etsy'    },
@@ -269,6 +269,7 @@ function getColors(id) {
   if (id === 'ESOLPT-2612') return ['Dark Chocolate','Purple','Cardinal Red','Forest Green','Heather Navy'];
   if (id === 'ESRLPT-2613') return ['Black','White'];
   if (['ESSNPT-2614','ESSNPT-2614b'].indexOf(id) > -1) return ['Military Green','Black','Natural','Sports Gray','Dark Chocolate'];
+  if (id === 'ESSMPA-2631') return ['White','Light Blue','Military Green','Royal Blue','Dark Heather'];
   if (id === 'ESRCPT-2615') return ['Black','Purple','Cardinal Red','Forest Green','Heather Navy'];
   if (['AASIWS-2621','AAERWS-2622','AASIMS-2624','AAERMS-2625'].indexOf(id) > -1) return ['Standard print'];
   if (['AAFPWS-2623','AAESMS-2626'].indexOf(id) > -1) return ['Black'];
