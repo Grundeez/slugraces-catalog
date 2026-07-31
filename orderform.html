@@ -226,6 +226,13 @@ var CATEGORIES = {
       { id: 'AAESCM-2629', name: 'Extreme Slug 15oz Coffee Mug',        price: 19.99, supplier: 'etsy'    },
       { id: 'AAESTM-2630', name: 'Extreme Slug 11oz Tea Mug',           price: 14.99, supplier: 'etsy'    }
     ]
+  },
+  kids: {
+    label: '👶 Kids Wear',
+    products: [
+      { id: 'AARLIR-2632', name: 'Rainbow Logo Infant Romper',           price: 10.97, supplier: 'artsadd' },
+      { id: 'AARCIR-2633', name: 'Color Logo Infant Romper',             price: 10.97, supplier: 'artsadd' }
+    ]
   }
 };
 
@@ -249,6 +256,7 @@ function getSizes(id) {
   var bigShirt = ['AAFPHS-2617','ESFPHS-2616'];
   var noSize = ['ESSWPP-2627','ESOLBG-2628','AAESCM-2629','AAESTM-2630'];
 
+  if (['AARLIR-2632','AARCIR-2633'].indexOf(id) > -1) return ['0-3 Months','3-6 Months','6-9 Months','12 Months','18 Months'];
   if (oneSize.indexOf(id) > -1) return ['One Size Fits Most'];
   if (womenSlide.indexOf(id) > -1) return ['US5.5','US6','US7','US8','US8.5','US9.5','US10','US11','US12.5','US14'];
   if (menSlide.indexOf(id) > -1) return ['US5.5','US6.5','US7.5','US8','US9','US9.5','US10.5','US11.5','US12.5','US13'];
@@ -269,6 +277,7 @@ function getColors(id) {
   if (id === 'ESOLPT-2612') return ['Dark Chocolate','Purple','Cardinal Red','Forest Green','Heather Navy'];
   if (id === 'ESRLPT-2613') return ['Black','White'];
   if (['ESSNPT-2614','ESSNPT-2614b'].indexOf(id) > -1) return ['Military Green','Black','Natural','Sports Gray','Dark Chocolate'];
+  if (['AARLIR-2632','AARCIR-2633'].indexOf(id) > -1) return ['Purple'];
   if (id === 'ESSMPA-2631') return ['White','Light Blue','Military Green','Royal Blue','Dark Heather'];
   if (id === 'ESRCPT-2615') return ['Black','Purple','Cardinal Red','Forest Green','Heather Navy'];
   if (['AASIWS-2621','AAERWS-2622','AASIMS-2624','AAERMS-2625'].indexOf(id) > -1) return ['Standard print'];
