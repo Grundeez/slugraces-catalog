@@ -3,720 +3,870 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Extreme Slug Racing — Order Form</title>
+<title>Extreme Slug Racing — Official Merchandise Store</title>
+<meta name="description" content="Official Extreme Slug Racing merchandise. Funny shirts. Serious purpose. Proceeds benefit Joyce Fire &amp; Rescue.">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: Arial, sans-serif; background: #1a1a1a; color: #fff; padding: 20px; max-width: 700px; margin: 0 auto; }
-  .header { text-align: center; padding: 24px 20px; background: #111; border-radius: 12px; margin-bottom: 20px; border: 1px solid #333; }
-  .header .slug { font-size: 32px; margin-bottom: 8px; }
-  .header h1 { color: #FFB800; font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
-  .header p { color: #aaa; font-size: 12px; line-height: 1.7; }
-  .legend { display: flex; gap: 12px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
-  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
-  .badge-fast { background: #1e4a1e; color: #5cb85c; border: 1px solid #5cb85c; }
-  .badge-slow { background: #4a3a00; color: #FFB800; border: 1px solid #FFB800; }
-  .section { background: #222; border-radius: 10px; padding: 20px; margin-bottom: 16px; border: 1px solid #333; }
-  .section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #FFB800; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #333; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-  .field-row.single { grid-template-columns: 1fr; }
-  .field-row.triple { grid-template-columns: 1fr 1fr 1fr; }
-  .field { display: flex; flex-direction: column; }
-  label { font-size: 11px; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-  label .req { color: #FFB800; }
-  input, select, textarea { background: #333; border: 1px solid #444; border-radius: 6px; color: #fff; font-size: 13px; padding: 9px 12px; transition: border-color 0.15s; width: 100%; }
-  input:focus, select:focus, textarea:focus { outline: none; border-color: #FFB800; background: #3a3a3a; }
-  select option { background: #333; color: #fff; }
-  textarea { resize: vertical; min-height: 70px; }
-  .cat-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
-  .cat-tab { padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; cursor: pointer; border: 1px solid #444; background: #333; color: #aaa; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.5px; }
-  .cat-tab.active { background: #FFB800; color: #111; border-color: #FFB800; }
-  .cat-tab:hover:not(.active) { border-color: #FFB800; color: #FFB800; }
-  .item-block { background: #1a1a1a; border-radius: 8px; padding: 14px; margin-bottom: 12px; border: 1px solid #3a3a3a; }
-  .item-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
-  .item-label { font-size: 12px; font-weight: 700; color: #FFB800; text-transform: uppercase; letter-spacing: 1px; }
-  .item-price { font-size: 18px; font-weight: 900; color: #fff; }
-  .item-ship-badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 10px; }
-  .item-ship-fast { background: #1e4a1e; color: #5cb85c; }
-  .item-ship-slow { background: #4a3a00; color: #FFB800; }
-  .remove-btn { background: #444; border: none; color: #aaa; font-size: 11px; padding: 4px 10px; border-radius: 4px; cursor: pointer; }
-  .remove-btn:hover { background: #c0392b; color: #fff; }
-  .product-hint { font-size: 10px; color: #666; margin-top: 4px; font-style: italic; }
-  .add-item-btn { width: 100%; padding: 10px; background: #333; border: 1px dashed #555; border-radius: 8px; color: #aaa; font-size: 13px; cursor: pointer; transition: all 0.15s; margin-top: 4px; }
-  .add-item-btn:hover { background: #3a3a3a; border-color: #FFB800; color: #FFB800; }
-  .totals-box { background: #111; border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; border: 1px solid #333; }
-  .total-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 13px; color: #aaa; border-bottom: 1px solid #2a2a2a; }
-  .total-row:last-child { border-bottom: none; }
-  .total-row.grand { font-size: 20px; font-weight: 900; color: #FFB800; padding-top: 10px; margin-top: 4px; }
-  .total-row.grand span:last-child { color: #fff; }
-  .shipping-tiers { font-size: 10px; color: #555; margin-top: 6px; line-height: 1.6; }
-  .info-box { border-radius: 8px; padding: 12px 16px; font-size: 12px; line-height: 1.6; margin-bottom: 16px; }
-  .info-box.purple { background: #2a1a3e; border: 1px solid #8B2FC9; color: #ccc; }
-  .info-box.blue { background: #001a40; border: 1px solid #0057b7; color: #ccc; }
-  .info-box strong { color: #FFB800; }
-  .cart-banner { background: #1a2e1a; border: 1px solid #5cb85c; border-radius: 8px; padding: 10px 16px; margin-bottom: 16px; font-size: 12px; color: #5cb85c; display: none; }
-  .cart-banner strong { color: #FFB800; }
-  .submit-btn { width: 100%; padding: 16px; background: #FFB800; border: none; border-radius: 10px; color: #111; font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: background 0.15s; }
-  .submit-btn:hover { background: #e6a800; }
-  .submit-btn:disabled { background: #555; color: #888; cursor: default; }
-  .success-msg { display: none; background: #1e4a1e; border: 1px solid #5cb85c; border-radius: 10px; padding: 28px; text-align: center; margin-top: 16px; }
-  .success-msg h2 { color: #5cb85c; font-size: 22px; margin-bottom: 10px; }
-  .success-msg p { color: #ccc; font-size: 13px; line-height: 1.7; }
-  .disclaimer { text-align: center; font-size: 11px; color: #555; margin-top: 16px; line-height: 1.6; }
-  @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } .field-row.triple { grid-template-columns: 1fr 1fr; } }
+/* ========== RESET & BASE ========== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: Arial, sans-serif;
+  background: #1a1a1a;
+  color: #f0f0f0;
+  min-height: 100vh;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ========== NAV ========== */
+#main-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #111;
+  border-bottom: 2px solid #FFB800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 54px;
+}
+#main-nav .nav-logo { display: flex; align-items: center; gap: 10px; }
+#main-nav .nav-logo img { height: 38px; width: auto; }
+#main-nav .nav-links { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+#main-nav .nav-links a { color: #f0f0f0; font-size: 13px; font-weight: bold; padding: 6px 10px; border-radius: 4px; white-space: nowrap; transition: background 0.15s, color 0.15s; }
+#main-nav .nav-links a:hover { background: #FFB800; color: #111; }
+#main-nav .nav-etsy { font-size: 11px !important; color: #aaa !important; font-weight: normal !important; border: 1px solid #444; }
+#main-nav .nav-etsy:hover { background: #333 !important; color: #FFB800 !important; }
+#cart-nav-btn { background: #8B2FC9; color: #fff; border: none; border-radius: 6px; padding: 7px 14px; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 7px; white-space: nowrap; transition: background 0.15s; }
+#cart-nav-btn:hover { background: #6d24a0; }
+#cart-nav-btn .cart-count { background: #FFB800; color: #111; border-radius: 50%; min-width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; }
+#cart-nav-btn .cart-total { font-size: 12px; opacity: 0.9; }
+
+/* ========== HERO ========== */
+#hero { position: relative; width: 100%; min-height: 380px; background: #111 url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQuVG89k2FTFsvBpbvj7nyS9Lvi67GxhEBqZ-EKt33i9rGOVffvmLt7r2W5RZXxYh6Y00_l8pRswUBZtE3xzItfkHdZ0gv0faVHZQ8nKzqIX9TyFwOfi6uGaOrD7prX13UKNWRsVaLLDS7MkUOV1r6STIBmzz_CCrT4hGr9dCYfLV7mrORUQgHKZKuFlDO/s320/ExtremeText-fullcolor-01.png') center/contain no-repeat; display: flex; align-items: center; }
+#hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.2) 100%); }
+#hero-content { position: relative; z-index: 2; max-width: 520px; padding: 50px 40px; }
+#hero-content h1 { font-size: 2.4rem; line-height: 1.15; color: #FFB800; text-shadow: 2px 2px 6px rgba(0,0,0,0.8); margin-bottom: 14px; }
+#hero-content .hero-tagline { font-size: 1.1rem; color: #f0f0f0; margin-bottom: 10px; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); }
+#hero-content .hero-sub { font-size: 0.9rem; color: #ccc; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); margin-bottom: 20px; line-height: 1.5; }
+#hero-content .hero-btn { display: inline-block; background: #8B2FC9; color: #fff; padding: 12px 28px; border-radius: 6px; font-weight: bold; font-size: 1rem; transition: background 0.15s; }
+#hero-content .hero-btn:hover { background: #FFB800; color: #111; }
+#hero-content .hero-btn-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+#hero-content .hero-donate-btn { display: inline-block; background: #003087; color: #fff; padding: 12px 22px; border-radius: 6px; font-weight: bold; font-size: 1rem; border: 2px solid #009cde; transition: background 0.15s; }
+#hero-content .hero-donate-btn:hover { background: #009cde; }
+.free-ship-badge { display: inline-block; background: #c0392b; color: #fff; font-size: 10px; font-weight: bold; padding: 2px 7px; border-radius: 3px; margin-left: 6px; letter-spacing: 0.5px; vertical-align: middle; }
+
+/* ========== SHIPPING LEGEND ========== */
+#shipping-legend { background: #222; border-top: 1px solid #333; border-bottom: 3px solid #FFB800; padding: 18px 30px; display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
+#shipping-legend .legend-label { font-size: 12px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-right: 8px; }
+.slug-badge { display: inline-flex; align-items: center; gap: 8px; background: #111; border-radius: 20px; padding: 6px 14px; font-size: 13px; }
+.slug-badge img { height: 26px; width: auto; }
+.slug-badge .badge-text { line-height: 1.3; }
+.slug-badge .badge-name { font-weight: bold; display: block; }
+.slug-badge .badge-days { font-size: 11px; color: #aaa; display: block; }
+#shipping-legend .legend-note { font-size: 12px; color: #888; font-style: italic; margin-left: auto; }
+
+/* ========== INTRO ========== */
+#intro { background: #1a1a1a; padding: 28px 30px; text-align: center; border-bottom: 1px solid #333; }
+#intro p { max-width: 720px; margin: 0 auto; font-size: 14px; color: #bbb; line-height: 1.7; }
+#intro strong { color: #FFB800; }
+
+/* ========== SECTION HEADINGS ========== */
+.section-heading { background: linear-gradient(90deg, #8B2FC9 0%, #1a1a1a 60%); padding: 18px 30px; border-left: 5px solid #FFB800; margin-top: 10px; }
+.section-heading h2 { font-size: 1.5rem; color: #FFB800; letter-spacing: 1px; text-transform: uppercase; }
+.section-heading .section-sub { font-size: 12px; color: #bbb; margin-top: 3px; }
+
+/* ========== PRODUCT GRID ========== */
+.product-section { background: #1a1a1a; padding: 20px 20px 36px; }
+.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; max-width: 1300px; margin: 0 auto; }
+
+/* ========== PRODUCT CARD ========== */
+.product-card { background: #222; border: 1px solid #333; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: border-color 0.15s, transform 0.15s; }
+.product-card:hover { border-color: #8B2FC9; transform: translateY(-2px); }
+.product-img-wrap { position: relative; background: #f5f5f5; aspect-ratio: 1/1; overflow: hidden; cursor: pointer; }
+.product-img-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; transition: transform 0.2s; }
+.product-img-wrap:hover img { transform: scale(1.04); }
+
+/* ========== THUMBNAIL GALLERY ========== */
+.product-thumbs { display: flex; gap: 4px; padding: 6px 8px; background: #1a1a1a; flex-wrap: wrap; }
+.product-thumb { width: 44px; height: 44px; border-radius: 4px; border: 2px solid #444; background: #f5f5f5; cursor: pointer; overflow: hidden; flex-shrink: 0; transition: border-color 0.15s; }
+.product-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.product-thumb:hover { border-color: #FFB800; }
+.product-thumb.active { border-color: #8B2FC9; }
+.slug-icon { display: none; }
+.card-slug-row { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: bold; color: #bbb; }
+.card-slug-row img { height: 28px; width: auto; flex-shrink: 0; }
+.card-slug-row .slug-label { line-height: 1.2; }
+.card-slug-row .slug-days { font-size: 10px; color: #888; font-weight: normal; display: block; }
+.product-body { padding: 12px 14px 14px; display: flex; flex-direction: column; flex: 1; gap: 6px; }
+.product-name { font-size: 13px; font-weight: bold; color: #f0f0f0; line-height: 1.3; }
+.product-sku { font-size: 11px; color: #888; }
+.product-price { font-size: 15px; font-weight: bold; color: #FFB800; }
+.product-swatches { display: flex; flex-wrap: wrap; gap: 5px; min-height: 20px; }
+.swatch { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #555; cursor: default; flex-shrink: 0; }
+.swatch[title="White"] { border-color: #ccc; }
+.add-to-cart-btn { margin-top: auto; background: #8B2FC9; color: #fff; border: none; border-radius: 5px; padding: 9px 12px; font-size: 13px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.15s; text-align: center; }
+.add-to-cart-btn:hover { background: #FFB800; color: #111; }
+
+/* ========== FLOATING CART ========== */
+#cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1990; }
+#cart-overlay.open { display: block; }
+#cart-sidebar { position: fixed; top: 0; right: -420px; width: 400px; max-width: 95vw; height: 100vh; background: #111; border-left: 2px solid #8B2FC9; z-index: 2000; display: flex; flex-direction: column; transition: right 0.3s ease; }
+#cart-sidebar.open { right: 0; }
+#cart-header { background: #1a1a1a; padding: 16px 20px; border-bottom: 1px solid #333; display: flex; align-items: center; justify-content: space-between; }
+#cart-header h3 { color: #FFB800; font-size: 1rem; }
+#cart-close-btn { background: none; border: none; color: #aaa; font-size: 22px; cursor: pointer; line-height: 1; }
+#cart-close-btn:hover { color: #fff; }
+#cart-items-list { flex: 1; overflow-y: auto; padding: 14px; }
+.cart-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid #2a2a2a; }
+.cart-item-img { width: 52px; height: 52px; background: #f5f5f5; border-radius: 4px; object-fit: contain; flex-shrink: 0; }
+.cart-item-info { flex: 1; }
+.cart-item-name { font-size: 12px; font-weight: bold; line-height: 1.3; }
+.cart-item-sku { font-size: 10px; color: #888; }
+.cart-item-price { font-size: 12px; color: #FFB800; margin-top: 2px; }
+.cart-item-qty { display: flex; align-items: center; gap: 6px; margin-top: 5px; }
+.cart-qty-btn { background: #333; border: 1px solid #444; color: #fff; width: 22px; height: 22px; border-radius: 3px; cursor: pointer; font-size: 14px; line-height: 1; display: flex; align-items: center; justify-content: center; }
+.cart-qty-btn:hover { background: #8B2FC9; }
+.cart-qty-num { font-size: 13px; min-width: 16px; text-align: center; }
+.cart-item-remove { background: none; border: none; color: #666; cursor: pointer; font-size: 16px; padding: 0 4px; line-height: 1; align-self: flex-start; margin-top: 2px; }
+.cart-item-remove:hover { color: #e55; }
+#cart-footer { border-top: 1px solid #333; padding: 16px 20px; background: #1a1a1a; }
+.cart-subtotal-row { display: flex; justify-content: space-between; font-size: 13px; color: #bbb; margin-bottom: 5px; }
+.cart-total-row { display: flex; justify-content: space-between; font-size: 16px; font-weight: bold; color: #FFB800; margin-bottom: 4px; }
+.cart-shipping-note { font-size: 11px; color: #888; font-style: italic; margin-bottom: 14px; line-height: 1.4; }
+#checkout-btn { width: 100%; background: #8B2FC9; color: #fff; border: none; border-radius: 6px; padding: 13px; font-size: 15px; font-weight: bold; cursor: pointer; transition: background 0.15s; }
+#checkout-btn:hover { background: #FFB800; color: #111; }
+#cart-continue-btn { width: 100%; background: none; color: #888; border: 1px solid #333; border-radius: 6px; padding: 8px; font-size: 12px; cursor: pointer; margin-top: 8px; transition: color 0.15s; }
+#cart-continue-btn:hover { color: #f0f0f0; }
+
+/* ========== TOAST ========== */
+#cart-toast { position: fixed; bottom: 30px; right: 30px; background: #8B2FC9; color: #fff; padding: 12px 22px; border-radius: 8px; font-size: 14px; font-weight: bold; z-index: 3000; opacity: 0; transform: translateY(20px); transition: opacity 0.2s, transform 0.2s; pointer-events: none; }
+#cart-toast.show { opacity: 1; transform: translateY(0); }
+
+/* ========== FOOTER ========== */
+#footer { background: #111; border-top: 3px solid #8B2FC9; padding: 40px 30px 24px; margin-top: 40px; }
+#footer .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto 30px; }
+#footer h4 { color: #FFB800; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 6px; }
+#footer p, #footer li { font-size: 12px; color: #999; line-height: 1.7; }
+#footer ul { list-style: none; }
+#footer a { color: #999; transition: color 0.15s; }
+#footer a:hover { color: #FFB800; }
+.footer-race-day { background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 14px; font-size: 12px; color: #bbb; line-height: 1.7; }
+.footer-race-day strong { color: #FFB800; display: block; font-size: 14px; margin-bottom: 4px; }
+#footer .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #2a2a2a; font-size: 11px; color: #555; }
+#footer .footer-bottom a { color: #555; }
+#footer .footer-bottom a:hover { color: #888; }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  #main-nav .nav-links { display: none; }
+  #hero-content { padding: 30px 20px; }
+  #hero-content h1 { font-size: 1.7rem; }
+  #shipping-legend { gap: 12px; }
+  #shipping-legend .legend-note { margin-left: 0; }
+  .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+  #cart-sidebar { width: 100%; max-width: 100%; }
+}
+
+/* ========== MOBILE NAV ========== */
+#mobile-nav-toggle { display: none; background: none; border: none; color: #FFB800; font-size: 24px; cursor: pointer; }
+@media (max-width: 768px) {
+  #mobile-nav-toggle { display: block; }
+  #mobile-nav-menu { position: fixed; top: 54px; left: 0; right: 0; background: #111; border-bottom: 2px solid #FFB800; z-index: 999; display: none; padding: 10px 0; }
+  #mobile-nav-menu.open { display: block; }
+  #mobile-nav-menu a { display: block; padding: 11px 24px; color: #f0f0f0; font-size: 15px; font-weight: bold; border-bottom: 1px solid #222; }
+  #mobile-nav-menu a:hover { background: #1a1a1a; color: #FFB800; }
+}
+
+/* ========== LIGHTBOX ========== */
+#img-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 5000; align-items: center; justify-content: center; cursor: zoom-out; }
+#img-lightbox.open { display: flex; }
+#img-lightbox img { max-width: 90vw; max-height: 88vh; object-fit: contain; border-radius: 6px; box-shadow: 0 0 60px rgba(0,0,0,0.8); cursor: default; }
+#img-lightbox-close { position: absolute; top: 18px; right: 24px; font-size: 32px; color: #fff; cursor: pointer; line-height: 1; opacity: 0.7; }
+#img-lightbox-close:hover { opacity: 1; }
+.img-zoom-hint { position: absolute; bottom: 8px; left: 0; right: 0; text-align: center; font-size: 11px; color: #888; pointer-events: none; }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="slug">🐌</div>
-  <h1>Extreme Slug Racing — Order Form</h1>
-  <p>Place your order here and Sam will handle everything personally.<br>
-  You'll receive a PayPal invoice by email within 24 hours.<br>
-  <strong style="color:#FFB800;">All proceeds support Joyce Fire &amp; Rescue.</strong></p>
-  <div class="legend">
-    <span class="badge badge-fast">⚡ Speedy Slug — Ships 5-7 days</span>
-    <span class="badge badge-slow">🐌 Slow Slug — Ships 30-45 days</span>
+<!-- ========== NAV ========== -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQuVG89k2FTFsvBpbvj7nyS9Lvi67GxhEBqZ-EKt33i9rGOVffvmLt7r2W5RZXxYh6Y00_l8pRswUBZtE3xzItfkHdZ0gv0faVHZQ8nKzqIX9TyFwOfi6uGaOrD7prX13UKNWRsVaLLDS7MkUOV1r6STIBmzz_CCrT4hGr9dCYfLV7mrORUQgHKZKuFlDO/s320/ExtremeText-fullcolor-01.png" alt="Extreme Slug Racing">
+  </div>
+  <div class="nav-links">
+    <a href="#hats">Hats &amp; Beanies</a>
+    <a href="#womens">Women's</a>
+    <a href="#mens">Men's</a>
+    <a href="#kids">Kids</a>
+    <a href="#footwear">Footwear &amp; Socks</a>
+    <a href="#drinkware">Drinkware</a>
+    <a href="https://www.etsy.com/shop/SlugRaces" target="_blank" rel="noopener" class="nav-etsy">Etsy Shop ↗</a>
+  </div>
+  <button id="cart-nav-btn" onclick="openCart()">
+    🛒 <span class="cart-count" id="nav-cart-count">0</span>
+    <span class="cart-total" id="nav-cart-total"></span>
+  </button>
+  <button id="mobile-nav-toggle" onclick="toggleMobileNav()" aria-label="Menu">☰</button>
+</nav>
+
+<div id="mobile-nav-menu">
+  <a href="#hats" onclick="closeMobileNav()">Hats &amp; Beanies</a>
+  <a href="#womens" onclick="closeMobileNav()">Women's Apparel</a>
+  <a href="#mens" onclick="closeMobileNav()">Men's Apparel</a>
+  <a href="#kids" onclick="closeMobileNav()">Kids Wear</a>
+  <a href="#footwear" onclick="closeMobileNav()">Footwear &amp; Socks</a>
+  <a href="#drinkware" onclick="closeMobileNav()">Drinkware &amp; Posters</a>
+  <a href="https://www.etsy.com/shop/SlugRaces" target="_blank" rel="noopener" onclick="closeMobileNav()">Etsy Shop ↗</a>
+</div>
+
+<!-- ========== HERO ========== -->
+<section id="hero">
+  <div id="hero-overlay"></div>
+  <div id="hero-content">
+    <h1>The World's Fastest Gastropods</h1>
+    <p class="hero-tagline">Funny Shirts. Serious Purpose.</p>
+    <p class="hero-sub">Official merchandise from the 11th Annual Extreme Slug Racing at Joyce Daze. Proceeds benefit Clallam County Fire Protection District No. 4 — Joyce Fire &amp; Rescue.</p>
+    <div class="hero-btn-row">
+      <a href="#hats" class="hero-btn">Shop the Collection ↓</a>
+      <a href="https://www.paypal.com/donate/?hosted_button_id=YNK4F6T638HT2" target="_blank" rel="noopener" class="hero-donate-btn">💛 Donate to Joyce Fire &amp; Rescue</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SHIPPING LEGEND ========== -->
+<div id="shipping-legend">
+  <span class="legend-label">Shipping:</span>
+  <div class="slug-badge">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFX6Ea68EIlxecU-4w2pwr6xdrpmTOtKpvbxL4GQ_YPzK-b3276goFAHcv-VGmAfqZtuNu0T4HDFO0oVsSOBZ6qLdH8JXtE8cOwBeEu8H2ZeidSvXUb3jFngbPDp18ZqVlcABVJqlY8RJ2ocERHrdU2GNtuEE0IXvrbskQrya83AQ4oyxyW_BGzj4Szoh0/w88-h101/SpeedySlug.png" alt="Speedy Slug">
+    <div class="badge-text">
+      <span class="badge-name">⚡ Speedy Slug</span>
+      <span class="badge-days">Etsy · Ships 5–7 days</span>
+    </div>
+  </div>
+  <div class="slug-badge">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7p0b9qpjUI81VQuGkzdzGsZ9fiAxplqhd7fy_CLTNGP91fIg9CX-YblsnTBodv6DQbD21zFkVEFMD91bLhUq4cGfHk3PTeSDJNk1azEsL2SzFrNraaD_I62N8SQRD-ZWYQW8mhlACWE449c7W6YO_t4t71lWq_yEQjenjMlPorCP7XLCHzFOG9PiU2VGJ/w84-h101/SlowSlug.png" alt="Slow Slug">
+    <div class="badge-text">
+      <span class="badge-name">🐌 Slow Slug</span>
+      <span class="badge-days">ArtsAdd · Ships 30–45 days</span>
+    </div>
+  </div>
+  <span class="legend-note">All ArtsAdd orders processed via our order form</span>
+</div>
+
+<!-- ========== INTRO ========== -->
+<div id="intro">
+  <p>This store routes orders to <strong>Etsy</strong> (fast shipping, Speedy Slug ⚡) and <strong>ArtsAdd</strong> (larger catalog, Slow Slug 🐌, orders via our form). Every purchase supports <strong>Joyce Fire &amp; Rescue</strong> — the volunteer firefighters protecting our community since day one. <strong>No slugs are harmed</strong> — all competitors are returned to their natural habitat after racing.</p>
+</div>
+
+<!-- ========== HATS & BEANIES ========== -->
+<div id="hats" class="section-heading">
+  <h2>🧢 Hats &amp; Beanies</h2>
+  <div class="section-sub">Ball caps, beanies, and headgear for the serious slug fan</div>
+</div>
+<div class="product-section">
+  <div class="product-grid" id="grid-hats"></div>
+</div>
+
+<!-- ========== WOMEN'S ========== -->
+<div id="womens" class="section-heading">
+  <h2>👗 Women's Apparel</h2>
+  <div class="section-sub">Fitted styles — Ice silk, lace, bat wing, and hoodies</div>
+</div>
+<div class="product-section">
+  <div class="product-grid" id="grid-womens"></div>
+</div>
+
+<!-- ========== MEN'S ========== -->
+<div id="mens" class="section-heading">
+  <h2>👕 Men's Apparel</h2>
+  <div class="section-sub">Tees, Hawaiian shirts, hoodies — unisex Etsy tees fit all</div>
+</div>
+<div class="product-section">
+  <div class="product-grid" id="grid-mens"></div>
+</div>
+
+<!-- ========== KIDS ========== -->
+<div id="kids" class="section-heading">
+  <h2>👶 Kids Wear</h2>
+  <div class="section-sub">Infant rompers for the youngest slug racing fans</div>
+</div>
+<div class="product-section">
+  <div class="product-grid" id="grid-kids"></div>
+</div>
+
+<!-- ========== FOOTWEAR ========== -->
+<div id="footwear" class="section-heading">
+  <h2>🧦 Footwear &amp; Socks</h2>
+  <div class="section-sub">Socks and slides — race day ready</div>
+</div>
+<div class="product-section">
+  <div class="product-grid" id="grid-footwear"></div>
+</div>
+
+<!-- ========== DRINKWARE ========== -->
+<div id="drinkware" class="section-heading">
+  <h2>🍺 Drinkware &amp; Posters</h2>
+  <div class="section-sub">Mugs, glasses, and wall art for slug enthusiasts</div>
+</div>
+<div class="product-section">
+  <div class="product-grid" id="grid-drinkware"></div>
+</div>
+
+<!-- ========== LIGHTBOX ========== -->
+<div id="img-lightbox" onclick="closeLightbox()">
+  <span id="img-lightbox-close" onclick="closeLightbox()">✕</span>
+  <img id="img-lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+</div>
+
+<!-- ========== CART OVERLAY & SIDEBAR ========== -->
+<div id="cart-overlay" onclick="closeCart()"></div>
+<div id="cart-sidebar">
+  <div id="cart-header">
+    <h3>🛒 Your Cart</h3>
+    <button id="cart-close-btn" onclick="closeCart()">✕</button>
+  </div>
+  <div id="cart-items-list">
+    <div id="cart-empty-msg">Your cart is empty. Add some slug gear!</div>
+  </div>
+  <div id="cart-footer">
+    <div class="cart-subtotal-row"><span>Subtotal</span><span id="cart-subtotal-val">$0.00</span></div>
+    <div class="cart-total-row"><span>Total</span><span id="cart-total-val">$0.00</span></div>
+    <div class="cart-shipping-note" id="cart-shipping-note">Add items to see shipping estimate.</div>
+    <button id="checkout-btn" onclick="doCheckout()">Proceed to Order Form →</button>
+    <button id="cart-continue-btn" onclick="closeCart()">Continue Shopping</button>
   </div>
 </div>
 
-<div class="cart-banner" id="cart-banner">
-  🛒 <strong id="cart-banner-text"></strong> — review your items below and add color/size for each.
-</div>
+<!-- ========== TOAST ========== -->
+<div id="cart-toast"></div>
 
-<form id="orderForm">
-  <div class="section">
-    <div class="section-title">👤 Your Information</div>
-    <div class="field-row">
-      <div class="field"><label>First Name <span class="req">*</span></label><input type="text" id="firstName" required placeholder="First name"></div>
-      <div class="field"><label>Last Name <span class="req">*</span></label><input type="text" id="lastName" required placeholder="Last name"></div>
+<!-- ========== FOOTER ========== -->
+<footer id="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>About This Store</h4>
+      <p>Official merchandise for the Extreme Slug Racing series. Products ship from Etsy (fast) or ArtsAdd (extended catalog). All proceeds go directly to Joyce Fire &amp; Rescue — Clallam County Fire Protection District No. 4.</p>
     </div>
-    <div class="field-row">
-      <div class="field"><label>Email Address <span class="req">*</span></label><input type="email" id="email" required placeholder="you@email.com"></div>
-      <div class="field"><label>Phone (optional)</label><input type="tel" id="phone" placeholder="(360) 555-0000"></div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">📦 Shipping Address</div>
-    <div class="field-row single"><div class="field"><label>Street Address <span class="req">*</span></label><input type="text" id="address" required placeholder="123 Main Street"></div></div>
-    <div class="field-row single"><div class="field"><label>Apt / Suite (optional)</label><input type="text" id="address2" placeholder="Apt 4B"></div></div>
-    <div class="field-row triple">
-      <div class="field"><label>City <span class="req">*</span></label><input type="text" id="city" required placeholder="City"></div>
-      <div class="field"><label>State <span class="req">*</span></label><input type="text" id="state" required placeholder="WA" maxlength="2"></div>
-      <div class="field"><label>ZIP <span class="req">*</span></label><input type="text" id="zip" required placeholder="98363" maxlength="10"></div>
-    </div>
-    <div class="field-row single">
-      <div class="field"><label>Country</label>
-        <select id="country">
-          <option value="USA">United States</option>
-          <option value="Canada">Canada</option>
-          <option value="Australia">Australia</option>
-          <option value="UK">United Kingdom</option>
-          <option value="Other">Other — contact us first</option>
-        </select>
+    <div>
+      <div class="footer-race-day">
+        <strong>🏁 Race Day — August 1, 2026</strong>
+        11th Annual Extreme Slug Racing<br>
+        Joyce Daze Wild Blackberry Festival<br>
+        Joyce Family Kitchen Beer Garden<br>
+        Highway 112, Joyce WA<br>
+        Post Time: 2:30 PM<br>
+        <em>Organizer: Sam Nugent</em>
       </div>
     </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#hats">Hats &amp; Beanies</a></li>
+        <li><a href="#womens">Women's Apparel</a></li>
+        <li><a href="#mens">Men's Apparel</a></li>
+        <li><a href="#kids">Kids Wear</a></li>
+        <li><a href="#footwear">Footwear &amp; Socks</a></li>
+        <li><a href="#drinkware">Drinkware &amp; Posters</a></li>
+        <li><a href="orderform.html">Order Form</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Joyce Fire &amp; Rescue</h4>
+      <p>Clallam County Fire Protection District No. 4 serves the Joyce community with volunteer firefighters and first responders. Your purchase supports their equipment, training, and operations.</p>
+      <br>
+      <h4>No Slugs Harmed</h4>
+      <p>All racing slugs are returned to their natural habitat after each race. 🐌</p>
+    </div>
   </div>
-
-  <div class="section">
-    <div class="section-title">🛒 Your Order</div>
-    <div id="items-container"><p>Please select Category Tab to view items in dropdown</p></div>
-    <button type="button" class="add-item-btn" onclick="addItem()">+ Add Another Item</button>
+  <div class="footer-bottom">
+    <p>© 2026 Extreme Slug Racing · Joyce, WA · Funny Shirts. Serious Purpose. · <a href="https://www.etsy.com/shop/SlugRaces" target="_blank" rel="noopener">Etsy Shop</a> · <a href="orderform.html">Order Form</a></p>
   </div>
+</footer>
 
-  <div class="totals-box">
-    <div class="total-row"><span>Items subtotal</span><span id="subtotal-display">$0.00</span></div>
-    <div class="total-row"><span>Flat rate shipping</span><span id="shipping-display">—</span></div>
-    <div class="total-row grand"><span>Total due via PayPal</span><span id="total-display">$0.00</span></div>
-    <div class="shipping-tiers">Shipping: $6 on orders under $20 &nbsp;•&nbsp; $8 on orders $20–$40 &nbsp;•&nbsp; $10 on orders over $40</div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">📝 Special Instructions (optional)</div>
-    <div class="field-row single"><div class="field"><textarea id="notes" placeholder="Gift wrapping, sizing questions, Race Day pickup preference, etc."></textarea></div></div>
-  </div>
-
-  <div class="info-box purple">
-    <strong>⚡ Speedy Slug items</strong> (Etsy) ship in 5-7 business days from the US.<br>
-    <strong>🐌 Slow Slug items</strong> (ArtsAdd) ship in 30-45 days from overseas.<br>
-    Mixed orders are totally fine — we handle the routing for you!
-  </div>
-
-  <div class="info-box blue">
-    <strong>💳 How payment works:</strong><br>
-    After submitting, Sam will email you a PayPal invoice within 24 hours.
-    No PayPal account needed — pay by credit or debit card through PayPal's secure checkout.
-  </div>
-
-  <button type="submit" class="submit-btn" id="submitBtn">🐌 Submit My Order</button>
-</form>
-
-<div class="success-msg" id="successMsg">
-  <h2>✅ Order Received!</h2>
-  <p>Thank you! Sam will email you a PayPal invoice within 24 hours.<br>
-  Check your spam folder if you don't hear back.<br><br>
-  <strong style="color:#FFB800;">Race Day — August 1, 2026</strong><br>
-  Joyce Family Kitchen Beer Garden — Highway 112, Joyce WA — Post time 2:30pm<br><br>
-  Proceeds benefit Clallam County Fire Protection District No. 4. 🔥</p>
-</div>
-
-<div class="disclaimer">
-  slugraces.com &nbsp;•&nbsp; Joyce, WA &nbsp;•&nbsp; Est. 2015<br>
-  Questions? Email <strong>Grundeezpetlove@gmail.com</strong>
-</div>
-
+<!-- ========== JAVASCRIPT ========== -->
 <script>
 
-// ══════════════════════════════════════════════
-// PRODUCT CATALOG
-// ══════════════════════════════════════════════
+/* ---- SWATCH COLOR MAP ---- */
+var SWATCHES = {
+  'Black': '#111', 'White': '#fff', 'Beige': '#C8AD7F',
+  'Army Green': '#4B5320', 'Military Green': '#4B5320', 'Stone': '#928E85',
+  'Hunter Green': '#355E3B', 'Navy': '#1B2A4A', 'Heather Navy': '#1B2A4A',
+  'Royal Blue': '#4169E1', 'Natural': '#F5F0DC', 'Sports Gray': '#9EA0A3',
+  'Light Blue': '#ADD8E6', 'Dark Chocolate': '#3C1A0E', 'Purple': '#6A0DAD',
+  'Cardinal Red': '#C41E3A', 'Forest Green': '#228B22',
+  'Rainbow': 'linear-gradient(135deg,red,orange,yellow,green,blue,violet)',
+  'Dark Heather': '#4a4a4a',
+  'Multi': 'linear-gradient(135deg,#FFB800,#8B2FC9,#fff,#111)'
+};
+
+/* ---- PRODUCT CATALOG ---- */
 var CATEGORIES = {
   hats: {
-    label: '🧢 Hats & Beanies',
+    label: 'Hats & Beanies',
     products: [
-      { id: 'AAOLBC-2601', name: 'Official Logo Baseball Cap',          price: 9.98,  supplier: 'artsadd' },
-      { id: 'AACLBC-2602', name: 'Color Logo Baseball Cap',             price: 9.98,  supplier: 'artsadd' },
-      { id: 'AARLBC-2603', name: 'Rainbow Logo Baseball Cap',           price: 9.98,  supplier: 'artsadd' },
-      { id: 'ESOLBC-2604', name: 'Official Logo Cap (Premium)',          price: 20.22, supplier: 'artsadd' },
-      { id: 'ESTEKB-2605', name: 'Text Embroidered Knit Beanie',        price: 29.99, supplier: 'etsy'    },
-      { id: 'AARPKB-2606', name: 'Rainbow Print Knit Beanie',           price: 18.57, supplier: 'artsadd' }
+      { id:'AAOLBC-2601', name:'Official Logo Baseball Cap', price:9.98, supplier:'artsadd',
+        colors:['Black','White','Beige','Army Green'],
+        image:'https://i.etsystatic.com/50253800/r/il/6ccc6e/8128710324/il_794xN.8128710324_681e.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/6ccc6e/8128710324/il_794xN.8128710324_681e.jpg','https://i.etsystatic.com/50253800/r/il/9a3527/8176620853/il_794xN.8176620853_k276.jpg','https://i.etsystatic.com/50253800/r/il/a1273a/8128708904/il_794xN.8128708904_1qco.jpg','https://i.etsystatic.com/50253800/r/il/6db65c/8128709304/il_794xN.8128709304_hfhn.jpg']},
+      { id:'AACLBC-2602', name:'Color Logo Baseball Cap', price:9.98, supplier:'artsadd',
+        colors:['Black','White','Beige','Army Green'],
+        image:'https://cdn.sdspod.com/out/2538/202606/825fed78901bb646e365d5407832924a.jpg',
+        images:['https://cdn.sdspod.com/out/2538/202606/825fed78901bb646e365d5407832924a.jpg','https://cdn.sdspod.com/out/2538/202606/dadd9bee650c522a3f15b8d920e20cb5.jpg','https://cdn.sdspod.com/out/2538/202606/8a777a4d36b1c2c9063862c75801e14c.jpg','https://cdn.sdspod.com/out/2538/202606/a369dbcbc88cb767a3500bb8c4551d3f.jpg']},
+      { id:'AARLBC-2603', name:'Rainbow Logo Baseball Cap', price:9.98, supplier:'artsadd',
+        colors:['Black','White','Beige','Army Green'],
+        image:'https://cdn.sdspod.com/out/2538/202606/73a0a5f40c3e96cf612ae4757c908313.jpg',
+        images:['https://cdn.sdspod.com/out/2538/202606/73a0a5f40c3e96cf612ae4757c908313.jpg','https://cdn.sdspod.com/out/2538/202606/8acaa5b436879a48084df82a78f41650.jpg','https://cdn.sdspod.com/out/2538/202606/8f8d0ed64cab6f7a40b22200dc9a93ed.jpg','https://cdn.sdspod.com/out/2538/202606/f06b8f9889b16ff8a97c0c30c35a6828.jpg']},
+      { id:'ESOLBC-2604', name:'Official Logo Cap (Premium)', price:20.22, supplier:'etsy',
+        colors:['Black','White','Stone','Hunter Green','Navy'],
+        image:'https://i.etsystatic.com/50253800/r/il/6ccc6e/8128710324/il_794xN.8128710324_681e.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/6ccc6e/8128710324/il_794xN.8128710324_681e.jpg','https://i.etsystatic.com/50253800/r/il/9a3527/8176620853/il_794xN.8176620853_k276.jpg','https://i.etsystatic.com/50253800/r/il/a1273a/8128708904/il_794xN.8128708904_1qco.jpg','https://i.etsystatic.com/50253800/r/il/6db65c/8128709304/il_794xN.8128709304_hfhn.jpg']},
+      { id:'ESTEKB-2605', name:'Text Embroidered Knit Beanie', price:29.99, supplier:'etsy',
+        colors:['Black','Hunter Green','Navy'],
+        image:'https://i.etsystatic.com/50253800/r/il/b018dc/8162568665/il_794xN.8162568665_1psy.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/b018dc/8162568665/il_794xN.8162568665_1psy.jpg','https://i.etsystatic.com/50253800/r/il/2cb863/8162570231/il_794xN.8162570231_q8uc.jpg','https://i.etsystatic.com/50253800/r/il/a42a38/8114665176/il_794xN.8114665176_l0bp.jpg']},
+      { id:'AARPKB-2606', name:'Rainbow Print Knit Beanie', price:18.57, supplier:'artsadd',
+        colors:['Black'],
+        image:'https://cdn.sdspod.com/out/2538/202606/07f6e67516b5e88110bf76b32ff157de.jpg',
+        images:['https://cdn.sdspod.com/out/2538/202606/07f6e67516b5e88110bf76b32ff157de.jpg','https://cdn.sdspod.com/out/2538/202606/fb38d07dc1f463b1afe5d90f8ce3ff0c.jpg','https://cdn.sdspod.com/out/2538/202606/18e5bb7b45395a0bcb5728493ba63143.jpg','https://cdn.sdspod.com/out/2538/202606/56e58947d12ffab0396e0956c2c261a0.jpg']}
     ]
   },
   womens: {
-    label: "👗 Women's Apparel",
+    label: "Women's Apparel",
     products: [
-      { id: 'AARISV-2607', name: "Rainbow Ice Silk V-Neck Tee",         price: 19.75, supplier: 'artsadd' },
-      { id: 'AARBWV-2608', name: "Rainbow Bat Wing Sleeve V-Neck",      price: 19.36, supplier: 'artsadd' },
-      { id: 'AAPWLV-2609', name: "Purple Lace V-Neck Tee",              price: 17.95, supplier: 'artsadd' },
-      { id: 'AARCWH-2610', name: "Race Car Women's Hoodie",             price: 33.35, supplier: 'artsadd' },
-      { id: 'AASMPH-2635', name: "Slugzilla Movie Poster Ladies's Hoodie", price: 33.76, supplier: 'artsadd' }
+      { id:'AARISV-2607', name:"Rainbow Women's Ice Silk V-Neck Tee", price:19.75, supplier:'artsadd',
+        colors:['Black'],
+        image:'https://cdn.sdspod.com/out/2538/202606/dff89739090c2a7b0efc4e27365bf622.jpg',
+        images:['https://cdn.sdspod.com/out/2538/202606/dff89739090c2a7b0efc4e27365bf622.jpg','https://cdn.sdspod.com/out/2538/202606/931773a3eb8fdafacb0daac111ff7a93.jpg','https://cdn.sdspod.com/out/2538/202606/adea42a4e18b03e6ad9dec31ff5e598d.jpg','https://cdn.sdspod.com/images/91rr3AHARTasVhdqqVyNm4TGH9ub5wHb8VhZiE45/540eb16a8c272ef7a8ced3a69b4dd4c4.jpg']},
+      { id:'AARBWV-2608', name:"Rainbow Women's Bat Wing Sleeve V-Neck", price:19.36, supplier:'artsadd',
+        colors:['Black'],
+        image:'https://cdn.sdspod.com/out/2538/202606/620a831c6acc9e2a638530c6bb5acda2.jpg',
+        images:['https://cdn.sdspod.com/out/2538/202606/620a831c6acc9e2a638530c6bb5acda2.jpg','https://cdn.sdspod.com/out/2538/202606/68775e533c1f66bf576810d861326960.jpg','https://cdn.sdspod.com/out/2538/202606/9a10eeeb67b9885721399549fb6b71e6.jpg','https://cdn.sdspod.com/images/91rr3AHARTasVhdqqVyNm4TGH9ub5wHb8VhZiE45/f6deb17a1090600389efa4213417fa3f.jpg']},
+      { id:'AAPWLV-2609', name:"Purple Women's Lace V-Neck", price:17.95, supplier:'artsadd',
+        colors:['Purple'],
+        image:'https://www.mszxdz.com/public/tuku/img/ceshi/20260620/6a35c9c5defca6_50083095_63561.jpg',
+        images:['https://www.mszxdz.com/public/tuku/img/ceshi/20260620/6a35c9c5defca6_50083095_63561.jpg','https://www.mszxdz.com/public/tuku/img/ceshi/20260620/6a35c9c5df7f30_35313568_73077.jpg','https://www.mszxdz.com/public/tuku/img/ceshi/20260620/6a35c9c5dfb3c8_25684616_73556.jpg','https://www.mszxdz.com/public/tuku/img/ceshi/20260620/6a35c9c5dfdef9_59760636_80660.jpg']},
+      { id:'AARCWH-2610', name:"Race Car Women's Hoodie", price:33.35, supplier:'artsadd',
+        colors:['Black'],
+        image:'https://us-design-0001.oss-accelerate.aliyuncs.com/a95acdd005f197f56d81b71d428037f8.jpg?x-oss-process=image/resize,w_500,h_500',
+        images:['https://us-design-0001.oss-accelerate.aliyuncs.com/a95acdd005f197f56d81b71d428037f8.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/3272a70eb1e99c484bd0b9d779f47f2e.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/07d847b51bd6b05ff8d1db8bd606d22d.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/52890d4a714593c9393f642416abd45f.jpg?x-oss-process=image/resize,w_500,h_500']},
+      { id:'AASMPH-2635', name:"Slugzilla Movie Poster Ladies's Hoodie", price:33.76, supplier:'artsadd',
+        colors:['Black'],
+        image:'https://us-design-0001.oss-accelerate.aliyuncs.com/df8d4cf8647b7a55ce1b3e8433f6a43d.jpg?x-oss-process=image/resize,w_500,h_500',
+        images:['https://us-design-0001.oss-accelerate.aliyuncs.com/df8d4cf8647b7a55ce1b3e8433f6a43d.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/81f5f6695b98f86bf7c44cbb99dc8c13.jpg?x-oss-process=image/resize,w_500,h_500','https://img.artsadd.com/data/product/6510/info/image/20250115/5F67260E8D41271A38BABD7DB7DF55AD.png','https://us-design-0001.oss-accelerate.aliyuncs.com/bab641e9292683945a2167cb6376beb0.jpg?x-oss-process=image/resize,w_500,h_500']}
     ]
   },
   mens: {
-    label: "👕 Men's Apparel",
+    label: "Men's Apparel",
     products: [
-      { id: 'ESSMPA-2631', name: 'Slugzilla Movie Poster Art Tee — Unisex Sizing (FREE SHIPPING)', price: 24.99, supplier: 'etsy', freeShipping: true },
-      { id: 'ESOLPT-2612', name: 'Official Logo Print Tee — Unisex Sizing',    price: 22.97, supplier: 'etsy'    },
-      { id: 'ESRLPT-2613', name: 'Rainbow Logo Print Tee — Unisex Sizing',     price: 22.97, supplier: 'etsy'    },
-      { id: 'ESSNPT-2614', name: 'Slug Names Print Tee — Unisex Sizing',       price: 22.97, supplier: 'etsy'    },
-      { id: 'ESRCPT-2615', name: 'Race Car Print Tee — Unisex Sizing',         price: 22.97, supplier: 'etsy'    },
-      { id: 'ESFPHS-2616', name: 'Hawaiian Shirt — Unisex Sizing',             price: 59.99, supplier: 'etsy'    },
-      { id: 'AAFPHS-2617', name: 'Hawaiian Shirt (Slow / Save $20)',     price: 39.23, supplier: 'artsadd' },
-      { id: 'AASRCL-2618', name: 'Slug Racer Color Logo Tee',           price: 17.97, supplier: 'artsadd' },
-      { id: 'AASRAO-2619', name: 'Slug Racer All Over Print Tee',       price: 21.92, supplier: 'artsadd' },
-      { id: 'AASJMP-2620', name: "Slug Jockey Plus Size Tee",           price: 18.68, supplier: 'artsadd' },
-      { id: 'AAJFRH-2621', name: "Joyce Fire Rescue Men's Hoodie",      price: 33.76, supplier: 'artsadd' },
-      { id: 'AASMPH-2634', name: "Slugzilla Movie Poster Men's Hoodie",  price: 33.76, supplier: 'artsadd' }
-    ]
-  },
-  footwear: {
-    label: '👟 Footwear & Socks',
-    products: [
-      { id: 'AASIWS-2621', name: "Slug ID Women's Socks",               price: 12.35, supplier: 'artsadd' },
-      { id: 'AAERWS-2622', name: "Extreme Racing Women's Socks",        price: 12.35, supplier: 'artsadd' },
-      { id: 'AAFPWS-2623', name: "Floral Women's Slide Sandal",         price: 22.38, supplier: 'artsadd' },
-      { id: 'AASIMS-2624', name: "Slug ID Men's Socks",                 price: 12.40, supplier: 'artsadd' },
-      { id: 'AAERMS-2625', name: "Extreme Racing Men's Socks",          price: 12.40, supplier: 'artsadd' },
-      { id: 'AAESMS-2626', name: "Extreme Slug Men's Slide Sandal",     price: 22.79, supplier: 'artsadd' }
-    ]
-  },
-  misc: {
-    label: '☕ Drinkware & Posters',
-    products: [
-      { id: 'ESSWPP-2627', name: 'Slugs of the World Poster 16x20',     price: 14.99, supplier: 'etsy'    },
-      { id: 'ESOLBG-2628', name: 'Official Logo 16oz Beer Glass',        price: 19.75, supplier: 'etsy'    },
-      { id: 'AAESCM-2629', name: 'Extreme Slug 15oz Coffee Mug',        price: 19.99, supplier: 'etsy'    },
-      { id: 'AAESTM-2630', name: 'Extreme Slug 11oz Tea Mug',           price: 14.99, supplier: 'etsy'    }
+      { id:'ESSMPA-2631', name:'Slugzilla Movie Poster Art Tee — Unisex Sizing', price:24.99, freeShipping:true, supplier:'etsy',
+        colors:['White','Dark Heather','Military Green','Royal Blue','Light Blue'],
+        image:'https://i.etsystatic.com/50253800/r/il/604f65/8319642442/il_794xN.8319642442_s736.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/604f65/8319642442/il_794xN.8319642442_s736.jpg','https://i.etsystatic.com/50253800/r/il/6c116a/8367533027/il_794xN.8367533027_gpcq.jpg','https://i.etsystatic.com/50253800/r/il/ab9233/8319640860/il_794xN.8319640860_hrfa.jpg','https://i.etsystatic.com/50253800/r/il/20a38b/8319643352/il_794xN.8319643352_gveb.jpg']},
+      { id:'ESRJPT-2611', name:'Race Jockey Print Tee — Unisex Sizing', price:22.97, freeShipping:true, supplier:'etsy',
+        colors:['Military Green','Royal Blue','Natural','Sports Gray','Light Blue','Dark Chocolate','Purple','Cardinal Red','Forest Green','Heather Navy'],
+        image:'https://i.etsystatic.com/50253800/r/il/60a493/8177052711/il_794xN.8177052711_iqi1.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/60a493/8177052711/il_794xN.8177052711_iqi1.jpg','https://i.etsystatic.com/50253800/r/il/548f33/8177053099/il_794xN.8177053099_83id.jpg','https://i.etsystatic.com/50253800/r/il/daa93d/8177053847/il_794xN.8177053847_9xc7.jpg','https://i.etsystatic.com/50253800/r/il/b7d2c1/8177054235/il_794xN.8177054235_pf0j.jpg']},
+      { id:'ESOLPT-2612', name:'Official Logo Print Tee — Unisex Sizing', price:22.97, freeShipping:true, supplier:'etsy',
+        colors:['Military Green','Royal Blue','Natural','Sports Gray','Light Blue','Dark Chocolate','Purple','Cardinal Red','Forest Green','Heather Navy'],
+        image:'https://i.etsystatic.com/50253800/r/il/0df0bc/8128675072/il_794xN.8128675072_mib7.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/0df0bc/8128675072/il_794xN.8128675072_mib7.jpg','https://i.etsystatic.com/50253800/r/il/4e098a/8128675474/il_794xN.8128675474_di0d.jpg','https://i.etsystatic.com/50253800/r/il/b18798/8176589393/il_794xN.8176589393_lpp6.jpg','https://i.etsystatic.com/50253800/r/il/4b95cf/8176588939/il_794xN.8176588939_cb2z.jpg']},
+      { id:'ESRLPT-2613', name:'Rainbow Logo Print Tee — Unisex Sizing', price:22.97, freeShipping:true, supplier:'etsy',
+        colors:['Black','White'],
+        image:'https://i.etsystatic.com/50253800/r/il/4f4e9a/8176597889/il_794xN.8176597889_gjzl.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/4f4e9a/8176597889/il_794xN.8176597889_gjzl.jpg','https://i.etsystatic.com/50253800/r/il/030084/8128683628/il_794xN.8128683628_a3ld.jpg','https://i.etsystatic.com/50253800/r/il/5a04c0/8176596761/il_794xN.8176596761_i19r.jpg','https://i.etsystatic.com/50253800/r/il/796c6b/8128684618/il_794xN.8128684618_2ti7.jpg']},
+      { id:'ESSNPT-2614', name:'Slug Names Print Tee — Unisex Sizing', price:22.97, freeShipping:true, supplier:'etsy',
+        colors:['Military Green','Black','Natural','Sports Gray','Dark Chocolate'],
+        image:'https://i.etsystatic.com/50253800/r/il/70823f/8128746158/il_794xN.8128746158_fydz.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/70823f/8128746158/il_794xN.8128746158_fydz.jpg','https://i.etsystatic.com/50253800/r/il/75e859/8128746540/il_794xN.8128746540_c23l.jpg','https://i.etsystatic.com/50253800/r/il/92f0c8/8128746810/il_794xN.8128746810_2mfv.jpg','https://i.etsystatic.com/50253800/r/il/f63b7a/8176659413/il_794xN.8176659413_36nd.jpg']},
+      { id:'ESRCPT-2615', name:'Race Car Print Tee — Unisex Sizing', price:22.97, freeShipping:true, supplier:'etsy',
+        colors:['Black','Purple','Cardinal Red','Forest Green','Heather Navy'],
+        image:'https://i.etsystatic.com/50253800/r/il/634269/8176572567/il_794xN.8176572567_f1b1.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/634269/8176572567/il_794xN.8176572567_f1b1.jpg','https://i.etsystatic.com/50253800/r/il/fa0ff4/8128660188/il_794xN.8128660188_cpth.jpg','https://i.etsystatic.com/50253800/r/il/46394c/8176575985/il_794xN.8176575985_itux.jpg','https://i.etsystatic.com/50253800/r/il/774a67/8128662084/il_794xN.8128662084_luh5.jpg']},
+      { id:'AASRCL-2618', name:'Slug Racer Color Logo Print Tee', price:17.97, supplier:'artsadd',
+        colors:['Black'],
+        image:'https://us-design-0001.oss-accelerate.aliyuncs.com/e4864f83dcb48cb86851308a863f08d3.jpg?x-oss-process=image/resize,w_500,h_500',
+        images:['https://us-design-0001.oss-accelerate.aliyuncs.com/e4864f83dcb48cb86851308a863f08d3.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/f60532f53c5009c025e29c9fb23a44eb.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/8fe2d04b669c3a7aa5ff8d99adeb3b65.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/3903d98d73c4514621b227da722bf324.jpg?x-oss-process=image/resize,w_500,h_500']},
+      { id:'AASRAO-2619', name:'Slug Racer All Over Print Tee', price:21.92, supplier:'artsadd',
+        colors:['Black'],
+        image:'https://us-design-0001.oss-accelerate.aliyuncs.com/c938b8014e71a8b4d941bc1eff580b02.jpg?x-oss-process=image/resize,w_500,h_500',
+        images:['https://us-design-0001.oss-accelerate.aliyuncs.com/c938b8014e71a8b4d941bc1eff580b02.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/b0acbc9b7b8d0673559c86da5723eb74.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/0063e77698ecea94d245d11f70747484.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/e89d01791667d1c39c92e4db08afe0b8.jpg?x-oss-process=image/resize,w_500,h_500']},
+      { id:'AASJMP-2620', name:'Slug Jockey Plus Size Tee', price:18.68, supplier:'artsadd',
+        colors:['Black'],
+        image:'https://cdn.sdspod.com/out/2538/202606/e5e14ffc60f67e331246c8f21fbd42a8.jpg',
+        images:['https://cdn.sdspod.com/out/2538/202606/e5e14ffc60f67e331246c8f21fbd42a8.jpg','https://cdn.sdspod.com/out/2538/202606/0ac5f6f8e927328023bcd9acc4dbf292.jpg','https://cdn.sdspod.com/out/2538/202606/12ec2e3655a2e54a16363f1a5f3b290a.jpg','https://cdn.sdspod.com/images/91rr3AHARTasVhdqqVyNm4TGH9ub5wHb8VhZiE45/084115c683bff57c727ae0695cd2fbcb.jpg']},
+      { id:'ESFPHS-2616', name:'Hawaiian Shirt — Unisex Sizing', price:59.99, freeShipping:true, supplier:'etsy',
+        colors:['Multi'],
+        image:'https://i.etsystatic.com/50253800/r/il/1e66a1/8196622803/il_794xN.8196622803_mwtz.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/1e66a1/8196622803/il_794xN.8196622803_mwtz.jpg','https://i.etsystatic.com/50253800/r/il/f36b9e/8196624401/il_794xN.8196624401_osxp.jpg','https://i.etsystatic.com/50253800/r/il/4d9898/8148710346/il_794xN.8148710346_2893.jpg','https://i.etsystatic.com/50253800/r/il/1e8217/8196626107/il_794xN.8196626107_etg4.jpg']},
+      { id:'AAFPHS-2617', name:'Hawaiian Shirt — Standard', price:39.23, supplier:'artsadd',
+        colors:['Multi'],
+        image:'https://i.etsystatic.com/50253800/r/il/1e66a1/8196622803/il_794xN.8196622803_mwtz.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/1e66a1/8196622803/il_794xN.8196622803_mwtz.jpg','https://i.etsystatic.com/50253800/r/il/f36b9e/8196624401/il_794xN.8196624401_osxp.jpg','https://i.etsystatic.com/50253800/r/il/4d9898/8148710346/il_794xN.8148710346_2893.jpg','https://i.etsystatic.com/50253800/r/il/1e8217/8196626107/il_794xN.8196626107_etg4.jpg']},
+      { id:'AAJFRH-2621', name:'Joyce Fire Rescue Hoodie', price:33.76, supplier:'artsadd',
+        colors:['Black'],
+        image:'https://us-design-0001.oss-accelerate.aliyuncs.com/58c781bba8cab6ff9276abe64bf782d1.jpg?x-oss-process=image/resize,w_500,h_500',
+        images:['https://us-design-0001.oss-accelerate.aliyuncs.com/58c781bba8cab6ff9276abe64bf782d1.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/9ef98a0dad9a7967c837ecbb9556e0f8.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/2480d3994dc94fe88f3b57d273cd4e6a.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/aaf96496766df41850a6681f914893a3.jpg?x-oss-process=image/resize,w_500,h_500']},
+      { id:'AASMPH-2634', name:"Slugzilla Movie Poster Men's Hoodie", price:33.76, supplier:'artsadd',
+        colors:['Black'],
+        image:'https://us-design-0001.oss-accelerate.aliyuncs.com/8f1b44854084aa10a0a67ae4a2148f3e.jpg?x-oss-process=image/resize,w_500,h_500',
+        images:['https://us-design-0001.oss-accelerate.aliyuncs.com/8f1b44854084aa10a0a67ae4a2148f3e.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/2df7db2a362f63d6883410e54974071e.jpg?x-oss-process=image/resize,w_500,h_500','https://img.artsadd.com/data/product/6326/info/image/20250116/5B2A3FC0D020AE5798257AB1C5B85B52.png','https://us-design-0001.oss-accelerate.aliyuncs.com/c70295a830d3da00b33779403ea57de5.jpg?x-oss-process=image/resize,w_500,h_500']}
     ]
   },
   kids: {
-    label: '👶 Kids Wear',
+    label: 'Kids Wear',
     products: [
-      { id: 'AARLIR-2632', name: 'Rainbow Logo Infant Romper',           price: 10.97, supplier: 'artsadd' },
-      { id: 'AARCIR-2633', name: 'Color Logo Infant Romper',             price: 10.97, supplier: 'artsadd' }
+      { id:'AARLIR-2632', name:'Rainbow Logo Infant Romper', price:10.97, supplier:'artsadd',
+        colors:['Purple'],
+        image:'https://www.mszxdz.com/public/tuku/img/ceshi/20260701/6a444cc38e5eb6_94306868_49621.jpg',
+        images:['https://www.mszxdz.com/public/tuku/img/ceshi/20260701/6a444cc38e5eb6_94306868_49621.jpg','https://www.mszxdz.com/public/tuku/img/ceshi/20260701/6a444cc38ea517_29224266_18629.jpg','https://www.mszxdz.com/public/tuku/img/ceshi/20260701/6a444cc38e29f1_13611690_25032.jpg','https://img.artsadd.com/data/product/9073/info/image/20260408/A140C980BDE1FACE1A49187BC0FFDE1A.png']},
+      { id:'AARCIR-2633', name:'Color Logo Infant Romper', price:10.97, supplier:'artsadd',
+        colors:['Purple'],
+        image:'https://www.mszxdz.com/public/tuku/img/ceshi/20260701/6a444a5e63b938_34643904_83815.jpg',
+        images:['https://www.mszxdz.com/public/tuku/img/ceshi/20260701/6a444a5e63b938_34643904_83815.jpg','https://www.mszxdz.com/public/tuku/img/ceshi/20260701/6a444a5e647ae6_26093280_21587.jpg','https://www.mszxdz.com/public/tuku/img/ceshi/20260701/6a444a5e637018_75486808_97472.jpg','https://img.artsadd.com/data/product/9073/info/image/20260408/A140C980BDE1FACE1A49187BC0FFDE1A.png']}
+    ]
+  },
+  footwear: {
+    label: 'Footwear & Socks',
+    products: [
+      { id:'AASIWS-2621', name:"Slug ID Women's Socks", price:12.35, supplier:'artsadd',
+        colors:['White'],
+        image:'https://us-design-0001.oss-accelerate.aliyuncs.com/153eda9d3f8747a3d1386ac75bdba154.jpg?x-oss-process=image/resize,w_500,h_500',
+        images:['https://us-design-0001.oss-accelerate.aliyuncs.com/153eda9d3f8747a3d1386ac75bdba154.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/cac7c2caae4150e9e68a714ef09d7cf4.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/00068fda1af533cb8a15fc41549a6a65.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/a6ed29518d61ac7e7c092beb95bff331.jpg?x-oss-process=image/resize,w_500,h_500']},
+      { id:'AAERWS-2622', name:"Extreme Racing Women's Socks", price:12.35, supplier:'artsadd',
+        colors:['White'],
+        image:'https://us-design-0001.oss-accelerate.aliyuncs.com/f496db59977da046f2b141373953d518.jpg?x-oss-process=image/resize,w_500,h_500',
+        images:['https://us-design-0001.oss-accelerate.aliyuncs.com/f496db59977da046f2b141373953d518.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/cdb7916c67c2c7a5352c92c7d0ad415a.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/ccf20b081102621a1334d59ca230f6de.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/67a7f74d780ba417ce878ac47c8a9c46.jpg?x-oss-process=image/resize,w_500,h_500']},
+      { id:'AAFPWS-2623', name:"Floral Print Women's Slide Sandal", price:22.38, supplier:'artsadd',
+        colors:['Multi'],
+        image:'https://us-design-0001.oss-accelerate.aliyuncs.com/6a224ed8aeeaec78d5e2c747371f86c1.jpg?x-oss-process=image/resize,w_500,h_500',
+        images:['https://us-design-0001.oss-accelerate.aliyuncs.com/6a224ed8aeeaec78d5e2c747371f86c1.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/0adc6b9669e7c04627072eabd1d6225e.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/85157872c4fcc34af20ec9001cfeea5f.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/c142d682a34482388e9c0cbe27bb4471.jpg?x-oss-process=image/resize,w_500,h_500']},
+      { id:'AASIMS-2624', name:"Slug ID Men's Socks", price:12.40, supplier:'artsadd',
+        colors:['White'],
+        image:'https://us-design-0001.oss-accelerate.aliyuncs.com/00068fda1af533cb8a15fc41549a6a65.jpg?x-oss-process=image/resize,w_500,h_500',
+        images:['https://us-design-0001.oss-accelerate.aliyuncs.com/00068fda1af533cb8a15fc41549a6a65.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/153eda9d3f8747a3d1386ac75bdba154.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/cac7c2caae4150e9e68a714ef09d7cf4.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/a6ed29518d61ac7e7c092beb95bff331.jpg?x-oss-process=image/resize,w_500,h_500']},
+      { id:'AAERMS-2625', name:"Extreme Racing Men's Socks", price:12.40, supplier:'artsadd',
+        colors:['White'],
+        image:'https://us-design-0001.oss-accelerate.aliyuncs.com/cdb7916c67c2c7a5352c92c7d0ad415a.jpg?x-oss-process=image/resize,w_500,h_500',
+        images:['https://us-design-0001.oss-accelerate.aliyuncs.com/cdb7916c67c2c7a5352c92c7d0ad415a.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/f496db59977da046f2b141373953d518.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/ccf20b081102621a1334d59ca230f6de.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/67a7f74d780ba417ce878ac47c8a9c46.jpg?x-oss-process=image/resize,w_500,h_500']},
+      { id:'AAESMS-2626', name:"Extreme Slug Men's Slide Sandal", price:22.79, supplier:'artsadd',
+        colors:['Multi'],
+        image:'https://us-design-0001.oss-accelerate.aliyuncs.com/778674da2628f695f167e1a05dc174b0.jpg?x-oss-process=image/resize,w_500,h_500',
+        images:['https://us-design-0001.oss-accelerate.aliyuncs.com/778674da2628f695f167e1a05dc174b0.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/acf74b1a4a1bc6df79cfc3c9453051de.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/6603d3ba42dd8f15b96004c3dec1abf0.jpg?x-oss-process=image/resize,w_500,h_500','https://us-design-0001.oss-accelerate.aliyuncs.com/783a21ab56e2e7174bb2a34a240d9f36.jpg?x-oss-process=image/resize,w_500,h_500']}
+    ]
+  },
+  drinkware: {
+    label: 'Drinkware & Posters',
+    products: [
+      { id:'ESSWPP-2627', name:'Slugs of the World Art Print Poster', price:14.99, supplier:'etsy',
+        colors:[],
+        image:'https://i.etsystatic.com/50253800/r/il/2b820c/8175027955/il_794xN.8175027955_cfiz.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/2b820c/8175027955/il_794xN.8175027955_cfiz.jpg','https://i.etsystatic.com/50253800/r/il/7a4b5f/8127113962/il_794xN.8127113962_qqfo.jpg']},
+      { id:'ESOLBG-2628', name:'Official Logo 16oz Beer Glass', price:19.75, supplier:'etsy',
+        colors:[],
+        image:'https://i.etsystatic.com/50253800/r/il/8a1be0/8176977727/il_794xN.8176977727_2zpa.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/8a1be0/8176977727/il_794xN.8176977727_2zpa.jpg','https://i.etsystatic.com/50253800/r/il/af0b7c/8176978117/il_794xN.8176978117_66o8.jpg','https://i.etsystatic.com/50253800/r/il/72de9a/8176978483/il_794xN.8176978483_anbx.jpg','https://i.etsystatic.com/50253800/r/il/bb4c6b/8129067858/il_794xN.8129067858_gk5w.jpg']},
+      { id:'AAESCM-2629', name:'Extreme Slug 15oz Coffee Mug', price:19.99, supplier:'etsy',
+        colors:['White'],
+        image:'https://i.etsystatic.com/50253800/r/il/21c6fb/8129003298/il_794xN.8129003298_fuco.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/21c6fb/8129003298/il_794xN.8129003298_fuco.jpg','https://i.etsystatic.com/50253800/r/il/64ddb0/8129004334/il_794xN.8129004334_o5yi.jpg','https://i.etsystatic.com/50253800/r/il/32ca43/8129001892/il_794xN.8129001892_seut.jpg','https://i.etsystatic.com/50253800/r/il/ac1257/8129003818/il_794xN.8129003818_9hab.jpg']},
+      { id:'AAESTM-2630', name:'Extreme Slug 11oz Tea Mug', price:14.99, supplier:'etsy',
+        colors:['White'],
+        image:'https://i.etsystatic.com/50253800/r/il/8c571f/8128982040/il_794xN.8128982040_8fk8.jpg',
+        images:['https://i.etsystatic.com/50253800/r/il/8c571f/8128982040/il_794xN.8128982040_8fk8.jpg','https://i.etsystatic.com/50253800/r/il/bad893/8128980428/il_794xN.8128980428_o8nq.jpg','https://i.etsystatic.com/50253800/r/il/69dec9/8176892889/il_794xN.8176892889_grgj.jpg','https://i.etsystatic.com/50253800/r/il/8f637f/8128981696/il_794xN.8128981696_b8kd.jpg']}
     ]
   }
 };
 
-// Flat product lookup
-var ALL_PRODUCTS = {};
-Object.keys(CATEGORIES).forEach(function(key) {
-  CATEGORIES[key].products.forEach(function(p) {
-    ALL_PRODUCTS[p.id] = p;
-  });
-});
+var SPEEDY_IMG = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFX6Ea68EIlxecU-4w2pwr6xdrpmTOtKpvbxL4GQ_YPzK-b3276goFAHcv-VGmAfqZtuNu0T4HDFO0oVsSOBZ6qLdH8JXtE8cOwBeEu8H2ZeidSvXUb3jFngbPDp18ZqVlcABVJqlY8RJ2ocERHrdU2GNtuEE0IXvrbskQrya83AQ4oyxyW_BGzj4Szoh0/w88-h101/SpeedySlug.png';
+var SLOW_IMG = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7p0b9qpjUI81VQuGkzdzGsZ9fiAxplqhd7fy_CLTNGP91fIg9CX-YblsnTBodv6DQbD21zFkVEFMD91bLhUq4cGfHk3PTeSDJNk1azEsL2SzFrNraaD_I62N8SQRD-ZWYQW8mhlACWE449c7W6YO_t4t71lWq_yEQjenjMlPorCP7XLCHzFOG9PiU2VGJ/w84-h101/SlowSlug.png';
 
-// ══════════════════════════════════════════════
-// SIZE & COLOR LOOKUPS
-// ══════════════════════════════════════════════
-function getSizes(id) {
-  var oneSize = ['AAOLBC-2601','AACLBC-2602','AARLBC-2603','ESOLBC-2604','AARPKB-2606','ESTEKB-2605'];
-  var womenSlide = ['AAFPWS-2623'];
-  var menSlide = ['AAESMS-2626'];
-  var womenSocks = ['AASIWS-2621','AAERWS-2622'];
-  var menSocks = ['AASIMS-2624','AAERMS-2625'];
-  var bigShirt = ['AAFPHS-2617','ESFPHS-2616'];
-  var noSize = ['ESSWPP-2627','ESOLBG-2628','AAESCM-2629','AAESTM-2630'];
+var cart = [];
 
-  if (['AARLIR-2632','AARCIR-2633'].indexOf(id) > -1) return ['0-3 Months','3-6 Months','6-9 Months','12 Months','18 Months'];
-  if (oneSize.indexOf(id) > -1) return ['One Size Fits Most'];
-  if (womenSlide.indexOf(id) > -1) return ['US5.5','US6','US7','US8','US8.5','US9.5','US10','US11','US12.5','US14'];
-  if (menSlide.indexOf(id) > -1) return ['US5.5','US6.5','US7.5','US8','US9','US9.5','US10.5','US11.5','US12.5','US13'];
-  if (womenSocks.indexOf(id) > -1) return ['Women S/M (shoe 5-8)','Women L/XL (shoe 8.5-12)'];
-  if (menSocks.indexOf(id) > -1) return ['Men S/M (shoe 6-9)','Men L/XL (shoe 9.5-13)'];
-  if (bigShirt.indexOf(id) > -1) return ['S','M','L','XL','2XL','3XL','4XL','5XL'];
-  if (noSize.indexOf(id) > -1) return ['One Size'];
-  return ['XS','S','M','L','XL','2XL','3XL','4XL','5XL'];
-}
-
-function getColors(id) {
-  if (['AAOLBC-2601','AACLBC-2602','AARLBC-2603'].indexOf(id) > -1)
-    return ['Black','White','Beige','Army Green'];
-  if (id === 'ESOLBC-2604') return ['Black','White','Stone','Hunter Green','Navy'];
-  if (id === 'ESTEKB-2605') return ['Black','Hunter Green','Navy'];
-  if (id === 'AARPKB-2606') return ['Black'];
-  if (id === 'ESRJPT-2611') return ['Military Green','Royal Blue','Natural','Sports Gray','Light Blue'];
-  if (id === 'ESOLPT-2612') return ['Dark Chocolate','Purple','Cardinal Red','Forest Green','Heather Navy'];
-  if (id === 'ESRLPT-2613') return ['Black','White'];
-  if (['ESSNPT-2614','ESSNPT-2614b'].indexOf(id) > -1) return ['Military Green','Black','Natural','Sports Gray','Dark Chocolate'];
-  if (['AARLIR-2632','AARCIR-2633'].indexOf(id) > -1) return ['Purple'];
-  if (id === 'ESSMPA-2631') return ['White','Light Blue','Military Green','Royal Blue','Dark Heather'];
-  if (id === 'ESRCPT-2615') return ['Black','Purple','Cardinal Red','Forest Green','Heather Navy'];
-  if (['AASIWS-2621','AAERWS-2622','AASIMS-2624','AAERMS-2625'].indexOf(id) > -1) return ['Standard print'];
-  if (['AAFPWS-2623','AAESMS-2626'].indexOf(id) > -1) return ['Black'];
-  if (['ESSWPP-2627','ESOLBG-2628','AAESCM-2629','AAESTM-2630'].indexOf(id) > -1) return ['Standard'];
-  return ['Black'];
-}
-
-// ══════════════════════════════════════════════
-// BUILD PRODUCT OPTIONS FOR A CATEGORY
-// ══════════════════════════════════════════════
-function buildOptions(catKey) {
-  var cat = CATEGORIES[catKey];
-  var html = '<option value="">— Select a product —</option>';
+function renderGrid(categoryKey, gridId) {
+  var cat = CATEGORIES[categoryKey];
+  var grid = document.getElementById(gridId);
+  if (!grid || !cat) return;
+  grid.innerHTML = '';
   for (var i = 0; i < cat.products.length; i++) {
-    var p = cat.products[i];
-    var icon = p.supplier === 'etsy' ? '⚡' : '🐌';
-    html += '<option value="' + p.id + '" data-price="' + p.price + '" data-supplier="' + p.supplier + '">';
-    html += icon + ' ' + p.id + ' — ' + p.name + ' ($' + p.price.toFixed(2) + ')';
-    html += '</option>';
+    grid.appendChild(buildCard(cat.products[i]));
   }
-  return html;
 }
 
-// ══════════════════════════════════════════════
-// ITEM COUNTER
-// ══════════════════════════════════════════════
-var itemCount = 0;
+function buildCard(p) {
+  var isEtsy = p.supplier === 'etsy';
+  var slugImg = isEtsy ? SPEEDY_IMG : SLOW_IMG;
+  var slugAlt = isEtsy ? 'Speedy Slug' : 'Slow Slug';
+  var slugName = isEtsy ? '⚡ Speedy Slug' : '🐌 Slow Slug';
+  var slugDays = isEtsy ? 'Etsy · Ships 5–7 days' : 'ArtsAdd · Ships 30–45 days';
+  var imgs = (p.images && p.images.length > 0) ? p.images : [p.image];
 
-// ══════════════════════════════════════════════
-// ADD ITEM ROW
-// ══════════════════════════════════════════════
-function addItem() {
-  if (itemCount >= 8) {
-    alert('Maximum 8 items per order. Contact us for larger orders.');
-    return;
-  }
-  itemCount++;
-  var n = itemCount;
+  var card = document.createElement('div');
+  card.className = 'product-card';
 
-  var tabHtml = '';
-  Object.keys(CATEGORIES).forEach(function(key) {
-    var cat = CATEGORIES[key];
-    var active = (key === 'hats') ? ' active' : '';
-    tabHtml += '<button type="button" class="cat-tab' + active + '" ';
-    tabHtml += 'id="tab-' + n + '-' + key + '" ';
-    tabHtml += 'onclick="switchCategory(' + n + ', \'' + key + '\')">';
-    tabHtml += cat.label + '</button>';
-  });
+  var imgWrap = document.createElement('div');
+  imgWrap.className = 'product-img-wrap';
+  imgWrap.title = 'Click to enlarge';
+  var mainImg = document.createElement('img');
+  mainImg.src = imgs[0];
+  mainImg.alt = p.name;
+  mainImg.loading = 'lazy';
+  var zoomHint = document.createElement('div');
+  zoomHint.className = 'img-zoom-hint';
+  zoomHint.textContent = '🔍 Click to enlarge';
+  imgWrap.appendChild(mainImg);
+  imgWrap.appendChild(zoomHint);
+  imgWrap.onclick = function() { openLightbox(mainImg.src, p.name); };
+  card.appendChild(imgWrap);
 
-  var removeBtn = n > 1 ? '<button type="button" class="remove-btn" onclick="removeItem(' + n + ')">✕ Remove</button>' : '';
-
-  var html = '<div class="item-block" id="item-block-' + n + '">';
-  html += '<div class="item-header">';
-  html += '<span class="item-label">Item ' + n + '</span>';
-  html += '<span class="item-ship-badge" id="item-ship-' + n + '" style="display:none;"></span>';
-  html += '<span class="item-price" id="item-price-' + n + '">$0.00</span>';
-  html += removeBtn;
-  html += '</div>';
-  html += '<div class="cat-tabs">' + tabHtml + '</div>';
-  html += '<div class="field-row single" style="margin-bottom:8px;">';
-  html += '<div class="field">';
-  html += '<label>Product <span class="req">*</span></label>';
-  html += '<select id="product-' + n + '" onchange="onProductChange(' + n + ')">';
-  html += buildOptions('hats');
-  html += '</select>';
-  html += '<div class="product-hint">⚡ = Ships 5-7 days &nbsp;|&nbsp; 🐌 = Ships 30-45 days</div>';
-  html += '</div></div>';
-  html += '<div class="field-row" id="options-row-' + n + '" style="display:none;">';
-  html += '<div class="field"><label>Color <span class="req">*</span></label>';
-  html += '<select id="color-' + n + '"><option value="">— Select color —</option></select></div>';
-  html += '<div class="field"><label>Size <span class="req">*</span></label>';
-  html += '<select id="size-' + n + '"><option value="">— Select size —</option></select></div>';
-  html += '</div>';
-  html += '<div class="field-row" id="qty-row-' + n + '" style="display:none;">';
-  html += '<div class="field"><label>Quantity</label>';
-  html += '<select id="qty-' + n + '" onchange="updateTotals()">';
-  html += '<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>';
-  html += '</select></div>';
-  html += '<div class="field" style="justify-content:flex-end;padding-bottom:2px;">';
-  html += '<div style="font-size:10px;color:#666;line-height:1.5;">Check size charts at<br>slugraces.com</div>';
-  html += '</div></div>';
-  html += '</div>';
-
-  // Clear the placeholder text on first item
-  var container = document.getElementById('items-container');
-  if (n === 1) container.innerHTML = '';
-  container.insertAdjacentHTML('beforeend', html);
-  updateTotals();
-}
-
-// ══════════════════════════════════════════════
-// SWITCH CATEGORY TAB
-// ══════════════════════════════════════════════
-function switchCategory(n, catKey) {
-  Object.keys(CATEGORIES).forEach(function(key) {
-    var tab = document.getElementById('tab-' + n + '-' + key);
-    if (tab) {
-      if (key === catKey) tab.classList.add('active');
-      else tab.classList.remove('active');
+  if (imgs.length > 1) {
+    var thumbRow = document.createElement('div');
+    thumbRow.className = 'product-thumbs';
+    for (var t = 0; t < imgs.length; t++) {
+      var thumb = document.createElement('div');
+      thumb.className = 'product-thumb' + (t === 0 ? ' active' : '');
+      var thumbImg = document.createElement('img');
+      thumbImg.src = imgs[t];
+      thumbImg.alt = p.name + ' view ' + (t + 1);
+      thumbImg.loading = 'lazy';
+      thumb.appendChild(thumbImg);
+      thumbRow.appendChild(thumb);
     }
-  });
-
-  var ps = document.getElementById('product-' + n);
-  if (ps) ps.innerHTML = buildOptions(catKey);
-
-  var optRow = document.getElementById('options-row-' + n);
-  var qtyRow = document.getElementById('qty-row-' + n);
-  var priceEl = document.getElementById('item-price-' + n);
-  var shipEl = document.getElementById('item-ship-' + n);
-  if (optRow) optRow.style.display = 'none';
-  if (qtyRow) qtyRow.style.display = 'none';
-  if (priceEl) priceEl.textContent = '$0.00';
-  if (shipEl) shipEl.style.display = 'none';
-
-  updateTotals();
-}
-
-// ══════════════════════════════════════════════
-// PRODUCT SELECTION CHANGE
-// ══════════════════════════════════════════════
-function onProductChange(n) {
-  var ps = document.getElementById('product-' + n);
-  if (!ps) return;
-
-  var opt = ps.options[ps.selectedIndex];
-  var id = ps.value;
-  var price = parseFloat(opt.getAttribute('data-price')) || 0;
-  var supplier = opt.getAttribute('data-supplier') || '';
-
-  var priceEl = document.getElementById('item-price-' + n);
-  if (priceEl) priceEl.textContent = price > 0 ? '$' + price.toFixed(2) : '$0.00';
-
-  var badge = document.getElementById('item-ship-' + n);
-  if (badge) {
-    if (id && supplier) {
-      badge.style.display = '';
-      if (supplier === 'etsy') {
-        badge.className = 'item-ship-badge item-ship-fast';
-        badge.textContent = '⚡ Ships 5-7 days';
-      } else {
-        badge.className = 'item-ship-badge item-ship-slow';
-        badge.textContent = '🐌 Ships 30-45 days';
-      }
-    } else {
-      badge.style.display = 'none';
+    var allThumbEls = thumbRow.children;
+    for (var tt = 0; tt < imgs.length; tt++) {
+      (function(idx, thumbEl) {
+        thumbEl.onclick = function() {
+          mainImg.src = imgs[idx];
+          for (var i = 0; i < allThumbEls.length; i++) allThumbEls[i].classList.remove('active');
+          thumbEl.classList.add('active');
+        };
+      })(tt, allThumbEls[tt]);
     }
+    card.appendChild(thumbRow);
   }
 
-  var optRow = document.getElementById('options-row-' + n);
-  var qtyRow = document.getElementById('qty-row-' + n);
+  var body = document.createElement('div');
+  body.className = 'product-body';
 
-  if (id) {
-    if (optRow) optRow.style.display = '';
-    if (qtyRow) qtyRow.style.display = '';
+  var slugRow = document.createElement('div');
+  slugRow.className = 'card-slug-row';
+  var slugBadgeImg = document.createElement('img');
+  slugBadgeImg.src = slugImg;
+  slugBadgeImg.alt = slugAlt;
+  var slugLabelDiv = document.createElement('div');
+  slugLabelDiv.className = 'slug-label';
+  slugLabelDiv.textContent = slugName;
+  var slugDaysSpan = document.createElement('span');
+  slugDaysSpan.className = 'slug-days';
+  slugDaysSpan.textContent = slugDays;
+  slugLabelDiv.appendChild(slugDaysSpan);
+  slugRow.appendChild(slugBadgeImg);
+  slugRow.appendChild(slugLabelDiv);
 
-    var colorSel = document.getElementById('color-' + n);
-    if (colorSel) {
-      colorSel.innerHTML = '<option value="">— Select color —</option>';
-      var colors = getColors(id);
-      colors.forEach(function(c) {
-        colorSel.insertAdjacentHTML('beforeend', '<option value="' + c + '">' + c + '</option>');
-      });
-      if (colors.length === 1) colorSel.value = colors[0];
-    }
+  var nameEl = document.createElement('div');
+  nameEl.className = 'product-name';
+  nameEl.textContent = p.name;
 
-    var sizeSel = document.getElementById('size-' + n);
-    if (sizeSel) {
-      sizeSel.innerHTML = '<option value="">— Select size —</option>';
-      var sizes = getSizes(id);
-      sizes.forEach(function(s) {
-        sizeSel.insertAdjacentHTML('beforeend', '<option value="' + s + '">' + s + '</option>');
-      });
-      if (sizes.length === 1) sizeSel.value = sizes[0];
-    }
-  } else {
-    if (optRow) optRow.style.display = 'none';
-    if (qtyRow) qtyRow.style.display = 'none';
+  var skuEl = document.createElement('div');
+  skuEl.className = 'product-sku';
+  skuEl.textContent = p.id;
+
+  var priceEl = document.createElement('div');
+  priceEl.className = 'product-price';
+  priceEl.textContent = '$' + p.price.toFixed(2);
+  if (p.freeShipping) {
+    var fsBadge = document.createElement('span');
+    fsBadge.className = 'free-ship-badge';
+    fsBadge.textContent = 'FREE SHIPPING';
+    priceEl.appendChild(fsBadge);
   }
 
-  updateTotals();
-}
+  var addBtn = document.createElement('button');
+  addBtn.className = 'add-to-cart-btn';
+  addBtn.textContent = 'Add to Cart';
+  addBtn.setAttribute('data-id', p.id);
+  addBtn.onclick = function() { addToCart(this.getAttribute('data-id')); };
 
-// ══════════════════════════════════════════════
-// REMOVE ITEM
-// ══════════════════════════════════════════════
-function removeItem(n) {
-  var block = document.getElementById('item-block-' + n);
-  if (block) block.remove();
-  updateTotals();
-}
+  body.appendChild(slugRow);
+  body.appendChild(nameEl);
+  body.appendChild(skuEl);
+  body.appendChild(priceEl);
 
-// ══════════════════════════════════════════════
-// UPDATE TOTALS
-// ══════════════════════════════════════════════
-function updateTotals() {
-  var subtotal = 0;
-  for (var i = 1; i <= itemCount; i++) {
-    var block = document.getElementById('item-block-' + i);
-    if (!block) continue;
-    var ps = document.getElementById('product-' + i);
-    if (!ps || !ps.value) continue;
-    var opt = ps.options[ps.selectedIndex];
-    var price = parseFloat(opt.getAttribute('data-price')) || 0;
-    var qtyEl = document.getElementById('qty-' + i);
-    var qty = qtyEl ? parseInt(qtyEl.value) || 1 : 1;
-    var lineTotal = price * qty;
-    subtotal += lineTotal;
-    var priceEl = document.getElementById('item-price-' + i);
-    if (priceEl) priceEl.textContent = '$' + lineTotal.toFixed(2);
+  if (p.colors && p.colors.length > 0) {
+    var swatchDiv = document.createElement('div');
+    swatchDiv.className = 'product-swatches';
+    for (var j = 0; j < p.colors.length; j++) {
+      var swatch = document.createElement('span');
+      swatch.className = 'swatch';
+      swatch.title = p.colors[j];
+      swatch.style.background = SWATCHES[p.colors[j]] || '#888';
+      swatchDiv.appendChild(swatch);
+    }
+    body.appendChild(swatchDiv);
   }
 
-  var shipping = 0;
-  if (subtotal > 0 && subtotal <= 20) shipping = 6.00;
-  else if (subtotal > 20 && subtotal <= 40) shipping = 8.00;
-  else if (subtotal > 40) shipping = 10.00;
-
-  var total = subtotal + shipping;
-  document.getElementById('subtotal-display').textContent = '$' + subtotal.toFixed(2);
-  document.getElementById('shipping-display').textContent = shipping > 0 ? '$' + shipping.toFixed(2) : '—';
-  document.getElementById('total-display').textContent = subtotal > 0 ? '$' + total.toFixed(2) : '$0.00';
+  body.appendChild(addBtn);
+  card.appendChild(body);
+  return card;
 }
 
-// ══════════════════════════════════════════════
-// FIND WHICH CATEGORY AN ITEM ID BELONGS TO
-// ══════════════════════════════════════════════
-function findCategoryForId(productId) {
-  var found = null;
-  Object.keys(CATEGORIES).forEach(function(catKey) {
-    if (found) return;
-    var prods = CATEGORIES[catKey].products;
+function findProduct(id) {
+  var keys = Object.keys(CATEGORIES);
+  for (var k = 0; k < keys.length; k++) {
+    var prods = CATEGORIES[keys[k]].products;
     for (var i = 0; i < prods.length; i++) {
-      if (prods[i].id === productId) { found = catKey; break; }
+      if (prods[i].id === id) return prods[i];
     }
-  });
-  return found;
+  }
+  return null;
 }
 
-// ══════════════════════════════════════════════
-// LOAD CART FROM SESSIONSTORAGE
-// ══════════════════════════════════════════════
-function loadCartFromSession() {
-  var raw = null;
-  try { raw = sessionStorage.getItem('slugcart'); } catch(e) {}
-  if (!raw) return false;
-
-  var cartItems = null;
-  try { cartItems = JSON.parse(raw); } catch(e) {}
-  if (!cartItems || !cartItems.length) return false;
-
-  // Clear the default first item that addItem() will have already added
-  document.getElementById('items-container').innerHTML = '';
-  itemCount = 0;
-
-  var loaded = 0;
-  for (var i = 0; i < cartItems.length; i++) {
-    var cartItem = cartItems[i];
-    var productId = cartItem.id;
-    var qty = cartItem.qty || 1;
-
-    // Verify the product exists in our catalog
-    if (!ALL_PRODUCTS[productId]) continue;
-
-    var catKey = findCategoryForId(productId);
-    if (!catKey) continue;
-
-    // Add a new item row
-    addItem();
-    var n = itemCount;
-
-    // Switch to correct category tab
-    switchCategory(n, catKey);
-
-    // Select the product — needs a tiny delay for DOM to settle after switchCategory
-    (function(rowN, pid, rowQty) {
-      setTimeout(function() {
-        var ps = document.getElementById('product-' + rowN);
-        if (!ps) return;
-        ps.value = pid;
-        onProductChange(rowN);
-
-        // Set quantity after onProductChange shows the qty row
-        setTimeout(function() {
-          var qtyEl = document.getElementById('qty-' + rowN);
-          if (qtyEl) {
-            // Set qty — clamp to available options (max 5)
-            var setQty = Math.min(rowQty, 5);
-            qtyEl.value = setQty;
-            updateTotals();
-          }
-        }, 50);
-      }, 80 * rowN); // stagger each item slightly so DOM builds in order
-    })(n, productId, qty);
-
-    loaded++;
+function addToCart(productId) {
+  var p = findProduct(productId);
+  if (!p) return;
+  var existing = null;
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].id === productId) { existing = cart[i]; break; }
   }
-
-  if (loaded > 0) {
-    var banner = document.getElementById('cart-banner');
-    var bannerText = document.getElementById('cart-banner-text');
-    if (banner && bannerText) {
-      bannerText.textContent = loaded + ' item' + (loaded > 1 ? 's' : '') + ' loaded from your cart';
-      banner.style.display = 'block';
-    }
-    return true;
-  }
-  return false;
+  if (existing) { existing.qty += 1; }
+  else { cart.push({ id: p.id, name: p.name, price: p.price, image: p.image, supplier: p.supplier, qty: 1 }); }
+  saveCart();
+  updateCartUI();
+  showToast(p.name + ' added to cart!');
 }
 
-// ══════════════════════════════════════════════
-// PAGE LOAD
-// ══════════════════════════════════════════════
-window.onload = function() {
-  // Try sessionStorage cart first
-  var loadedFromCart = loadCartFromSession();
+function removeFromCart(productId) {
+  var newCart = [];
+  for (var i = 0; i < cart.length; i++) { if (cart[i].id !== productId) newCart.push(cart[i]); }
+  cart = newCart;
+  saveCart();
+  updateCartUI();
+}
 
-  if (!loadedFromCart) {
-    // Fall back to single ?item= preselect or blank form
-    addItem();
-
-    var params = new URLSearchParams(window.location.search);
-    var preselect = params.get('item');
-    if (!preselect) return;
-
-    var foundCat = findCategoryForId(preselect);
-    if (foundCat) {
-      switchCategory(1, foundCat);
-      setTimeout(function() {
-        var ps = document.getElementById('product-1');
-        if (ps) {
-          ps.value = preselect;
-          onProductChange(1);
-        }
-      }, 100);
+function changeQty(productId, delta) {
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].id === productId) {
+      cart[i].qty += delta;
+      if (cart[i].qty < 1) { removeFromCart(productId); return; }
+      break;
     }
   }
-};
+  saveCart();
+  updateCartUI();
+}
 
-// ══════════════════════════════════════════════
-// FORM SUBMISSION
-// ══════════════════════════════════════════════
-document.getElementById('orderForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+function saveCart() { try { sessionStorage.setItem('slugcart', JSON.stringify(cart)); } catch(e) {} }
 
-  var hasProduct = false;
-  var orderLines = [];
-  var subtotal = 0;
-  var hasEtsy = false;
-  var hasArtsAdd = false;
+function loadCart() {
+  try { var raw = sessionStorage.getItem('slugcart'); if (raw) { cart = JSON.parse(raw); } } catch(e) { cart = []; }
+}
 
-  for (var i = 1; i <= itemCount; i++) {
-    var block = document.getElementById('item-block-' + i);
-    if (!block) continue;
-    var ps = document.getElementById('product-' + i);
-    if (!ps || !ps.value) continue;
-    hasProduct = true;
-
-    var opt = ps.options[ps.selectedIndex];
-    var prod = ALL_PRODUCTS[ps.value];
-    var productName = ps.value + ' — ' + (prod ? prod.name : '');
-    var price = parseFloat(opt.getAttribute('data-price')) || 0;
-    var supplier = opt.getAttribute('data-supplier') || '';
-    var colorEl = document.getElementById('color-' + i);
-    var sizeEl = document.getElementById('size-' + i);
-    var qtyEl = document.getElementById('qty-' + i);
-    var color = colorEl ? colorEl.value || 'N/A' : 'N/A';
-    var size = sizeEl ? sizeEl.value || 'N/A' : 'N/A';
-    var qty = qtyEl ? parseInt(qtyEl.value) || 1 : 1;
-    var lineTotal = price * qty;
-    subtotal += lineTotal;
-
-    if (supplier === 'etsy') hasEtsy = true;
-    else hasArtsAdd = true;
-
-    var shipLabel = supplier === 'etsy' ? '⚡ Etsy / 5-7 days' : '🐌 ArtsAdd / 30-45 days';
-    orderLines.push(productName + ' | ' + shipLabel + ' | Color: ' + color + ' | Size: ' + size + ' | Qty: ' + qty + ' | $' + lineTotal.toFixed(2));
-  }
-
-  if (!hasProduct) {
-    alert('Please add at least one item to your order.');
+function updateCartUI() {
+  var totalQty = 0, totalPrice = 0;
+  for (var i = 0; i < cart.length; i++) { totalQty += cart[i].qty; totalPrice += cart[i].price * cart[i].qty; }
+  document.getElementById('nav-cart-count').textContent = totalQty;
+  document.getElementById('nav-cart-total').textContent = totalQty > 0 ? '$' + totalPrice.toFixed(2) : '';
+  var listEl = document.getElementById('cart-items-list');
+  listEl.innerHTML = '';
+  if (cart.length === 0) {
+    var emptyDiv = document.createElement('div');
+    emptyDiv.style.cssText = 'text-align:center;color:#666;font-size:13px;margin-top:40px;';
+    emptyDiv.textContent = 'Your cart is empty. Add some slug gear!';
+    listEl.appendChild(emptyDiv);
+    document.getElementById('cart-subtotal-val').textContent = '$0.00';
+    document.getElementById('cart-total-val').textContent = '$0.00';
+    document.getElementById('cart-shipping-note').textContent = 'Add items to see shipping estimate.';
     return;
   }
+  for (var j = 0; j < cart.length; j++) listEl.appendChild(buildCartItemNode(cart[j]));
+  document.getElementById('cart-subtotal-val').textContent = '$' + totalPrice.toFixed(2);
+  document.getElementById('cart-total-val').textContent = '$' + totalPrice.toFixed(2);
+  var hasEtsy = false, hasArts = false;
+  for (var k = 0; k < cart.length; k++) { if (cart[k].supplier === 'etsy') hasEtsy = true; else hasArts = true; }
+  var note = hasEtsy && hasArts ? '⚡ Etsy items ship 5–7 days. 🐌 ArtsAdd items ship 30–45 days. You have both — order form will note each.' : hasEtsy ? '⚡ Speedy Slug — Etsy items ship in 5–7 days.' : '🐌 Slow Slug — ArtsAdd items ship in 30–45 days. Order processed via form.';
+  document.getElementById('cart-shipping-note').textContent = note;
+}
 
-  var shipping = 0;
-  if (subtotal <= 20) shipping = 6.00;
-  else if (subtotal <= 40) shipping = 8.00;
-  else shipping = 10.00;
-  var total = subtotal + shipping;
+function buildCartItemNode(item) {
+  var row = document.createElement('div');
+  row.className = 'cart-item';
+  var img = document.createElement('img');
+  img.className = 'cart-item-img'; img.src = item.image; img.alt = item.name;
+  var info = document.createElement('div');
+  info.className = 'cart-item-info';
+  var nameEl = document.createElement('div'); nameEl.className = 'cart-item-name'; nameEl.textContent = item.name;
+  var skuEl = document.createElement('div'); skuEl.className = 'cart-item-sku'; skuEl.textContent = item.id;
+  var priceEl = document.createElement('div'); priceEl.className = 'cart-item-price'; priceEl.textContent = '$' + item.price.toFixed(2) + ' each';
+  var qtyRow = document.createElement('div'); qtyRow.className = 'cart-item-qty';
+  var btnMinus = document.createElement('button'); btnMinus.className = 'cart-qty-btn'; btnMinus.textContent = '−';
+  (function(id) { btnMinus.onclick = function() { changeQty(id, -1); }; })(item.id);
+  var qtyNum = document.createElement('span'); qtyNum.className = 'cart-qty-num'; qtyNum.textContent = item.qty;
+  var btnPlus = document.createElement('button'); btnPlus.className = 'cart-qty-btn'; btnPlus.textContent = '+';
+  (function(id) { btnPlus.onclick = function() { changeQty(id, 1); }; })(item.id);
+  qtyRow.appendChild(btnMinus); qtyRow.appendChild(qtyNum); qtyRow.appendChild(btnPlus);
+  info.appendChild(nameEl); info.appendChild(skuEl); info.appendChild(priceEl); info.appendChild(qtyRow);
+  var removeBtn = document.createElement('button'); removeBtn.className = 'cart-item-remove'; removeBtn.title = 'Remove'; removeBtn.textContent = '✕';
+  (function(id) { removeBtn.onclick = function() { removeFromCart(id); }; })(item.id);
+  row.appendChild(img); row.appendChild(info); row.appendChild(removeBtn);
+  return row;
+}
 
-  var suppliers = [];
-  if (hasEtsy) suppliers.push('Etsy (5-7 days)');
-  if (hasArtsAdd) suppliers.push('ArtsAdd (30-45 days)');
+function openCart() { document.getElementById('cart-sidebar').classList.add('open'); document.getElementById('cart-overlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeCart() { document.getElementById('cart-sidebar').classList.remove('open'); document.getElementById('cart-overlay').classList.remove('open'); document.body.style.overflow = ''; }
 
-  var addr2 = document.getElementById('address2').value;
-  var shipTo = document.getElementById('address').value + '\n';
-  if (addr2) shipTo += addr2 + '\n';
-  shipTo += document.getElementById('city').value + ', ' + document.getElementById('state').value + ' ' + document.getElementById('zip').value + '\n';
-  shipTo += document.getElementById('country').value;
+function doCheckout() {
+  if (cart.length === 0) { showToast('Your cart is empty!'); return; }
+  try {
+    var cartJson = JSON.stringify(cart);
+    sessionStorage.setItem('slugcart', cartJson);
+    sessionStorage.setItem('slugcart_checkout', cartJson);
+    sessionStorage.setItem('cartData', cartJson);
+    sessionStorage.setItem('cart', cartJson);
+    var simple = [];
+    for (var i = 0; i < cart.length; i++) simple.push({ itemId: cart[i].id, id: cart[i].id, name: cart[i].name, price: cart[i].price, qty: cart[i].qty, quantity: cart[i].qty, supplier: cart[i].supplier });
+    sessionStorage.setItem('cartItems', JSON.stringify(simple));
+    sessionStorage.setItem('orderItems', JSON.stringify(simple));
+  } catch(e) { alert('Could not save cart. Please check your browser settings allow sessionStorage.'); return; }
+  window.location.href = 'orderform.html';
+}
 
-  var formData = {
-    customer_name: document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
-    email: document.getElementById('email').value,
-    phone: document.getElementById('phone').value || 'Not provided',
-    ship_to: shipTo,
-    order_items: orderLines.join('\n'),
-    fulfillment: suppliers.join(' + '),
-    subtotal: '$' + subtotal.toFixed(2),
-    shipping: '$' + shipping.toFixed(2),
-    order_total: '$' + total.toFixed(2),
-    notes: document.getElementById('notes').value || 'None',
-    _subject: '🐌 New Order — ' + document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value + ' — $' + total.toFixed(2)
-  };
+var toastTimer = null;
+function showToast(msg) {
+  var el = document.getElementById('cart-toast');
+  el.textContent = msg; el.classList.add('show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function() { el.classList.remove('show'); }, 2500);
+}
 
-  var btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.textContent = 'Sending your order...';
+function openLightbox(src, alt) {
+  var lb = document.getElementById('img-lightbox');
+  var img = document.getElementById('img-lightbox-img');
+  img.src = src; img.alt = alt || '';
+  lb.classList.add('open'); document.body.style.overflow = 'hidden';
+}
+function closeLightbox() { document.getElementById('img-lightbox').classList.remove('open'); document.body.style.overflow = ''; }
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeLightbox(); closeCart(); } });
 
-  fetch('https://formspree.io/f/xnjkvzpa', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify(formData)
-  }).then(function(response) {
-    if (response.ok) {
-      // Clear the cart from sessionStorage on successful submission
-      try { sessionStorage.removeItem('slugcart'); } catch(e) {}
-      document.getElementById('orderForm').style.display = 'none';
-      document.getElementById('successMsg').style.display = 'block';
-      window.scrollTo(0, 0);
-    } else {
-      throw new Error('failed');
-    }
-  }).catch(function() {
-    btn.disabled = false;
-    btn.textContent = '🐌 Submit My Order';
-    alert('There was a problem submitting your order. Please email me directly at Grundeezpetlove@gmail.com and I will get you sorted right away!');
-  });
-});
+function toggleMobileNav() { document.getElementById('mobile-nav-menu').classList.toggle('open'); }
+function closeMobileNav() { document.getElementById('mobile-nav-menu').classList.remove('open'); }
+
+function getEmail() {
+  var codes = [103,114,117,110,100,101,101,122,112,101,116,108,111,118,101,64,103,109,97,105,108,46,99,111,109];
+  var s = ''; for (var i = 0; i < codes.length; i++) s += String.fromCharCode(codes[i]); return s;
+}
+
+function init() {
+  loadCart();
+  renderGrid('hats', 'grid-hats');
+  renderGrid('womens', 'grid-womens');
+  renderGrid('mens', 'grid-mens');
+  renderGrid('kids', 'grid-kids');
+  renderGrid('footwear', 'grid-footwear');
+  renderGrid('drinkware', 'grid-drinkware');
+  updateCartUI();
+}
+
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 </script>
 </body>
